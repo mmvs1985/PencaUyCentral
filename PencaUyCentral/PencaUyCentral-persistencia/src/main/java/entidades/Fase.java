@@ -13,6 +13,7 @@ import java.util.List;
 @Table(name="\"Fases\"")
 @NamedQuery(name="Fase.findAll", query="SELECT f FROM Fase f")
 public class Fase implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -70,7 +71,7 @@ public class Fase implements Serializable {
 	public Grupo addGrupo(Grupo grupo) {
 		getGrupos().add(grupo);
 		grupo.setFase(this);
-		return grupo;
+		return grupo;		
 	}
 
 	public Grupo removeGrupo(Grupo grupo) {

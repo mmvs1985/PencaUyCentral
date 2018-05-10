@@ -14,6 +14,7 @@ import java.util.List;
 @Table(name="\"Torneos\"")
 @NamedQuery(name="Torneo.findAll", query="SELECT t FROM Torneo t")
 public class Torneo implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id

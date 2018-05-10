@@ -13,6 +13,7 @@ import java.util.List;
 @Table(name="\"Pencas\"")
 @NamedQuery(name="Penca.findAll", query="SELECT p FROM Penca p")
 public class Penca implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id

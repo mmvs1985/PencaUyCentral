@@ -9,9 +9,10 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="\"Equipos_Grupo\"")
+@Table(name="\"Equipos_Grupo\"") 
 @NamedQuery(name="Equipos_Grupo.findAll", query="SELECT e FROM Equipos_Grupo e")
 public class Equipos_Grupo implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id

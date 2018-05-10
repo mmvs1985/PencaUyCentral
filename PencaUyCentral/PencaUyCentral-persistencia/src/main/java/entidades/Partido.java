@@ -13,6 +13,7 @@ import java.util.Date;
 @Table(name="\"Partidos\"")
 @NamedQuery(name="Partido.findAll", query="SELECT p FROM Partido p")
 public class Partido implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
