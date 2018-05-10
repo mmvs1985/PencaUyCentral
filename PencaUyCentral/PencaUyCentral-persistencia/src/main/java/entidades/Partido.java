@@ -43,8 +43,8 @@ public class Partido implements Serializable {
 	@Column(name="\"GolesEquipoVisita\"")
 	private Integer golesEquipoVisita;
 
-	@Column(name="\"GrupoId\"")
-	private Integer grupoId;
+	//@Column(name="\"GrupoId\"")
+	//private Integer grupoId;
 
 	//bi-directional many-to-one association to Equipo
 	@ManyToOne
@@ -54,7 +54,7 @@ public class Partido implements Serializable {
 	//bi-directional many-to-one association to Equipo
 	@ManyToOne
 	@JoinColumn(name="\"EquipoVisitaId\"")
-	private Equipo equipoVisitante;
+	private Equipo equipoVisita;
 
 	//bi-directional many-to-one association to Equipo
 	@ManyToOne
@@ -64,7 +64,7 @@ public class Partido implements Serializable {
 	//bi-directional many-to-one association to Grupo
 	@ManyToOne
 	@JoinColumn(name="\"GrupoId\"")
-	private Grupo grupoId_de_Partidos;
+	private Grupo grupo;
 
 /*
 	//bi-directional many-to-one association to Grupo
@@ -139,14 +139,14 @@ public class Partido implements Serializable {
 		this.golesEquipoVisita = golesEquipoVisita;
 	}
 
-	public Integer getGrupoId() {
+	/*public Integer getGrupoId() {
 		return this.grupoId;
 	}
 
 	public void setGrupoId(Integer grupoId) {
 		this.grupoId = grupoId;
 	}
-
+*/
 	public Equipo getEquipoGanador() {
 		return this.equipoGanador;
 	}
@@ -156,11 +156,11 @@ public class Partido implements Serializable {
 	}
 
 	public Equipo getEquipoVisitante() {
-		return this.equipoVisitante;
+		return this.equipoVisita;
 	}
 
 	public void setEquipoVisitante(Equipo equipoVisitante) {
-		this.equipoVisitante = equipoVisitante;
+		this.equipoVisita = equipoVisitante;
 	}
 
 	public Equipo getEquipLocal() {
@@ -171,12 +171,12 @@ public class Partido implements Serializable {
 		this.equipoLocal = equipoLocal;
 	}
 
-	public Grupo getGrupoId_de_Partidos() {
-		return this.grupoId_de_Partidos;
+	public Grupo getGrupo() {
+		return this.grupo;
 	}
 
-	public void setGrupoId_de_Partidos(Grupo grupoId_de_Partidos) {
-		this.grupoId_de_Partidos = grupoId_de_Partidos;
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
 	}
 /*
 	public Grupo getGrupoId2() {

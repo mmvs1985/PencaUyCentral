@@ -24,9 +24,6 @@ public class TiposPremio implements Serializable {
 	@Column(name="\"Nombre\"")
 	private String nombre;
 
-	//bi-directional many-to-one association to Premio
-	@OneToMany(mappedBy="tiposPremio")
-	private List<Premio> premios;
 
 	public TiposPremio() {
 	}
@@ -45,28 +42,6 @@ public class TiposPremio implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public List<Premio> getPremios() {
-		return this.premios;
-	}
-
-	public void setPremios(List<Premio> premios) {
-		this.premios = premios;
-	}
-
-	public Premio addPremio(Premio premio) {
-		getPremios().add(premio);
-		premio.setTiposPremio(this);
-
-		return premio;
-	}
-
-	public Premio removePremio(Premio premio) {
-		getPremios().remove(premio);
-		premio.setTiposPremio(null);
-
-		return premio;
 	}
 
 }

@@ -26,15 +26,15 @@ public class Equipo implements Serializable {
 
 	//bi-directional many-to-one association to Equipos_Grupo
 	@OneToMany(mappedBy="equipo")
-	private List<Equipos_Grupo> equiposGrupos;
+	private List<Equipos_Grupo> equiposGrupo;
 
 	//bi-directional many-to-one association to Partido
 	@OneToMany(mappedBy="equipoGanador")
 	private List<Partido> partidosEquipoGanador;
 
 	//bi-directional many-to-one association to Partido
-	@OneToMany(mappedBy="equipoVisitante")
-	private List<Partido> partidosEquipoVisitante;
+	@OneToMany(mappedBy="equipoVisita")
+	private List<Partido> partidosEquipoVisita;
 
 	//bi-directional many-to-one association to Partido
 	@OneToMany(mappedBy="equipoLocal")
@@ -60,11 +60,11 @@ public class Equipo implements Serializable {
 	}
 
 	public List<Equipos_Grupo> getEquiposGrupos() {
-		return this.equiposGrupos;
+		return this.equiposGrupo;
 	}
 
 	public void setEquiposGrupos(List<Equipos_Grupo> equiposGrupos) {
-		this.equiposGrupos = equiposGrupos;
+		this.equiposGrupo = equiposGrupos;
 	}
 
 	public Equipos_Grupo addEquiposGrupo(Equipos_Grupo equiposGrupo) {
@@ -102,11 +102,11 @@ public class Equipo implements Serializable {
 	}
 
 	public List<Partido> getPartidosEquipoVisitante() {
-		return this.partidosEquipoVisitante;
+		return this.partidosEquipoVisita;
 	}
 
 	public void setPartidosEquipoVisitante(List<Partido> partidosEquipoVisitante) {
-		this.partidosEquipoVisitante = partidosEquipoVisitante;
+		this.partidosEquipoVisita = partidosEquipoVisitante;
 	}
 
 	public Partido addPartidosEquipoVisitante(Partido partidosEquipoVisitante) {

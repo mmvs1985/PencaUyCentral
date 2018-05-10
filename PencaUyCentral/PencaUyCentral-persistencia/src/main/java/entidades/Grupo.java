@@ -29,16 +29,16 @@ public class Grupo implements Serializable {
 
 	//bi-directional many-to-one association to Equipos_Grupo
 	@OneToMany(mappedBy="grupo")
-	private List<Equipos_Grupo> equiposGrupos;
+	private List<Equipos_Grupo> equiposGrupo;
 
-	//bi-directional many-to-one association to Fas
+	//bi-directional many-to-one association to Fase
 	@ManyToOne
 	@JoinColumn(name="\"FaseId\"")
 	private Fase fase;
 
 	//bi-directional many-to-one association to Partido
-	@OneToMany(mappedBy="grupoId_de_Partidos")
-	private List<Partido> partidosGrupoId_de_Partidos;
+	@OneToMany(mappedBy="grupo")
+	private List<Partido> partidos;
 
 /*
 	//bi-directional many-to-one association to Partido
@@ -73,11 +73,11 @@ public class Grupo implements Serializable {
 	}
 
 	public List<Equipos_Grupo> getEquiposGrupos() {
-		return this.equiposGrupos;
+		return this.equiposGrupo;
 	}
 
-	public void setEquiposGrupos(List<Equipos_Grupo> equiposGrupos) {
-		this.equiposGrupos = equiposGrupos;
+	public void setEquiposGrupos(List<Equipos_Grupo> equiposGrupo) {
+		this.equiposGrupo = equiposGrupo;
 	}
 
 	public Equipos_Grupo addEquiposGrupo(Equipos_Grupo equiposGrupo) {
@@ -100,24 +100,22 @@ public class Grupo implements Serializable {
 		this.fase = fase;
 	}
 
-	public List<Partido> getPartidosGrupoId_de_Partidos() {
-		return this.partidosGrupoId_de_Partidos;
+	public List<Partido> getPartidos() {
+		return this.partidos;
 	}
 
-	public void setPartidosGrupoId_de_Partidos(List<Partido> partidosGrupoId_de_Partidos) {
-		this.partidosGrupoId_de_Partidos = partidosGrupoId_de_Partidos;
+	public void setPartido(List<Partido> partidos) {
+		this.partidos = partidos;
 	}
 
-	public Partido addPartidosGrupoId_de_Partidos(Partido partidosGrupoId_de_Partidos) {
-		getPartidosGrupoId_de_Partidos().add(partidosGrupoId_de_Partidos);
-		partidosGrupoId_de_Partidos.setGrupoId_de_Partidos(this);
-		return partidosGrupoId_de_Partidos;
+	public void addPartido(Partido partido) {
+		getPartidos().add(partido);
+		partido.setGrupo(this);
 	}
 
-	public Partido removePartidosGrupoId_de_Partidos(Partido partidosGrupoId_de_Partidos) {
-		getPartidosGrupoId_de_Partidos().remove(partidosGrupoId_de_Partidos);
-		partidosGrupoId_de_Partidos.setGrupoId_de_Partidos(null);
-		return partidosGrupoId_de_Partidos;
+	public void removePartido(Partido partido) {
+		getPartidos().remove(partido);
+		partido.setGrupo(null);
 	}
 
 /*

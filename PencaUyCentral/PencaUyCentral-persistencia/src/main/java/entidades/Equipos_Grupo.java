@@ -15,11 +15,11 @@ public class Equipos_Grupo implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="\"Id\"")
-	private Integer id;
-
+	@EmbeddedId
+	private Equipos_Grupo_Identidad id;
+	
+	
+	
 	@Column(name="\"GolenContra\"")
 	private Integer golenContra;
 
@@ -55,14 +55,6 @@ public class Equipos_Grupo implements Serializable {
 	private Grupo grupo;
 
 	public Equipos_Grupo() {
-	}
-
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public Integer getGolenContra() {
