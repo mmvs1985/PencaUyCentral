@@ -11,8 +11,8 @@ import java.util.List;
  */
 @Entity
 @Table(name="\"Organizaciones\"")
-@NamedQuery(name="Organizacione.findAll", query="SELECT o FROM Organizacione o")
-public class Organizacione implements Serializable {
+@NamedQuery(name="Organizacion.findAll", query="SELECT o FROM Organizacion o")
+public class Organizacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -27,7 +27,7 @@ public class Organizacione implements Serializable {
 	@OneToMany(mappedBy="organizacion")
 	private List<Penca> pencas;
 
-	public Organizacione() {
+	public Organizacion() {
 	}
 
 	public Integer getId() {

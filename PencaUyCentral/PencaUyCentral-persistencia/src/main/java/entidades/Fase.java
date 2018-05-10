@@ -11,8 +11,8 @@ import java.util.List;
  */
 @Entity
 @Table(name="\"Fases\"")
-@NamedQuery(name="Fas.findAll", query="SELECT f FROM Fas f")
-public class Fas implements Serializable {
+@NamedQuery(name="Fase.findAll", query="SELECT f FROM Fase f")
+public class Fase implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -29,10 +29,10 @@ public class Fas implements Serializable {
 	private Torneo torneo;
 
 	//bi-directional many-to-one association to Grupo
-	@OneToMany(mappedBy="fas")
+	@OneToMany(mappedBy="fase")
 	private List<Grupo> grupos;
 
-	public Fas() {
+	public Fase() {
 	}
 
 	public Integer getId() {
@@ -69,15 +69,13 @@ public class Fas implements Serializable {
 
 	public Grupo addGrupo(Grupo grupo) {
 		getGrupos().add(grupo);
-		grupo.setFas(this);
-
+		grupo.setFase(this);
 		return grupo;
 	}
 
 	public Grupo removeGrupo(Grupo grupo) {
 		getGrupos().remove(grupo);
-		grupo.setFas(null);
-
+		grupo.setFase(null);
 		return grupo;
 	}
 

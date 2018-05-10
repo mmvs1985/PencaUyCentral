@@ -33,7 +33,7 @@ public class Torneo implements Serializable {
 
 	//bi-directional many-to-one association to Fas
 	@OneToMany(mappedBy="torneo")
-	private List<Fas> fases;
+	private List<Fase> fases;
 
 	public Torneo() {
 	}
@@ -70,22 +70,22 @@ public class Torneo implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public List<Fas> getFases() {
+	public List<Fase> getFases() {
 		return this.fases;
 	}
 
-	public void setFases(List<Fas> fases) {
+	public void setFases(List<Fase> fases) {
 		this.fases = fases;
 	}
 
-	public Fas addFas(Fas fas) {
+	public Fase addFas(Fase fas) {
 		getFases().add(fas);
 		fas.setTorneo(this);
 
 		return fas;
 	}
 
-	public Fas removeFas(Fas fas) {
+	public Fase removeFas(Fase fas) {
 		getFases().remove(fas);
 		fas.setTorneo(null);
 

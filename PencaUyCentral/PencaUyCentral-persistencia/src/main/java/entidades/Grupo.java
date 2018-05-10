@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name="\"Grupos\"")
 @NamedQuery(name="Grupo.findAll", query="SELECT g FROM Grupo g")
 public class Grupo implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;	
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -33,7 +33,7 @@ public class Grupo implements Serializable {
 	//bi-directional many-to-one association to Fas
 	@ManyToOne
 	@JoinColumn(name="\"FaseId\"")
-	private Fas fas;
+	private Fase fase;
 
 	//bi-directional many-to-one association to Partido
 	@OneToMany(mappedBy="grupoId_de_Partidos")
@@ -82,23 +82,21 @@ public class Grupo implements Serializable {
 	public Equipos_Grupo addEquiposGrupo(Equipos_Grupo equiposGrupo) {
 		getEquiposGrupos().add(equiposGrupo);
 		equiposGrupo.setGrupo(this);
-
 		return equiposGrupo;
 	}
 
 	public Equipos_Grupo removeEquiposGrupo(Equipos_Grupo equiposGrupo) {
 		getEquiposGrupos().remove(equiposGrupo);
 		equiposGrupo.setGrupo(null);
-
 		return equiposGrupo;
 	}
 
-	public Fas getFas() {
-		return this.fas;
+	public Fase getFase() {
+		return this.fase;
 	}
 
-	public void setFas(Fas fas) {
-		this.fas = fas;
+	public void setFase(Fase fase) {
+		this.fase = fase;
 	}
 
 	public List<Partido> getPartidosGrupoId_de_Partidos() {

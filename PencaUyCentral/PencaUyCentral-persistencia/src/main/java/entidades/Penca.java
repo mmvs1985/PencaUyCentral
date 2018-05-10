@@ -27,7 +27,7 @@ public class Penca implements Serializable {
 	//bi-directional many-to-one association to Organizacione
 	@ManyToOne
 	@JoinColumn(name="\"OrganizacionId\"")
-	private Organizacione organizacion;
+	private Organizacion organizacion;
 
 	public Penca() {
 	}
@@ -62,11 +62,11 @@ public class Penca implements Serializable {
 		return participante;
 	}
 
-	public Organizacione getOrganizacion() {
+	public Organizacion getOrganizacion() {
 		return this.organizacion;
 	}
 
-	public void setOrganizacion(Organizacione organizacion) {
+	public void setOrganizacion(Organizacion organizacion) {
 		this.organizacion = organizacion;
 	}
 
