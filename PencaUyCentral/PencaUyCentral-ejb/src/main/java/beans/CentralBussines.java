@@ -1,12 +1,11 @@
 package beans;
 
-import beans.interfaces.CentralBussinesLocal;
-import beans.interfaces.CentralBussinesRemote;
-import beans.interfaces.CentralPersistenceLocal;
-
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
+import beans.interfaces.CentralBussinesLocal;
+import beans.interfaces.CentralBussinesRemote;
 
 /**
  * Session Bean implementation class CentralBussines
@@ -19,7 +18,10 @@ public class CentralBussines implements CentralBussinesRemote, CentralBussinesLo
      * Default constructor. 
      */
 	
-	@EJB CentralPersistenceLocal bean;
+	@EJB TorneoPersistence beanTorneo;
+	@EJB OrganizacionPersistence beanOrganizacion;
+	@EJB EquipoPersistence beanEquipo;
+	@EJB UsuarioPersistence beanUsuario;
 	
     public CentralBussines() {
         // TODO Auto-generated constructor stub

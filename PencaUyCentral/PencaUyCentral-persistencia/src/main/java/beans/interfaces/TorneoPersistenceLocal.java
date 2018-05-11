@@ -3,6 +3,6 @@ package beans.interfaces;
 import javax.ejb.Local;
 
 @Local
-public interface CentralPersistenceLocal {
+public interface TorneoPersistenceLocal {
 
 }
