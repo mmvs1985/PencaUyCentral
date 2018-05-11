@@ -2,6 +2,8 @@ package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,15 +31,21 @@ public class Organizacion implements Serializable {
 	private List<Penca> pencas;
 
 	public Organizacion() {
+		this.pencas = new ArrayList<Penca>(); 
+	}
+	
+	public Organizacion(String nombre) {
+		this.nombre = nombre;
+		this.pencas = new ArrayList<Penca>(); 
 	}
 
 	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	/*public void setId(Integer id) {
 		this.id = id;
-	}
+	}*/
 
 	public String getNombre() {
 		return this.nombre;
@@ -58,14 +66,12 @@ public class Organizacion implements Serializable {
 	public Penca addPenca(Penca penca) {
 		getPencas().add(penca);
 		penca.setOrganizacion(this);
-
 		return penca;
 	}
 
 	public Penca removePenca(Penca penca) {
 		getPencas().remove(penca);
 		penca.setOrganizacion(null);
-
 		return penca;
 	}
 
