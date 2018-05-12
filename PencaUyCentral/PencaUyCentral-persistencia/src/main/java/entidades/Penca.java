@@ -40,9 +40,9 @@ public class Penca implements Serializable {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	/*public void setId(Integer id) {
 		this.id = id;
-	}
+	}*/
 
 	public List<Participante> getParticipantes() {
 		return this.participantes;

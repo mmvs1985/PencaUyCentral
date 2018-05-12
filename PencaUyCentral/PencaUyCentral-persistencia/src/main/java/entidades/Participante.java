@@ -44,18 +44,10 @@ public class Participante implements Serializable {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	/*public void setId(Integer id) {
 		this.id = id;
-	}
-/*
-	public Integer getPencaId() {
-		return this.pencaId;
-	}
+	}*/
 
-	public void setPencaId(Integer pencaId) {
-		this.pencaId = pencaId;
-	}
-*/
 	public Integer getPuntos() {
 		return this.puntos;
 	}

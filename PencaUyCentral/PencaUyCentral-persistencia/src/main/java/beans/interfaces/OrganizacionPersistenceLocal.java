@@ -22,30 +22,4 @@ public interface OrganizacionPersistenceLocal {
 	
 	boolean eliminarOrganizacion(int id);
 	
-	boolean agregarPenca(Organizacion o);
-	
-	List<Penca> obtenerPencas();
-	
-	Penca obtenerPenca(int id);
-	
-	List<Participante> obtenerParticipantesPenca(int id);
-
-	boolean eliminarPenca(Penca p);
-	
-	boolean agregarParticipante(String usuario, Penca p);
-	
-	List<Participante> obtenerParticipantes();
-	
-	Participante obtenerParticipante(int id);
-	
-	boolean eliminarParticipante(Participante p);
-	
-	boolean agregarTipoPremio(String nombre);
-	
-	List<TiposPremio> obtenerTiposPremio();
-	
-	TiposPremio obtenerTipoPremio(int id);
-	
-	boolean eliminarTipoPremio(TiposPremio tp);
-
 }

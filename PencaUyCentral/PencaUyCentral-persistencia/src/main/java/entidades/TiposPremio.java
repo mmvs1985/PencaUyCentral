@@ -35,9 +35,9 @@ public class TiposPremio implements Serializable {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	/*public void setId(Integer id) {
 		this.id = id;
-	}
+	}*/
 
 	public String getNombre() {
 		return this.nombre;

@@ -11,7 +11,10 @@ import java.util.List;
  */
 @Entity
 @Table(name="\"Equipos\"")  
-@NamedQuery(name="Equipo.findAll", query="SELECT e FROM Equipo e")
+@NamedQueries({
+	@NamedQuery(name = "Equipo.findAll", query="SELECT e FROM Equipo e"),
+	@NamedQuery(name = "Equipo.findByNombre",query = "SELECT e FROM Equipo e WHERE e.nombre = :nombre")
+})
 public class Equipo implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -47,9 +50,9 @@ public class Equipo implements Serializable {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	/*public void setId(Integer id) {
 		this.id = id;
-	}
+	}*/
 
 	public String getNombre() {
 		return this.nombre;
