@@ -5,21 +5,47 @@ import java.util.List;
 import javax.ejb.Local;
 
 import entidades.Organizacion;
+import entidades.Participante;
 import entidades.Penca;
+import entidades.TiposPremio;
 
 @Local
 public interface OrganizacionPersistenceLocal {
 
 	boolean agregarOrganizacion(String nombre);
 
-	Organizacion obtenerOrganizacion(String nombre);
+	Organizacion obtenerOrganizacion(int id);
+	
+	List<Organizacion> obtenerOrganizaciones();
 
-	List<Penca> obtenerPencasOrganizacion(String nombre);
+	List<Penca> obtenerPencasOrganizacion(int id);
+	
+	boolean eliminarOrganizacion(int id);
+	
+	boolean agregarPenca(Organizacion o);
+	
+	List<Penca> obtenerPencas();
+	
+	Penca obtenerPenca(int id);
+	
+	List<Participante> obtenerParticipantesPenca(int id);
 
-	boolean agregarPencaEnOrganizacion(String nombre, Penca penca);
-
-	boolean eliminarPencaEnOrganizacion(String nombre, Penca penca);
-
-	boolean eliminarOrganizacion(String nombre);
+	boolean eliminarPenca(Penca p);
+	
+	boolean agregarParticipante(String usuario, Penca p);
+	
+	List<Participante> obtenerParticipantes();
+	
+	Participante obtenerParticipante(int id);
+	
+	boolean eliminarParticipante(Participante p);
+	
+	boolean agregarTipoPremio(String nombre);
+	
+	List<TiposPremio> obtenerTiposPremio();
+	
+	TiposPremio obtenerTipoPremio(int id);
+	
+	boolean eliminarTipoPremio(TiposPremio tp);
 
 }
