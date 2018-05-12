@@ -32,11 +32,18 @@ public class Torneo implements Serializable {
 	@Column(name="\"Tipo\"")
 	private String tipo;
 
-	//bi-directional many-to-one association to Fas
+	//bi-directional many-to-one association to Fase
 	@OneToMany(mappedBy="torneo")
 	private List<Fase> fases;
 
 	public Torneo() {
+	}
+	
+	public Torneo(String nombre, String tipo, Date comienzo) {
+		super();
+		this.nombre = nombre;
+		this.tipo = tipo;
+		this.comienzo = comienzo;
 	}
 
 	public Integer getId() {
@@ -79,18 +86,18 @@ public class Torneo implements Serializable {
 		this.fases = fases;
 	}
 
-	public Fase addFas(Fase fas) {
-		getFases().add(fas);
-		fas.setTorneo(this);
+	public Fase addFase(Fase fase) {
+		getFases().add(fase);
+		fase.setTorneo(this);
 
-		return fas;
+		return fase;
 	}
 
-	public Fase removeFas(Fase fas) {
-		getFases().remove(fas);
-		fas.setTorneo(null);
+	public Fase removeFase(Fase fase) {
+		getFases().remove(fase);
+		fase.setTorneo(null);
 
-		return fas;
+		return fase;
 	}
 
 }

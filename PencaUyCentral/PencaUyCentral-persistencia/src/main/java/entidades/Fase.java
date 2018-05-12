@@ -35,6 +35,10 @@ public class Fase implements Serializable {
 
 	public Fase() {
 	}
+	
+	public Fase(String nombre) {
+		this.nombre = nombre;
+	}
 
 	public Integer getId() {
 		return this.id;
