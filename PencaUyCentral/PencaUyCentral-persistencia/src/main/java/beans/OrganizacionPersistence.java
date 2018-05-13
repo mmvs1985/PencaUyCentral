@@ -2,12 +2,8 @@ package beans;
 
 import beans.interfaces.OrganizacionPersistenceLocal;
 import beans.interfaces.OrganizacionPersistenceRemote;
-import controladores.OrganizacionController;
 import entidades.Organizacion;
 import entidades.Penca;
-
-import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -20,61 +16,91 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 @LocalBean
-public class OrganizacionPersistence implements OrganizacionPersistenceRemote, OrganizacionPersistenceLocal, Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class OrganizacionPersistence implements OrganizacionPersistenceRemote, OrganizacionPersistenceLocal {
+	
+	@PersistenceContext(unitName="PencaUyCentral-persistencia")
+	private static EntityManager em;
 	
 	/**
      * Default constructor. 
      */
     public OrganizacionPersistence() {
-        // TODO Auto-generated constructor stub
-    	
-    }
+        // TODO Auto-generated constructor stub    	
+    }     	
     
 	@Override
 	public boolean agregarOrganizacion(String nombre) {
-		// TODO Auto-generated method stub
-		return OrganizacionController.getInstancia().addOrganizacion(nombre);		
-	}
-	
-	
-	@Override
-	public Organizacion obtenerOrganizacion(String nombre) {
-		// TODO Auto-generated method stub
-		return OrganizacionController.getInstancia().getOrganizacion(nombre);	
-	}
-	
-	@Override
-	public List<Penca> obtenerPencasOrganizacion(String nombre) {
-		// TODO Auto-generated method stub
-		return OrganizacionController.getInstancia().getPencasOrganizacion(nombre);	
+		Organizacion o = obtenerOrganizacionPorNombre(nombre);
+		if (o == null) {		
+			Organizacion no = new Organizacion();
+			no.setNombre(nombre);
+			em.persist(no);
+			return true;
+		} else {
+			return false;
+		}		
 	}	
 	
 	@Override
-	public boolean agregarPencaEnOrganizacion(String nombre, Penca penca) {
-		// TODO Auto-generated method stub
-		return OrganizacionController.getInstancia().addPencaEnOrganizacion(nombre, penca);	
+	public Organizacion obtenerOrganizacion(int id) {
+		return (Organizacion) em.find(Organizacion.class, id);
+	}	
+	
+	@Override
+	public List<Organizacion> obtenerOrganizaciones(){
+		return (List<Organizacion>) em.createNamedQuery("Organizacion.findAll", Organizacion.class).getResultList();
+	}
+	
+	public Organizacion obtenerOrganizacionPorNombre(String nombre) {
+		return (Organizacion) em.createNamedQuery("Organizacion.findByNombre", Organizacion.class).setParameter("nombre", nombre).getSingleResult();
+	}	
+	
+	@Override
+	public List<Penca> obtenerPencasOrganizacion(int id) {
+		Organizacion o = obtenerOrganizacion(id);
+		if (o != null) {
+			List<Penca> lp = (List<Penca>) em.createNamedQuery("Penca.findByOrganizacion", Penca.class).setParameter("organizacion", o).getResultList();
+			return lp;
+		} else {
+			return null;
+		}	
+	}	
+	
+	/*@Override
+	public boolean agregarPencaEnOrganizacion(int id, Penca penca) {
+		Organizacion o = obtenerOrganizacion(id);
+		if (o != null) {
+			em.getTransaction().begin();
+			penca.setOrganizacion(o);			
+			em.getTransaction().commit();
+			return true;
+		} else {
+			return false;
+		}		
 	}
 	
 	@Override
-	public boolean eliminarPencaEnOrganizacion(String nombre, Penca penca) {
-		// TODO Auto-generated method stub
-		return OrganizacionController.getInstancia().removePencaEnOrganizacion(nombre, penca);	
-	}
+	public boolean eliminarPencaEnOrganizacion(int id, Penca penca) {
+		Organizacion o = obtenerOrganizacion(id);
+		if (o != null) {	
+			em.getTransaction().begin();
+			penca.setOrganizacion(null);			
+			em.getTransaction().commit();
+			return true;
+		} else {
+			return false;
+		}	
+	}*/
 	
 	@Override
-	public boolean eliminarOrganizacion(String nombre) {
-		// TODO Auto-generated method stub
-		return OrganizacionController.getInstancia().removeOrganizacion(nombre);	
-	}
-	
-	
-	
-	
-	
-	
-	
-	
+	public boolean eliminarOrganizacion(int id) {
+		Organizacion o = obtenerOrganizacion(id);
+		if (o != null) {				
+			em.remove(o);
+			return true;
+		} else {
+			return false;
+		}
+	}		
 
 }

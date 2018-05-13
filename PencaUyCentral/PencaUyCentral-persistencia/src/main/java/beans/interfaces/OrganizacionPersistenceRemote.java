@@ -5,21 +5,19 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import entidades.Organizacion;
+import entidades.Participante;
 import entidades.Penca;
+import entidades.TiposPremio;
 
 @Remote
 public interface OrganizacionPersistenceRemote {
 
 	boolean agregarOrganizacion(String nombre);
 
-	Organizacion obtenerOrganizacion(String nombre);
+	Organizacion obtenerOrganizacion(int id);
 
-	List<Penca> obtenerPencasOrganizacion(String nombre);
+	List<Penca> obtenerPencasOrganizacion(int id);
 
-	boolean agregarPencaEnOrganizacion(String nombre, Penca penca);
-
-	boolean eliminarPencaEnOrganizacion(String nombre, Penca penca);
-
-	boolean eliminarOrganizacion(String nombre);
+	boolean eliminarOrganizacion(int id);	
 
 }

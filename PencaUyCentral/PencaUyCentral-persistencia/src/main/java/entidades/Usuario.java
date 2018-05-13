@@ -4,12 +4,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@Entity
+@Table(name="\"Usuarios\"")
+@NamedQueries({
+	@NamedQuery(name = "Usuario.findAll", query="SELECT u FROM Usuario u"),
+	@NamedQuery(name = "Usuario.findByNickname",query = "SELECT u FROM Usuario u WHERE u.nickname = :nickname"),
+	@NamedQuery(name = "Usuario.findByCredentials",query = "SELECT u FROM Usuario u WHERE u.nickname = :nickname AND u.password = :password")
+})
 public class Usuario  implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -38,13 +49,17 @@ public class Usuario  implements Serializable {
 	@Column(name="\"Nacimiento\"")
 	private Date nacimiento;
 	
+	
+	public Usuario(){		
+	}
+	
 	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	/*public void setId(Integer id) {
 		this.id = id;
-	}
+	}*/
 
 	public String getNombre() {
 		return nombre;

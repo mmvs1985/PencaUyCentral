@@ -10,7 +10,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="\"Participantes\"")
-@NamedQuery(name="Participante.findAll", query="SELECT p FROM Participante p")
+@NamedQueries({
+	@NamedQuery(name="Participante.findAll", query="SELECT p FROM Participante p"),
+	@NamedQuery(name = "Participante.findByPenca",query = "SELECT p FROM Participante p WHERE p.penca = :penca")
+})
 public class Participante implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -41,18 +44,10 @@ public class Participante implements Serializable {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	/*public void setId(Integer id) {
 		this.id = id;
-	}
-/*
-	public Integer getPencaId() {
-		return this.pencaId;
-	}
+	}*/
 
-	public void setPencaId(Integer pencaId) {
-		this.pencaId = pencaId;
-	}
-*/
 	public Integer getPuntos() {
 		return this.puntos;
 	}

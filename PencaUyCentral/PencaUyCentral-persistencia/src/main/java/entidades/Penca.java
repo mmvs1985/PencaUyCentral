@@ -11,7 +11,10 @@ import java.util.List;
  */
 @Entity
 @Table(name="\"Pencas\"")
-@NamedQuery(name="Penca.findAll", query="SELECT p FROM Penca p")
+@NamedQueries({
+	@NamedQuery(name="Penca.findAll", query="SELECT p FROM Penca p"),
+	@NamedQuery(name = "Penca.findByOrganizacion",query = "SELECT p FROM Penca p WHERE p.organizacion = :organizacion")
+})
 public class Penca implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -37,9 +40,9 @@ public class Penca implements Serializable {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	/*public void setId(Integer id) {
 		this.id = id;
-	}
+	}*/
 
 	public List<Participante> getParticipantes() {
 		return this.participantes;
@@ -52,14 +55,12 @@ public class Penca implements Serializable {
 	public Participante addParticipante(Participante participante) {
 		getParticipantes().add(participante);
 		participante.setPenca(this);
-
 		return participante;
 	}
 
 	public Participante removeParticipante(Participante participante) {
 		getParticipantes().remove(participante);
 		participante.setPenca(null);
-
 		return participante;
 	}
 

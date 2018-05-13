@@ -5,21 +5,21 @@ import java.util.List;
 import javax.ejb.Local;
 
 import entidades.Organizacion;
+import entidades.Participante;
 import entidades.Penca;
+import entidades.TiposPremio;
 
 @Local
 public interface OrganizacionPersistenceLocal {
 
 	boolean agregarOrganizacion(String nombre);
 
-	Organizacion obtenerOrganizacion(String nombre);
+	Organizacion obtenerOrganizacion(int id);
+	
+	List<Organizacion> obtenerOrganizaciones();
 
-	List<Penca> obtenerPencasOrganizacion(String nombre);
-
-	boolean agregarPencaEnOrganizacion(String nombre, Penca penca);
-
-	boolean eliminarPencaEnOrganizacion(String nombre, Penca penca);
-
-	boolean eliminarOrganizacion(String nombre);
-
+	List<Penca> obtenerPencasOrganizacion(int id);
+	
+	boolean eliminarOrganizacion(int id);
+	
 }

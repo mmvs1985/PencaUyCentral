@@ -11,7 +11,10 @@ import java.util.List;
  */
 @Entity
 @Table(name="\"TiposPremio\"")
-@NamedQuery(name="TiposPremio.findAll", query="SELECT t FROM TiposPremio t")
+@NamedQueries({
+	@NamedQuery(name = "TiposPremio.findAll", query="SELECT t FROM TiposPremio t"),
+	@NamedQuery(name = "TiposPremio.findByNombre",query = "SELECT t FROM TiposPremio t WHERE t.nombre = :nombre")
+})
 public class TiposPremio implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -32,9 +35,9 @@ public class TiposPremio implements Serializable {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	/*public void setId(Integer id) {
 		this.id = id;
-	}
+	}*/
 
 	public String getNombre() {
 		return this.nombre;
