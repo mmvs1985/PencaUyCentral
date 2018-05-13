@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -99,5 +100,30 @@ public class Torneo implements Serializable {
 
 		return fase;
 	}
+	
+	@Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+	
+	 @Override
+	    public boolean equals(Object obj) {
+	        if (this == obj) {
+	            return true;
+	        }
+	        if (obj == null) {
+	            return false;
+	        }
+	        if (getClass() != obj.getClass()) {
+	            return false;
+	        }
+	        final Torneo other = (Torneo) obj;
+	        if (!Objects.equals(this.id, other.id)) {
+	            return false;
+	        }
+	        return true;
+	    }
 
 }

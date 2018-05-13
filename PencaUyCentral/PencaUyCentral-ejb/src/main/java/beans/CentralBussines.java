@@ -18,7 +18,7 @@ public class CentralBussines implements CentralBussinesRemote, CentralBussinesLo
      * Default constructor. 
      */
 	
-	@EJB TorneoPersistence beanTorneo;
+//	@EJB TorneoPersistence beanTorneo;
 	@EJB OrganizacionPersistence beanOrganizacion;
 	@EJB EquipoPersistence beanEquipo;
 	@EJB UsuarioPersistence beanUsuario;
