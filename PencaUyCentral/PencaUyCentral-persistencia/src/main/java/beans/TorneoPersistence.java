@@ -5,6 +5,7 @@ import entidades.Organizacion;
 import entidades.Torneo;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -44,9 +45,16 @@ public class TorneoPersistence implements TorneoPersistenceRemote, TorneoPersist
 	    }
 	    @Override
 	    public boolean crearTorneo(String nombre, String tipo, Date comienzo) {
-	    	Torneo t = new Torneo(nombre,tipo,comienzo);
-	    	em.persist(t);
-	    	return true;
+	    	
+	    	if (em.createQuery( "Select d from "+ Torneo.class.getSimpleName()+" d where d.nombre = '" + nombre+"'").getResultList().isEmpty()) {
+	    		Torneo t = new Torneo(nombre,tipo,comienzo);
+		    	em.persist(t);
+		    	return true;
+	    	}else {
+	    		System.out.println("Ya existe un torneo con ese nombre");
+	    		return false;
+	    	}
+	    	
 	    }
 	    
 	    @Override
@@ -56,11 +64,42 @@ public class TorneoPersistence implements TorneoPersistenceRemote, TorneoPersist
 	    	
 	    }
 	    
+	   
+	    @SuppressWarnings("unchecked")
+	    public Torneo obtenerTorneoPorNombre(String nombre) {
+	    	List<Torneo> list =(List<Torneo>)em.createQuery( "Select d from "+ Torneo.class.getSimpleName()+" d where d.nombre = '"+nombre + "'" ).getResultList();
+	    	if (!(list.isEmpty())) {
+	    		Torneo torneo = list.get(0);
+	    		System.out.println("obtuve un torneo");
+	    		return torneo;
+	    	}else {
+	    		System.out.println("no obtuve nada");
+	    		return null;
+	    	}
+	    	
+	    	
+	    }
+	    
+	    
 	    @Override
 	    public boolean eliminarTorneo(int id) {   
 	    	Torneo t = em.find(Torneo.class, id);
 	    	em.remove(t);
 	    	return true;
+	    }
+	    
+	    @Override
+	    public boolean eliminarTodosTorneo() {
+	    	List<Torneo> list = this.obtenerTodos();
+	    	Torneo t;
+
+	    	Iterator<Torneo> itList = list.iterator();
+	        while(itList.hasNext()) {
+	            t = itList.next();
+	            em.remove(t);
+	            System.out.println("borre un torneo");
+	        }
+	        return true;
 	    }
 	    
 	    

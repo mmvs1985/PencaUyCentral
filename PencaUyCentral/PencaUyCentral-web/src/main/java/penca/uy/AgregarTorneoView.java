@@ -53,16 +53,26 @@ public class AgregarTorneoView implements Serializable {
 	}
 
 	public void save() {
-		torneoBean.crearTorneo(nombre, tipo, comienzo);
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage("Se ha agregado el torneo " + nombre + " del tipo " + tipo));
+		Date hoy = new Date();
+		if (comienzo.before(hoy)) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("El comienzo del Torneo no puede ser anterior a hoy"));
+		} else {
+			if (torneoBean.crearTorneo(nombre, tipo, comienzo)) {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage("Se ha agregado el torneo " + nombre + " del tipo " + tipo));
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage("Ya existe un torneo con ese nombre"));
+			}
+		}
 	}
-	
+
 	public void onDateSelect(SelectEvent event) {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
-    }
-	
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		facesContext.addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+	}
 
 }

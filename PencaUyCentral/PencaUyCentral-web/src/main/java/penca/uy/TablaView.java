@@ -11,7 +11,6 @@ import beans.interfaces.TorneoPersistenceRemote;
 import entidades.Torneo;
  
 @ManagedBean(name="TablaView")
-@ViewScoped
 public class TablaView implements Serializable {
      
     /**

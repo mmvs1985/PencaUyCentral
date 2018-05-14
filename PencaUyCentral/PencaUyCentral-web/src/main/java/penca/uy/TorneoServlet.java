@@ -44,23 +44,35 @@ public class TorneoServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		PrintWriter pw=response.getWriter();
-		 //pw.println("Cree el torneo");
-		 List<Torneo> torneos = torneoBean.obtenerTodos();
-		 pw.println("obuve todos ");
+		
+		 pw.println("Voy a obtener el torneo de la copa mundial");
+		 Torneo t = torneoBean.obtenerTorneoPorNombre("mundial");
 		 
+		 pw.println("Este es el torneo "+t.getId()+" el nombre "+t.getNombre()+" la fecha "+t.getComienzo());
 		 
+		
+		 
+		 pw.close(); 
+		 
+		 //List<Torneo> torneos = torneoBean.obtenerTodos();
+		 //pw.println("obuve todos ");
+		 
+		 /*
 		 int i = torneos.size();
 		 pw.println("tamaño  "+i);
 
 		 Torneo t;
 		 for (int j = 1; j < i ; j++) {
 			 t = torneos.get(j);
+			 
 			 pw.println(j+") Torneo - " + t.getNombre());
+			 
            
          }
+         */
 		 //pw.println("Cree la fase fase de grupos");
 		
-		 pw.close(); 
+		 
 		 
 	}
 
