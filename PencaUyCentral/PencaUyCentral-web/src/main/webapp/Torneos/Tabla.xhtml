@@ -1,0 +1,28 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<p:dataTable var="torneo" value="#{TablaView.getTorneos()}">
+		<p:column headerText="Id">
+			<h:outputText value="#{torneo.id}" />
+		</p:column>
+
+		<p:column headerText="Nombre">
+			<h:outputText value="#{torneo.nombre}" />
+		</p:column>
+
+		<p:column headerText="Tipo">
+			<h:outputText value="#{torneo.tipo}" />
+		</p:column>
+		
+
+	</p:dataTable>
+</h:body>
+</html>

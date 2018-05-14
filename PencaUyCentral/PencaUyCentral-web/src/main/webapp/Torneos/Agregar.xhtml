@@ -1,0 +1,51 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	Agregar Torneo
+</h:head>
+<h:body>
+
+<h:form>
+	<h:panelGrid id="grid" cellpadding="5" columns="2" >
+		<f:facet name="header">
+			<p:messages id="msgs" />
+		</f:facet>
+
+		<p:outputLabel for="nombre" value="Nombre:" />
+		<p:inputText id="nombre" value="#{AgregarTorneoView.nombre}"
+			required="true" requiredMessage="Debe tener un nombre." />
+
+		<p:outputLabel for="tipo" value="Tipo:" />
+		<p:inputText id="tipo" value="#{AgregarTorneoView.tipo}"
+			required="true" requiredMessage="Debe tener un tipo." />
+
+		<p:outputLabel for="comienzo" value="Comienzo:" />
+        <p:calendar id="comienzo" value="#{AgregarTorneoView.comienzo}" />
+
+
+	</h:panelGrid>
+	<h:panelGrid id="date" columns="6" cellpadding="5">
+		<p:commandButton value="Agregar" id="botonAgregar" process="@form"
+			update="grid" actionListener="#{AgregarTorneoView.save}" />
+	</h:panelGrid>
+	<p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+        <p:panelGrid id="display" columns="2" columnClasses="label,value">
+            
+ 
+           <h:outputText value="Comienzo:" />
+            <h:outputText value="#{calendarView.comienzo}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:outputText>
+ 
+        </p:panelGrid>
+    </p:dialog>
+
+</h:form>
+
+
+</h:body>
+</html>

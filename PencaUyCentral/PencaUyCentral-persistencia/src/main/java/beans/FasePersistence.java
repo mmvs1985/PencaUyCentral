@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import beans.interfaces.FasePersistenceLocal;
 import beans.interfaces.FasePersistenceRemote;
 import entidades.Fase;
+import entidades.Torneo;
 
 /**
  * Session Bean implementation class FasePersistence
@@ -26,20 +27,21 @@ public class FasePersistence implements FasePersistenceRemote, FasePersistenceLo
         // TODO Auto-generated constructor stub
     }
     
-    public boolean crearFase(String nombre) {
+    public boolean crearFase(String nombre,int torneoId) {
     	
     	Fase fase = new Fase(nombre);
+    	Torneo t = em.find(Torneo.class, torneoId);
+    	
+    	fase.setTorneo(t);
+    	t.addFase(fase);
     	em.persist(fase);
     	return true;
-    }
-    
+    }    
     
     public Fase obtenerFase(int id) {
     	
-    	return em.find(Fase.class, id);
-    	
-    }
-    
+    	return em.find(Fase.class, id);    	
+    }    
     
     public boolean eliminarFase(int id) {
     	
