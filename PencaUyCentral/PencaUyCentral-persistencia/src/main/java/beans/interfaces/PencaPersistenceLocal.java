@@ -9,16 +9,11 @@ import entidades.Participante;
 import entidades.Penca;
 
 @Local
-public interface PencaPersistenceLocal {
-	
-boolean agregarPenca(Organizacion o);
-	
-	Penca obtenerPenca(int id);
-	
-	List<Penca> obtenerPencas();
-	
-	List<Participante> obtenerParticipantesPenca(int id);
-
-	boolean eliminarPenca(int id);
+public interface PencaPersistenceLocal {	
+	public boolean agregarPenca(Organizacion o);	
+	public Penca obtenerPenca(int id);	
+	public List<Penca> obtenerPencas();	
+	public List<Participante> obtenerParticipantesPenca(int id);
+	public boolean eliminarPenca(int id);
 
 }

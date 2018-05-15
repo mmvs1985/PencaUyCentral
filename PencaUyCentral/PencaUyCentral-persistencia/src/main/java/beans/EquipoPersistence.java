@@ -3,6 +3,8 @@ package beans;
 import beans.interfaces.EquipoPersistenceLocal;
 import beans.interfaces.EquipoPersistenceRemote;
 import entidades.Equipo;
+import entidades.Organizacion;
+import entidades.Torneo;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ import javax.persistence.PersistenceContext;
 public class EquipoPersistence implements EquipoPersistenceRemote, EquipoPersistenceLocal {
 	
 	@PersistenceContext(unitName="PencaUyCentral-persistencia")
-	private static EntityManager em;
+	private EntityManager em;
 
     /**
      * Default constructor. 
@@ -30,8 +32,8 @@ public class EquipoPersistence implements EquipoPersistenceRemote, EquipoPersist
     
     @Override
 	public boolean agregarEquipo(String nombre) {
-		Equipo e = (Equipo) em.createNamedQuery("Equipo.findByNombre", Equipo.class).setParameter("nombre", nombre).getSingleResult();
-		if (e == null) {		
+		//List<Equipo> le = em.createNamedQuery("Equipo.findByNombre", Equipo.class).setParameter("nombre", nombre).getResultList();
+    	if (em.createQuery("SELECT e FROM "+ Equipo.class.getSimpleName()+" e WHERE e.nombre = '" + nombre +"'").getResultList().isEmpty()) {	
 			Equipo ne = new Equipo();
 			ne.setNombre(nombre);		
 			em.persist(ne);
@@ -47,8 +49,22 @@ public class EquipoPersistence implements EquipoPersistenceRemote, EquipoPersist
 	}	
 	
 	@Override
+	public Equipo obtenerEquipoPorNombre(String nombre) {
+		List<Equipo> le = em.createNamedQuery("Equipo.findByNombre", Equipo.class).setParameter("nombre", nombre).getResultList();
+		if (le.isEmpty()) {
+			return null;
+		}
+		else {
+			return le.get(0);
+		}
+	}		
+	
+	@Override
+	//@SuppressWarnings("unchecked")
 	public List<Equipo> obtenerEquipos(){
 		return (List<Equipo>) em.createNamedQuery("Equipo.findAll", Equipo.class).getResultList();
+		/*List<Equipo> le = em.createQuery( "SELECT e FROM "+ Equipo.class.getSimpleName()+" e").getResultList();
+    	return le;*/
 	}
 	
 	@Override

@@ -20,7 +20,7 @@ import javax.persistence.PersistenceContext;
 public class ParticipantePersistence implements ParticipantePersistenceRemote, ParticipantePersistenceLocal {
 	
 	@PersistenceContext(unitName="PencaUyCentral-persistencia")
-	private static EntityManager em;
+	private EntityManager em;
 
     /**
      * Default constructor. 

@@ -7,14 +7,10 @@ import javax.ejb.Remote;
 import entidades.Equipo;
 
 @Remote
-public interface EquipoPersistenceRemote {
-	
-	boolean agregarEquipo(String nombre);
-
-	Equipo obtenerEquipo(int id);
-	
-	List<Equipo> obtenerEquipos();
-
-	boolean eliminarEquipo(int id);
-
+public interface EquipoPersistenceRemote {	
+	public boolean agregarEquipo(String nombre);
+	public Equipo obtenerEquipo(int id);
+	public Equipo obtenerEquipoPorNombre(String nombre);
+	public List<Equipo> obtenerEquipos();
+	public boolean eliminarEquipo(int id);
 }

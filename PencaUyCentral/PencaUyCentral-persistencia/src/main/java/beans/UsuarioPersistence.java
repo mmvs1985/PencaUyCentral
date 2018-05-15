@@ -30,9 +30,8 @@ public class UsuarioPersistence implements UsuarioPersistenceRemote, UsuarioPers
     }
     
     @Override
-	public boolean agregarUsuario(String nombre, String apellido, String email, String nickname, String password, Date fechaNac) {
-		Usuario u = (Usuario) em.createNamedQuery("Usuario.findByNickname", Usuario.class).setParameter("nickname", nickname).getSingleResult();
-		if (u == null) {		
+	public boolean agregarUsuario(String nombre, String apellido, String email, String nickname, String password, Date fechaNac) {		
+		if (em.createNamedQuery("Usuario.findByNickname", Usuario.class).setParameter("nickname", nickname).getResultList().isEmpty()) {		
 			Usuario nu = new Usuario();
 			nu.setNombre(nombre);
 			nu.setApellido(apellido);

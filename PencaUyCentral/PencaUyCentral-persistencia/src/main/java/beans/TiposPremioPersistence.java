@@ -31,7 +31,7 @@ public class TiposPremioPersistence implements TiposPremioPersistenceRemote, Tip
     
 	@Override
 	public boolean agregarTipoPremio(String nombre) {
-		TiposPremio tp = (TiposPremio) em.createNamedQuery("TiposPremio.findByNombre", TiposPremio.class).setParameter("nombre", nombre).getSingleResult();
+		TiposPremio tp = (TiposPremio) em.createNamedQuery("TiposPremio.findByNombre", TiposPremio.class).setParameter("nombre", nombre).getResultList().get(0);
 		if (tp == null) {	
 			TiposPremio ntp = new TiposPremio();
 			ntp.setNombre(nombre);

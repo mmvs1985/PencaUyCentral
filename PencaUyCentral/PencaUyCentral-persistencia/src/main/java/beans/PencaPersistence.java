@@ -22,7 +22,7 @@ import javax.persistence.PersistenceContext;
 public class PencaPersistence implements PencaPersistenceRemote, PencaPersistenceLocal {
 	
 	@PersistenceContext(unitName="PencaUyCentral-persistencia")
-	private static EntityManager em;
+	private EntityManager em;
 
     /**
      * Default constructor. 

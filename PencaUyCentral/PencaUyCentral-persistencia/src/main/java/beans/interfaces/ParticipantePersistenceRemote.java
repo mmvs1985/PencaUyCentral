@@ -8,14 +8,9 @@ import entidades.Participante;
 import entidades.Penca;
 
 @Remote
-public interface ParticipantePersistenceRemote {
-	
-boolean agregarParticipante(String usuario, Penca p);
-	
-	List<Participante> obtenerParticipantes();
-	
-	Participante obtenerParticipante(int id);
-	
-	boolean eliminarParticipante(int id);
-
+public interface ParticipantePersistenceRemote {	
+	public boolean agregarParticipante(String usuario, Penca p);	
+	public List<Participante> obtenerParticipantes();	
+	public Participante obtenerParticipante(int id);	
+	public boolean eliminarParticipante(int id);
 }

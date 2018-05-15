@@ -19,9 +19,9 @@ public class CentralBussines implements CentralBussinesRemote, CentralBussinesLo
      */
 	
 //	@EJB TorneoPersistence beanTorneo;
-	@EJB OrganizacionPersistence beanOrganizacion;
-	@EJB EquipoPersistence beanEquipo;
-	@EJB UsuarioPersistence beanUsuario;
+//	@EJB OrganizacionPersistence beanOrganizacion;
+//	@EJB EquipoPersistence beanEquipo;
+//	@EJB UsuarioPersistence beanUsuario;
 	
     public CentralBussines() {
         // TODO Auto-generated constructor stub

@@ -12,12 +12,9 @@ import entidades.TiposPremio;
 @Remote
 public interface OrganizacionPersistenceRemote {
 
-	boolean agregarOrganizacion(String nombre);
-
-	Organizacion obtenerOrganizacion(int id);
-
-	List<Penca> obtenerPencasOrganizacion(int id);
-
-	boolean eliminarOrganizacion(int id);	
+	public boolean agregarOrganizacion(String nombre);
+	public Organizacion obtenerOrganizacion(int id);
+	public List<Penca> obtenerPencasOrganizacion(int id);
+	public boolean eliminarOrganizacion(int id);	
 
 }
