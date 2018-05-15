@@ -29,7 +29,7 @@ public class Grupo implements Serializable {
 
 	//bi-directional many-to-one association to Equipos_Grupo
 	@OneToMany(mappedBy="grupo")
-	private List<Equipos_Grupo> equiposGrupo;
+	private List<EquiposGrupo> equiposGrupo;
 
 	//bi-directional many-to-one association to Fase
 	@ManyToOne
@@ -59,7 +59,6 @@ public class Grupo implements Serializable {
 	public Integer getFaseId() {
 		return this.faseId;
 	}
-
 	public void setFaseId(Integer faseId) {
 		this.faseId = faseId;
 	}
@@ -72,21 +71,21 @@ public class Grupo implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public List<Equipos_Grupo> getEquiposGrupos() {
+	public List<EquiposGrupo> getEquiposGrupos() {
 		return this.equiposGrupo;
 	}
 
-	public void setEquiposGrupos(List<Equipos_Grupo> equiposGrupo) {
+	public void setEquiposGrupos(List<EquiposGrupo> equiposGrupo) {
 		this.equiposGrupo = equiposGrupo;
 	}
 
-	public Equipos_Grupo addEquiposGrupo(Equipos_Grupo equiposGrupo) {
+	public EquiposGrupo addEquiposGrupo(EquiposGrupo equiposGrupo) {
 		getEquiposGrupos().add(equiposGrupo);
 		equiposGrupo.setGrupo(this);
 		return equiposGrupo;
 	}
 
-	public Equipos_Grupo removeEquiposGrupo(Equipos_Grupo equiposGrupo) {
+	public EquiposGrupo removeEquiposGrupo(EquiposGrupo equiposGrupo) {
 		getEquiposGrupos().remove(equiposGrupo);
 		equiposGrupo.setGrupo(null);
 		return equiposGrupo;
@@ -122,22 +121,17 @@ public class Grupo implements Serializable {
 	public List<Partido> getPartidos2() {
 		return this.partidos2;
 	}
-
 	public void setPartidos2(List<Partido> partidos2) {
 		this.partidos2 = partidos2;
 	}
-
 	public Partido addPartidos2(Partido partidos2) {
 		getPartidos2().add(partidos2);
 		partidos2.setGrupo2(this);
-
 		return partidos2;
 	}
-
 	public Partido removePartidos2(Partido partidos2) {
 		getPartidos2().remove(partidos2);
 		partidos2.setGrupo2(null);
-
 		return partidos2;
 	}
 */

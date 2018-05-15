@@ -5,18 +5,30 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the "Equipos_Grupo" database table.
+ * The persistent class for the "EquiposGrupo" database table.
  * 
  */
 @Entity
-@Table(name="\"Equipos_Grupo\"") 
-@NamedQuery(name="Equipos_Grupo.findAll", query="SELECT e FROM Equipos_Grupo e")
-public class Equipos_Grupo implements Serializable {
+@Table(name="\"EquiposGrupo\"") 
+@NamedQuery(name="EquiposGrupo.findAll", query="SELECT e FROM EquiposGrupo e")
+public class EquiposGrupo implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private Equipos_Grupo_Identidad id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="\"Id\"")
+	private Integer id;
+	
+	//bi-directional many-to-one association to Equipo
+	@ManyToOne
+	@JoinColumn(name="\"EquipoId\"")
+	private Equipo equipo;
+	
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	@JoinColumn(name="\"GrupoId\"")
+	private Grupo grupo;
 	
 	
 	
@@ -44,17 +56,9 @@ public class Equipos_Grupo implements Serializable {
 	@Column(name="\"Puntos\"")
 	private Integer puntos;
 
-	//bi-directional many-to-one association to Equipo
-	@ManyToOne
-	@JoinColumn(name="\"EquipoId\"")
-	private Equipo equipo;
 
-	//bi-directional many-to-one association to Grupo
-	@ManyToOne
-	@JoinColumn(name="\"GrupoId\"")
-	private Grupo grupo;
 
-	public Equipos_Grupo() {
+	public EquiposGrupo() {
 	}
 
 	public Integer getGolenContra() {

@@ -29,7 +29,7 @@ public class Equipo implements Serializable {
 
 	//bi-directional many-to-one association to Equipos_Grupo
 	@OneToMany(mappedBy="equipo")
-	private List<Equipos_Grupo> equiposGrupo;
+	private List<EquiposGrupo> equiposGrupo;
 
 	//bi-directional many-to-one association to Partido
 	@OneToMany(mappedBy="equipoGanador")
@@ -62,22 +62,22 @@ public class Equipo implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public List<Equipos_Grupo> getEquiposGrupos() {
+	public List<EquiposGrupo> getEquiposGrupos() {
 		return this.equiposGrupo;
 	}
 
-	public void setEquiposGrupos(List<Equipos_Grupo> equiposGrupos) {
+	public void setEquiposGrupos(List<EquiposGrupo> equiposGrupos) {
 		this.equiposGrupo = equiposGrupos;
 	}
 
-	public Equipos_Grupo addEquiposGrupo(Equipos_Grupo equiposGrupo) {
+	public EquiposGrupo addEquiposGrupo(EquiposGrupo equiposGrupo) {
 		getEquiposGrupos().add(equiposGrupo);
 		equiposGrupo.setEquipo(this);
 
 		return equiposGrupo;
 	}
 
-	public Equipos_Grupo removeEquiposGrupo(Equipos_Grupo equiposGrupo) {
+	public EquiposGrupo removeEquiposGrupo(EquiposGrupo equiposGrupo) {
 		getEquiposGrupos().remove(equiposGrupo);
 		equiposGrupo.setEquipo(null);
 
