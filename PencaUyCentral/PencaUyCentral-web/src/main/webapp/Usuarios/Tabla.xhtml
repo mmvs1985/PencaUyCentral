@@ -1,0 +1,41 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	Tabla de Usuarios
+</h:head>
+
+<h:body>
+	<p:panel header="Tabla de Usuarios" style="margin-bottom:10px;">
+		<p:dataTable var="usuario" value="#{TablaUsuariosView.getUsuarios()}">
+			<p:column headerText="Id">
+				<h:outputText value="#{usuario.id}" />
+			</p:column>
+
+			<p:column headerText="Nombre">
+				<h:outputText value="#{usuario.nombre}" />
+			</p:column>
+
+			<p:column headerText="Apellido">
+				<h:outputText value="#{usuario.apellido}" />
+			</p:column>
+			
+			<p:column headerText="Nacimiento">
+				<h:outputText value="#{usuario.nacimiento}" />
+			</p:column>
+			
+			<p:column headerText="Email">
+				<h:outputText value="#{usuario.email}" />
+			</p:column>
+			
+			<p:column headerText="Nickname">
+				<h:outputText value="#{usuario.nickname}" />
+			</p:column>
+
+		</p:dataTable>
+	</p:panel>
+</h:body>
+</html>

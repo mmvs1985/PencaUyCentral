@@ -2,6 +2,7 @@ package beans;
 
 import beans.interfaces.UsuarioPersistenceLocal;
 import beans.interfaces.UsuarioPersistenceRemote;
+import entidades.Organizacion;
 import entidades.Usuario;
 
 import java.util.Date;
@@ -20,7 +21,7 @@ import javax.persistence.PersistenceContext;
 public class UsuarioPersistence implements UsuarioPersistenceRemote, UsuarioPersistenceLocal {
 
 	@PersistenceContext(unitName="PencaUyCentral-persistencia")
-	private static EntityManager em;
+	private EntityManager em;
 	
     /**
      * Default constructor. 
@@ -49,7 +50,18 @@ public class UsuarioPersistence implements UsuarioPersistenceRemote, UsuarioPers
 	@Override
 	public Usuario obtenerUsuario(int id) {
 		return (Usuario) em.find(Usuario.class, id);
-	}	
+	}
+	
+	@Override
+	public Usuario obtenerUsuarioPorNickname(String nickname) {
+		List<Usuario> lu = em.createNamedQuery("Usuario.findByNickname", Usuario.class).setParameter("nickname", nickname).getResultList();
+		if (lu.isEmpty()) {
+			return null;
+		}
+		else {
+			return lu.get(0);
+		}
+	}
 	
 	@Override
 	public List<Usuario> obtenerUsuarios(){

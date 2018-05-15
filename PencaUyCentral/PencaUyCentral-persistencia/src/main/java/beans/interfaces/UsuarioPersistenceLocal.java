@@ -11,6 +11,7 @@ import entidades.Usuario;
 public interface UsuarioPersistenceLocal {	
 	public boolean agregarUsuario(String nombre, String apellido, String email, String nickname, String password, Date fechaNac);
 	public Usuario obtenerUsuario(int id);	
+	public Usuario obtenerUsuarioPorNickname(String nickname);
 	public List<Usuario> obtenerUsuarios();	
 	public boolean usuarioValido(Usuario u);
 	public boolean eliminarUsuario(int id);
