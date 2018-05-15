@@ -19,7 +19,7 @@ import javax.persistence.PersistenceContext;
 public class OrganizacionPersistence implements OrganizacionPersistenceRemote, OrganizacionPersistenceLocal {
 	
 	@PersistenceContext(unitName="PencaUyCentral-persistencia")
-	private static EntityManager em;
+	private EntityManager em;
 	
 	/**
      * Default constructor. 
@@ -52,7 +52,13 @@ public class OrganizacionPersistence implements OrganizacionPersistenceRemote, O
 	}
 	
 	public Organizacion obtenerOrganizacionPorNombre(String nombre) {
-		return (Organizacion) em.createNamedQuery("Organizacion.findByNombre", Organizacion.class).setParameter("nombre", nombre).getSingleResult();
+		List<Organizacion> lo = em.createNamedQuery("Organizacion.findByNombre", Organizacion.class).setParameter("nombre", nombre).getResultList();
+		if (lo.isEmpty()) {
+			return null;
+		}
+		else {
+			return lo.get(0);
+		}
 	}	
 	
 	@Override

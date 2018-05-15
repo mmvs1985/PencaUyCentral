@@ -12,14 +12,10 @@ import entidades.TiposPremio;
 @Local
 public interface OrganizacionPersistenceLocal {
 
-	boolean agregarOrganizacion(String nombre);
-
-	Organizacion obtenerOrganizacion(int id);
-	
-	List<Organizacion> obtenerOrganizaciones();
-
-	List<Penca> obtenerPencasOrganizacion(int id);
-	
-	boolean eliminarOrganizacion(int id);
+	public boolean agregarOrganizacion(String nombre);
+	public Organizacion obtenerOrganizacion(int id);	
+	public List<Organizacion> obtenerOrganizaciones();
+	public List<Penca> obtenerPencasOrganizacion(int id);	
+	public boolean eliminarOrganizacion(int id);
 	
 }

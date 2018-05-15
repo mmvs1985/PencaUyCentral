@@ -7,14 +7,9 @@ import javax.ejb.Remote;
 import entidades.TiposPremio;
 
 @Remote
-public interface TiposPremioPersistenceRemote {
-	
-	boolean agregarTipoPremio(String nombre);
-
-	List<TiposPremio> obtenerTiposPremio();
-
-	TiposPremio obtenerTipoPremio(int id);
-
-	boolean eliminarTipoPremio(int id);
-
+public interface TiposPremioPersistenceRemote {	
+	public boolean agregarTipoPremio(String nombre);
+	public List<TiposPremio> obtenerTiposPremio();
+	public TiposPremio obtenerTipoPremio(int id);
+	public boolean eliminarTipoPremio(int id);
 }

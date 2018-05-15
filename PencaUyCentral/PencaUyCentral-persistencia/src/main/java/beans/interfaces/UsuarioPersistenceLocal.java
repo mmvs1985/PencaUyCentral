@@ -8,16 +8,10 @@ import javax.ejb.Local;
 import entidades.Usuario;
 
 @Local
-public interface UsuarioPersistenceLocal {
-	
-	boolean agregarUsuario(String nombre, String apellido, String email, String nickname, String password, Date fechaNac);
-
-	Usuario obtenerUsuario(int id);
-	
-	List<Usuario> obtenerUsuarios();
-	
-	boolean usuarioValido(Usuario u);
-
-	boolean eliminarUsuario(int id);
-
+public interface UsuarioPersistenceLocal {	
+	public boolean agregarUsuario(String nombre, String apellido, String email, String nickname, String password, Date fechaNac);
+	public Usuario obtenerUsuario(int id);	
+	public List<Usuario> obtenerUsuarios();	
+	public boolean usuarioValido(Usuario u);
+	public boolean eliminarUsuario(int id);
 }

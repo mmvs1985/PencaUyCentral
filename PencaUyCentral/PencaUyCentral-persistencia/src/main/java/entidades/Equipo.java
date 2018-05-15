@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name="\"Equipos\"")  
 @NamedQueries({
 	@NamedQuery(name = "Equipo.findAll", query="SELECT e FROM Equipo e"),
-	@NamedQuery(name = "Equipo.findByNombre",query = "SELECT e FROM Equipo e WHERE e.nombre = :nombre")
+	@NamedQuery(name = "Equipo.findByNombre", query = "SELECT e FROM Equipo e WHERE e.nombre = :nombre")
 })
 public class Equipo implements Serializable {
 	

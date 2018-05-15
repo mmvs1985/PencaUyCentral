@@ -9,16 +9,10 @@ import entidades.Participante;
 import entidades.Penca;
 
 @Remote
-public interface PencaPersistenceRemote {
-	
-boolean agregarPenca(Organizacion o);
-	
-	Penca obtenerPenca(int id);
-	
-	List<Penca> obtenerPencas();
-	
-	List<Participante> obtenerParticipantesPenca(int id);
-
-	boolean eliminarPenca(int id);
-
+public interface PencaPersistenceRemote {	
+	public boolean agregarPenca(Organizacion o);	
+	public Penca obtenerPenca(int id);	
+	public List<Penca> obtenerPencas();	
+	public List<Participante> obtenerParticipantesPenca(int id);
+	public boolean eliminarPenca(int id);
 }
