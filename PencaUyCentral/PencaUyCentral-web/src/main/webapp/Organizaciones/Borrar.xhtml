@@ -1,0 +1,32 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	Borrar Organización
+</h:head>
+<h:body>
+
+<h:form>
+    <p:growl id="msgs" showDetail="true" />
+ 
+    <p:panel header="Seleccione una Organización" style="margin-bottom:10px;">
+        <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel for="organizacion" value="Organización: " />
+            <p:selectOneMenu id="organizacion" value="#{BorrarOrganizacionView.organizacion}" style="width:150px">
+                <f:selectItem itemLabel="Organizaciones" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{BorrarOrganizacionView.organizaciones}" />
+            </p:selectOneMenu>
+        </h:panelGrid>
+ 
+        <p:separator />
+ 
+        <p:commandButton value="Borrar" update="msgs" actionListener="#{BorrarOrganizacionView.borrar}" icon="ui-icon-trash" />
+    </p:panel>
+</h:form>
+
+
+</h:body>
+</html>
