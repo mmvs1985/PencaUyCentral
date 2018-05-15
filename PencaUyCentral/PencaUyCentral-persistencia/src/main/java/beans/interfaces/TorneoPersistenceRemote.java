@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import entidades.Fase;
 import entidades.Torneo;
 @Remote
 public interface TorneoPersistenceRemote {
@@ -16,6 +17,7 @@ public interface TorneoPersistenceRemote {
     public List<Torneo> obtenerTodos();
     public Torneo obtenerTorneoPorNombre(String nombre);
     public boolean eliminarTodosTorneo();
+    
 
 	
 	

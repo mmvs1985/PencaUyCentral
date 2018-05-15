@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import entidades.Fase;
 import entidades.Torneo;
 
 @Local
@@ -16,6 +17,7 @@ public interface TorneoPersistenceLocal {
     public List<Torneo> obtenerTodos();
     public Torneo obtenerTorneoPorNombre(String nombre);
     public boolean eliminarTodosTorneo();
+    
 
 
 }

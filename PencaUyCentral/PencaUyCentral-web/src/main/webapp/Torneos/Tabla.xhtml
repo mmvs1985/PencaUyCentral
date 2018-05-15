@@ -5,24 +5,26 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-
+	Tabla de Torneos
 </h:head>
 
 <h:body>
-	<p:dataTable var="torneo" value="#{TablaView.getTorneos()}">
-		<p:column headerText="Id">
-			<h:outputText value="#{torneo.id}" />
-		</p:column>
+	<p:panel header="Tabla de Torneos" style="margin-bottom:10px;">
+		<p:dataTable var="torneo" value="#{TablaView.getTorneos()}">
+			<p:column headerText="Id">
+				<h:outputText value="#{torneo.id}" />
+			</p:column>
 
-		<p:column headerText="Nombre">
-			<h:outputText value="#{torneo.nombre}" />
-		</p:column>
+			<p:column headerText="Nombre">
+				<h:outputText value="#{torneo.nombre}" />
+			</p:column>
 
-		<p:column headerText="Tipo">
-			<h:outputText value="#{torneo.tipo}" />
-		</p:column>
-		
+			<p:column headerText="Tipo">
+				<h:outputText value="#{torneo.tipo}" />
+			</p:column>
 
-	</p:dataTable>
+
+		</p:dataTable>
+	</p:panel>
 </h:body>
 </html>

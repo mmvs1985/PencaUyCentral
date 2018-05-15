@@ -1,5 +1,8 @@
 package beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -48,6 +51,20 @@ public class FasePersistence implements FasePersistenceRemote, FasePersistenceLo
     	Fase f = em.find(Fase.class, id);
     	em.remove(f);
     	return true;
+    }
+    @SuppressWarnings("unchecked")
+    public List<Fase> obtenerFasesPorTorneo(int id){
+    	List<Fase> list= new ArrayList();
+    	list =(List<Fase>)em.createQuery( "Select d from "+ Fase.class.getSimpleName()+" d where d.torneo = "+id ).getResultList();
+    	return list;
+    }
+    
+    @SuppressWarnings("unchecked")
+    public Fase obtenerFasePorNombreYTorneo(int id,String nombre){
+    	List<Fase> list =(List<Fase>)em.createQuery( "Select d from "+ Fase.class.getSimpleName()+" d where d.torneo = "+id+" and d.nombre ='" + nombre +"'").getResultList();
+    	if (!(list.isEmpty())) {
+    		return list.get(0);
+    	}else return null;
     }
 
 }

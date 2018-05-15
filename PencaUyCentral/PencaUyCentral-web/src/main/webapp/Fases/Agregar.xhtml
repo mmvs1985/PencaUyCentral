@@ -1,0 +1,46 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	Agregar Fase
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:panel header="Agregar Fase" style="margin-bottom:10px;">
+
+			<h:panelGrid id="grid" cellpadding="5" columns="1">
+				<f:facet name="header">
+					<p:messages id="msgs" />
+				</f:facet>
+
+				<p:outputLabel for="nombre" value="Nombre:" />
+				<p:inputText id="nombre" value="#{AgregarFaseView.nombre}"
+					required="true" requiredMessage="Debe tener un nombre." />
+
+				<!--<p:outputLabel for="torneo" value="Torneo:" />
+		<p:inputText id="torneo" value="#{AgregarFaseView.torneo}"
+			required="true" requiredMessage="Debe tener un Torneo." />-->
+				<p:outputLabel for="torneo" value="Torneo: " />
+				<p:selectOneMenu id="torneo" value="#{AgregarFaseView.torneo}"
+					style="width:150px" required="true"
+					requiredMessage="Debe tener un Torneo.">
+					<f:selectItem itemLabel="Torneos" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{AgregarFaseView.torneos}" />
+				</p:selectOneMenu>
+
+			</h:panelGrid>
+			<h:panelGrid id="agregar" columns="6" cellpadding="5">
+				<p:commandButton value="Agregar" id="botonAgregar" process="@form"
+					update="grid" actionListener="#{AgregarFaseView.save}" />
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+
+
+</h:body>
+</html>

@@ -1,0 +1,58 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	Agregar Grupo
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:panel header="Agregar Grupo" style="margin-bottom:10px;">
+
+			<h:panelGrid id="grid" cellpadding="5" columns="1">
+				<f:facet name="header">
+					<p:messages id="msgs" />
+				</f:facet>
+
+				<p:outputLabel for="nombre" value="Nombre:" />
+				<p:inputText id="nombre" value="#{AgregarGrupoView.nombre}"
+					required="true" requiredMessage="Debe tener un nombre." />
+
+
+				<p:panel header="Seleccione un Torneo" style="margin-bottom:10px;">
+					<h:panelGrid columns="1" cellpadding="5">
+						<p:outputLabel for="torneo" value="Torneo: " />
+						<p:selectOneMenu id="torneo" value="#{AgregarGrupoView.torneo}"
+							style="width:150px">
+							<p:ajax listener="#{AgregarGrupoView.onTorneoChange}" update="fase" />
+							<f:selectItem itemLabel="Torneo" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{AgregarGrupoView.torneos}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel header="Seleccione una Fase" style="margin-bottom:10px;" />
+						<p:outputLabel for="fase" value="Fase: " />
+						<p:selectOneMenu id="fase" value="#{AgregarGrupoView.fase}"
+							style="width:150px">
+							<f:selectItem itemLabel="Seleccione una Fase" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{AgregarGrupoView.fases}" />
+						</p:selectOneMenu>
+
+					</h:panelGrid>
+					
+				</p:panel>
+			</h:panelGrid>
+			<h:panelGrid id="agregar" columns="6" cellpadding="5">
+				<p:commandButton value="Agregar" id="botonAgregar" process="@form"
+					update="grid" actionListener="#{AgregarGrupoView.save}" />
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+
+
+</h:body>
+</html>

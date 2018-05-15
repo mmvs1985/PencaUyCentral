@@ -13,16 +13,14 @@
     <p:growl id="msgs" showDetail="true" />
  
     <p:panel header="Seleccione un Torneo" style="margin-bottom:10px;">
-        <h:panelGrid columns="2" cellpadding="5">
+        <h:panelGrid columns="1" cellpadding="5">
             <p:outputLabel for="torneo" value="Torneo: " />
             <p:selectOneMenu id="torneo" value="#{BorrarTorneoView.torneo}" style="width:150px">
                 <f:selectItem itemLabel="Torneos" itemValue="" noSelectionOption="true" />
                 <f:selectItems value="#{BorrarTorneoView.torneos}" />
             </p:selectOneMenu>
         </h:panelGrid>
- 
-        <p:separator />
- 
+  
         <p:commandButton value="Borrar" update="msgs" actionListener="#{BorrarTorneoView.borrar}" icon="ui-icon-trash" />
     </p:panel>
 </h:form>
