@@ -51,6 +51,7 @@ public class OrganizacionPersistence implements OrganizacionPersistenceRemote, O
 		return (List<Organizacion>) em.createNamedQuery("Organizacion.findAll", Organizacion.class).getResultList();
 	}
 	
+	@Override
 	public Organizacion obtenerOrganizacionPorNombre(String nombre) {
 		List<Organizacion> lo = em.createNamedQuery("Organizacion.findByNombre", Organizacion.class).setParameter("nombre", nombre).getResultList();
 		if (lo.isEmpty()) {

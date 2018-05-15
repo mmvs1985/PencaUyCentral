@@ -1,0 +1,21 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	Tabla de Tipos de Premio
+</h:head>
+
+<h:body>
+	<p:dataTable var="tipospremio" value="#{TablaTiposPremioView.getTiposPremio()}">
+		<p:column headerText="Id">
+			<h:outputText value="#{tipospremio.id}" />
+		</p:column>
+		<p:column headerText="Nombre">
+			<h:outputText value="#{tipospremio.nombre}" />
+		</p:column>
+	</p:dataTable>
+</h:body>
+</html>

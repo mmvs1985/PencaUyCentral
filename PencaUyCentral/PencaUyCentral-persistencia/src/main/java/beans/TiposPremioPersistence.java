@@ -2,6 +2,7 @@ package beans;
 
 import beans.interfaces.TiposPremioPersistenceLocal;
 import beans.interfaces.TiposPremioPersistenceRemote;
+import entidades.Equipo;
 import entidades.TiposPremio;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import javax.persistence.PersistenceContext;
 public class TiposPremioPersistence implements TiposPremioPersistenceRemote, TiposPremioPersistenceLocal {
 	
 	@PersistenceContext(unitName="PencaUyCentral-persistencia")
-	private static EntityManager em;
+	private EntityManager em;
 
     /**
      * Default constructor. 
@@ -31,7 +32,7 @@ public class TiposPremioPersistence implements TiposPremioPersistenceRemote, Tip
     
 	@Override
 	public boolean agregarTipoPremio(String nombre) {
-		TiposPremio tp = (TiposPremio) em.createNamedQuery("TiposPremio.findByNombre", TiposPremio.class).setParameter("nombre", nombre).getResultList().get(0);
+		TiposPremio tp = obtenerTipoPremioPorNombre(nombre);
 		if (tp == null) {	
 			TiposPremio ntp = new TiposPremio();
 			ntp.setNombre(nombre);
@@ -46,6 +47,18 @@ public class TiposPremioPersistence implements TiposPremioPersistenceRemote, Tip
 	public TiposPremio obtenerTipoPremio(int id) {
 		return (TiposPremio) em.find(TiposPremio.class, id);
 	}	
+	
+	
+	@Override
+	public TiposPremio obtenerTipoPremioPorNombre(String nombre) {
+		List<TiposPremio> ltp = em.createNamedQuery("TiposPremio.findByNombre", TiposPremio.class).setParameter("nombre", nombre).getResultList();
+		if (ltp.isEmpty()){
+			return null;
+		}
+		else {
+			return ltp.get(0);
+		}
+	}		
 	
 	@Override
 	public List<TiposPremio> obtenerTiposPremio(){

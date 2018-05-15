@@ -13,7 +13,9 @@ import java.util.List;
 @Table(name="\"Pencas\"")
 @NamedQueries({
 	@NamedQuery(name="Penca.findAll", query="SELECT p FROM Penca p"),
-	@NamedQuery(name = "Penca.findByOrganizacion",query = "SELECT p FROM Penca p WHERE p.organizacion = :organizacion")
+	@NamedQuery(name = "Penca.findByNombre", query = "SELECT p FROM Penca p WHERE p.nombre = :nombre"),
+	@NamedQuery(name = "Penca.findByNombreAndOrganizacion", query = "SELECT p FROM Penca p WHERE p.nombre = :nombre AND p.organizacion = :organizacion"),
+	@NamedQuery(name = "Penca.findByOrganizacion", query = "SELECT p FROM Penca p WHERE p.organizacion = :organizacion")
 })
 public class Penca implements Serializable {
 	
@@ -23,6 +25,9 @@ public class Penca implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="\"Id\"")
 	private Integer id;
+	
+	@Column(name="\"Nombre\"")
+	private String nombre;
 
 	//bi-directional many-to-one association to Participante
 	@OneToMany(mappedBy="penca")
@@ -43,6 +48,14 @@ public class Penca implements Serializable {
 	/*public void setId(Integer id) {
 		this.id = id;
 	}*/
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
 	public List<Participante> getParticipantes() {
 		return this.participantes;

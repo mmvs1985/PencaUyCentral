@@ -1,0 +1,48 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	Agregar Penca
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:panel header="Agregar Penca" style="margin-bottom:10px;">
+
+			<h:panelGrid id="grid" cellpadding="5" columns="1">
+				<f:facet name="header">
+					<p:messages id="msgs" />
+				</f:facet>
+
+				<p:outputLabel for="nombre" value="Nombre:" />
+				<p:inputText id="nombre" value="#{AgregarPencaView.nombre}"
+					required="true" requiredMessage="Debe tener un nombre." />
+
+
+				<p:panel header="Seleccione una Organización" style="margin-bottom:10px;">
+					<h:panelGrid columns="1" cellpadding="5">
+						<p:outputLabel for="organizacion" value="Organización: " />
+						<p:selectOneMenu id="organizacion" value="#{AgregarPencaView.organizacion}"
+							style="width:150px">							
+							<f:selectItem itemLabel="Organización" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{AgregarPencaView.organizaciones}" />
+						</p:selectOneMenu>						
+
+					</h:panelGrid>
+					
+				</p:panel>
+			</h:panelGrid>
+			<h:panelGrid id="agregar" columns="6" cellpadding="5">
+				<p:commandButton value="Agregar" id="botonAgregar" process="@form"
+					update="grid" actionListener="#{AgregarPencaView.save}" />
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+
+
+</h:body>
+</html>
