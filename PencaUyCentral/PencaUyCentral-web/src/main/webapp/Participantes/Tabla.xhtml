@@ -1,0 +1,33 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	
+</h:head>
+
+<h:body>
+	<p:panel header="Tabla de Participantes" style="margin-bottom:10px;">
+		<p:dataTable var="participante" value="#{TablaParticipantesView.getParticipantes()}">
+			<p:column headerText="Id">
+				<h:outputText value="#{participante.id}" />
+			</p:column>
+
+			<p:column headerText="Usuario">
+				<h:outputText value="#{participante.usuario}" />
+			</p:column>
+			
+			<p:column headerText="Penca">
+				<h:outputText value="#{participante.penca.getNombre()}" />
+			</p:column>
+
+			<p:column headerText="Puntos">
+				<h:outputText value="#{participante.puntos}" />
+			</p:column>			
+			
+		</p:dataTable>
+	</p:panel>
+</h:body>
+</html>

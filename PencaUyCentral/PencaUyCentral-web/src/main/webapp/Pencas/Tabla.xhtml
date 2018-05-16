@@ -1,0 +1,26 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	
+</h:head>
+
+<h:body>
+	<p:panel header="Tabla de Pencas" style="margin-bottom:10px;">
+		<p:dataTable var="penca" value="#{TablaPencasView.getPencas()}">
+			<p:column headerText="Id">
+				<h:outputText value="#{penca.id}" />
+			</p:column>
+			<p:column headerText="Nombre">
+				<h:outputText value="#{penca.nombre}" />
+			</p:column>		
+			<p:column headerText="Organización">
+				<h:outputText value="#{penca.organizacion.getNombre()}" />
+			</p:column>			
+		</p:dataTable>
+	</p:panel>
+</h:body>
+</html>

@@ -77,22 +77,22 @@ public class BorrarPencaView implements Serializable {
 		this.pencas = pencas;
 	}
 	
-	 public void onOrganizacionChange() {
-		 //System.out.println("Esta es la Organizacion "+ organizacion);
-	        if ((organizacion != null) && (!organizacion.equals(""))) {
-	        	System.out.println("Esta es la Organizacion "+ organizacion);
-	        	Organizacion o = organizacionBean.obtenerOrganizacionPorNombre(organizacion);
-	        	List<Penca> listaPencas = pencaBean.obtenerPencasPorOrganizacion(o.getId());
-	        	int x = listaPencas.size();
-	        	System.out.println("Pencas de la organizacion: " + x);
-	    		pencas = new ArrayList<String>();
-	    		for (int j = 0; j < x; j++) {
-	    			pencas.add(listaPencas.get(j).getNombre());
-	    		}
-	    		x = pencas.size();
-	    		System.out.println("Pencas de la organizacion: " + x);
-	        }
-	   }
+	public void onOrganizacionChange() {
+        if ((organizacion != null) && (!organizacion.equals(""))) {
+        	System.out.println("Esta es la Organizacion "+ organizacion);
+        	Organizacion o = organizacionBean.obtenerOrganizacionPorNombre(organizacion);
+        	List<Penca> listaPencas = pencaBean.obtenerPencasPorOrganizacion(o.getId());
+        	int x = listaPencas.size();
+        	System.out.println("Pencas de la organizacion: " + x);
+    		pencas = new ArrayList<String>();
+    		for (int j = 0; j < x; j++) {
+    			pencas.add(listaPencas.get(j).getNombre());
+    			System.out.println("Penca: " + pencas.get(j));
+    		}
+    		x = pencas.size();
+    		System.out.println("Pencas de la organizacion: " + x);
+        }
+    }
 
 	public void borrar() {
 		FacesMessage msg;

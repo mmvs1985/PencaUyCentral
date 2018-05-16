@@ -1,0 +1,36 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:panel header="Borrar Participante" style="margin-bottom:10px;">
+			<h:panelGrid columns="1" cellpadding="5">
+			
+				<p:outputLabel for="participante" value="Usuario: " />
+				<p:selectOneMenu id="participante" value="#{BorrarParticipanteView.participante}"
+					style="width:150px">
+					<f:selectItem itemLabel="Seleccione un Participante" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{BorrarParticipanteView.participantes}" />
+				</p:selectOneMenu>
+
+
+			</h:panelGrid>
+
+			<p:commandButton value="Borrar" update="msgs"
+				actionListener="#{BorrarParticipanteView.borrar}" icon="ui-icon-trash" />
+		</p:panel>
+	</h:form>
+
+
+</h:body>
+</html>
