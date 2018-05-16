@@ -1,0 +1,91 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	Agregar Partidos
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:panel header="Agregar Equipos Grupo" style="margin-bottom:10px;">
+			<h:panelGrid columns="1" cellpadding="5">
+				<p:outputLabel for="torneo" value="Torneo: " />
+				<p:selectOneMenu id="torneo" value="#{AgregarPartidoView.torneo}"
+					style="width:150px">
+					<p:ajax listener="#{AgregarPartidoView.onTorneoChange}"
+						update="fase" />
+					<f:selectItem itemLabel="Torneo" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{AgregarPartidoView.torneos}" />
+				</p:selectOneMenu>
+
+
+				<p:outputLabel for="fase" value="Fase: " />
+				<p:selectOneMenu id="fase" value="#{AgregarPartidoView.fase}"
+					style="width:150px">
+					<p:ajax listener="#{AgregarPartidoView.onFaseChange}"
+						update="grupo" />
+					<f:selectItem itemLabel="Seleccione una Fase" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{AgregarPartidoView.fases}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="grupo" value="Grupo: " />
+				<p:selectOneMenu id="grupo" value="#{AgregarPartidoView.grupo}"
+					style="width:150px">
+					<p:ajax listener="#{AgregarPartidoView.onGrupoChange}"
+						update="equipoVisita equipoLocal" />
+					<f:selectItem itemLabel="Seleccione un Grupo" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{AgregarPartidoView.grupos}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="equipoLocal" value="Equipo Local: " />
+				<p:selectOneMenu id="equipoLocal"
+					value="#{AgregarPartidoView.equipoLocal}" style="width:150px">
+					<f:selectItem itemLabel="Seleccione un Equipo" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{AgregarPartidoView.equiposLocal}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="equipoVisita" value="Equipo Visita: " />
+				<p:selectOneMenu id="equipoVisita"
+					value="#{AgregarPartidoView.equipoVisita}" style="width:150px">
+					<f:selectItem itemLabel="Seleccione un Equipo" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{AgregarPartidoView.equiposVisita}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="fecha" value="Fecha:" />
+				<p:calendar id="fecha" value="#{AgregarPartidoView.fecha}" />
+
+
+
+
+			</h:panelGrid>
+
+			<p:commandButton value="Agregar" update="msgs"
+				actionListener="#{AgregarPartidoView.save}" />
+		</p:panel>
+		<p:dialog modal="true" resizable="false" header="Values"
+			widgetVar="dlg" showEffect="fold">
+			<p:panelGrid id="display" columns="2" columnClasses="label,value">
+
+
+				<h:outputText value="Fecha:" />
+				<h:outputText value="#{calendarView.fecha}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:outputText>
+
+			</p:panelGrid>
+		</p:dialog>
+	</h:form>
+
+
+</h:body>
+</html>

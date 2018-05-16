@@ -3,6 +3,7 @@ package beans;
 import beans.interfaces.EquipoPersistenceLocal;
 import beans.interfaces.EquipoPersistenceRemote;
 import entidades.Equipo;
+import entidades.Grupo;
 import entidades.Organizacion;
 import entidades.Torneo;
 
@@ -66,6 +67,8 @@ public class EquipoPersistence implements EquipoPersistenceRemote, EquipoPersist
 		/*List<Equipo> le = em.createQuery( "SELECT e FROM "+ Equipo.class.getSimpleName()+" e").getResultList();
     	return le;*/
 	}
+	
+
 	
 	@Override
 	public boolean eliminarEquipo(int id) {

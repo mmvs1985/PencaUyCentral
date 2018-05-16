@@ -25,6 +25,14 @@ public class EquiposGrupo implements Serializable {
 	@JoinColumn(name="\"EquipoId\"")
 	private Equipo equipo;
 	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	//bi-directional many-to-one association to Grupo
 	@ManyToOne
 	@JoinColumn(name="\"GrupoId\"")

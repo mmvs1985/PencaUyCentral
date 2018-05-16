@@ -5,7 +5,10 @@ import beans.interfaces.EquiposGrupoPersistenceRemote;
 import entidades.Equipo;
 import entidades.EquiposGrupo;
 import entidades.Grupo;
+import entidades.Torneo;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -52,7 +55,41 @@ public class EquiposGrupoPersistence implements EquiposGrupoPersistenceRemote, E
 		} else {
 			return false;
 		}		
-	}	
+	}
+    
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Equipo> obtenerEquiposPorGrupo(int grupo){
+		List<EquiposGrupo> list = em.createQuery( "Select eg from "+ EquiposGrupo.class.getSimpleName()+" eg where eg.grupo = "+grupo).getResultList();
+		if (!(list.isEmpty())) {
+			EquiposGrupo eg;
+			List<Equipo> listEquipo = new ArrayList<Equipo>();
+			Iterator<EquiposGrupo> itList = list.iterator();
+	        while(itList.hasNext()) {
+	            eg = itList.next();
+	            listEquipo.add(eg.getEquipo());
+	            System.out.println("Agregué el equipo "+eg.getEquipo().getNombre()+" a la lista");
+	        }
+	        return listEquipo;
+		}
+			
+		else return null ;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public boolean eliminarEquiposGrupo(int equipo,int grupo) {
+		List<EquiposGrupo> listEG = em.createQuery("SELECT e FROM "+ EquiposGrupo.class.getSimpleName()+" e WHERE e.equipo = " + equipo +" and e.grupo = "+grupo).getResultList();
+		if(!(listEG.isEmpty())) {
+			Equipo e = em.find(Equipo.class, equipo);
+			e.removeEquiposGrupo(listEG.get(0));
+			Grupo g = em.find(Grupo.class, grupo);
+			g.removeEquiposGrupo(listEG.get(0));
+			EquiposGrupo eg = em.find(EquiposGrupo.class, listEG.get(0).getId());
+			em.remove(eg);
+			return true;
+		}
+		else return false;
+	 }
 	
 
 }
