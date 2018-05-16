@@ -5,16 +5,16 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	Borrar Equipo
+
 </h:head>
 <h:body>
 
 <h:form>
     <p:growl id="msgs" showDetail="true" />
  
-    <p:panel header="Seleccione un Equipo" style="margin-bottom:10px;">
+    <p:panel header="Borrar Equipo" style="margin-bottom:10px;">
         <h:panelGrid columns="2" cellpadding="5">
-            <p:outputLabel for="equipo" value="Equipo: " />
+            <p:outputLabel for="equipo" value="Seleccione Equipo: " />
             <p:selectOneMenu id="equipo" value="#{BorrarEquipoView.equipo}" style="width:150px">
                 <f:selectItem itemLabel="Equipos" itemValue="" noSelectionOption="true" />
                 <f:selectItems value="#{BorrarEquipoView.equipos}" />

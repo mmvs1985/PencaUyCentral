@@ -11,6 +11,8 @@ import entidades.Penca;
 public interface ParticipantePersistenceRemote {	
 	public boolean agregarParticipante(String usuario, Penca p);	
 	public List<Participante> obtenerParticipantes();	
+	public Participante obtenerParticipantePorUsuario(String usuario);
+	public List<Participante> obtenerParticipantesPorPenca(int id);
 	public Participante obtenerParticipante(int id);	
 	public boolean eliminarParticipante(int id);
 }

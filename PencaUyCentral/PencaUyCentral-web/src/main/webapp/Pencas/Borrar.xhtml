@@ -1,0 +1,38 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:panel header="Borrar Penca" style="margin-bottom:10px;">
+			<h:panelGrid columns="1" cellpadding="5">
+				<p:outputLabel for="organizacion" value="Seleccione Organización: " />
+				<p:selectOneMenu id="organizacion" value="#{BorrarPencaView.organizacion}" style="width:150px">
+					<p:ajax listener="#{BorrarPencaView.onOrganizacionChange}" update="penca" />
+					<f:selectItem itemLabel="Organización" itemValue=""	noSelectionOption="true" />
+					<f:selectItems value="#{BorrarPencaView.organizaciones}" />
+				</p:selectOneMenu>
+				
+
+				<p:outputLabel for="penca" value="Seleccione Penca: " />
+				<p:selectOneMenu id="penca" value="#{BorrarPencaView.penca}" style="width:150px">
+					<f:selectItem itemLabel="Seleccione una Penca" itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{BorrarPencaView.pencas}" />
+				</p:selectOneMenu>
+
+			</h:panelGrid>
+			<p:commandButton value="Borrar" update="msgs" actionListener="#{BorrarPencaView.borrar}" icon="ui-icon-trash" />
+		</p:panel>
+	</h:form>
+
+
+</h:body>
+</html>

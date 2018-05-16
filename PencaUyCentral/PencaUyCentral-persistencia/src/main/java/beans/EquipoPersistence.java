@@ -34,7 +34,9 @@ public class EquipoPersistence implements EquipoPersistenceRemote, EquipoPersist
     @Override
 	public boolean agregarEquipo(String nombre) {
 		//List<Equipo> le = em.createNamedQuery("Equipo.findByNombre", Equipo.class).setParameter("nombre", nombre).getResultList();
-    	if (em.createQuery("SELECT e FROM "+ Equipo.class.getSimpleName()+" e WHERE e.nombre = '" + nombre +"'").getResultList().isEmpty()) {	
+    	//if (em.createQuery("SELECT e FROM "+ Equipo.class.getSimpleName()+" e WHERE e.nombre = '" + nombre +"'").getResultList().isEmpty()) {
+    	Equipo e = obtenerEquipoPorNombre(nombre);
+    	if (e == null) {
 			Equipo ne = new Equipo();
 			ne.setNombre(nombre);		
 			em.persist(ne);

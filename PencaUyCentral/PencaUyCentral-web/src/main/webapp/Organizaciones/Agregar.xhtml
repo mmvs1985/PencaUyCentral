@@ -4,9 +4,12 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>Agregar Organización</h:head> 
+<h:head>
+
+</h:head> 
 <body> 
 <h:form>
+<p:panel header="Agregar Organización" style="margin-bottom:10px;">
 	<h:panelGrid id="grid" cellpadding="5" columns="2" >
 		<f:facet name="header">
 			<p:messages id="msgs" />
@@ -20,6 +23,7 @@
 		<p:commandButton value="Agregar" id="botonAgregar" process="@form"
 			update="grid" actionListener="#{AgregarOrganizacionView.save}" />
 	</h:panelGrid>
+</p:panel>
 </h:form>
 
 </body> 

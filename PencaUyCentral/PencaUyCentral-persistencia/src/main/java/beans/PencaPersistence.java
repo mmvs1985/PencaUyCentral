@@ -6,7 +6,6 @@ import entidades.Organizacion;
 import entidades.Participante;
 import entidades.Penca;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -32,13 +31,20 @@ public class PencaPersistence implements PencaPersistenceRemote, PencaPersistenc
     }
     
     @Override
-	public boolean agregarPenca(Organizacion o) {
+	public boolean agregarPenca(String nombre, Organizacion o) {
 		Organizacion org = em.find(Organizacion.class, o.getId());
 		if (org != null) {	
-			Penca p = new Penca();
-			p.setOrganizacion(o);
-			em.persist(p);
-			return true;
+			Penca pe = obtenerPencaPorNombre(nombre);
+			if (pe == null) {
+				Penca p = new Penca();
+				p.setNombre(nombre);
+				p.setOrganizacion(o);
+				em.persist(p);
+				return true;
+			}
+			else {
+				return false;
+			}
 		} else {
 			return false;
 		}		
@@ -50,9 +56,39 @@ public class PencaPersistence implements PencaPersistenceRemote, PencaPersistenc
 	}	
 	
 	@Override
+	public Penca obtenerPencaPorNombre(String nombre) {
+		List<Penca> lp = em.createNamedQuery("Penca.findByNombre", Penca.class).setParameter("nombre", nombre).getResultList();
+		if (lp.isEmpty()) {
+			return null;
+		}
+		else {
+			return lp.get(0);
+		}
+	}	
+	
+	@Override
 	public List<Penca> obtenerPencas(){
 		return (List<Penca>) em.createNamedQuery("Penca.findAll", Penca.class).getResultList();
 	}
+	
+	@Override
+	public List<Penca> obtenerPencasPorOrganizacion(int id){
+		Organizacion o = em.find(Organizacion.class, id);
+		return (List<Penca>) em.createNamedQuery("Penca.findByOrganizacion", Penca.class).setParameter("organizacion", o).getResultList();
+	}
+	
+	@Override
+	public Penca obtenerPencaPorNombreYOrganizacion(int id, String nombre) {
+		Organizacion o = em.find(Organizacion.class, id);
+		List<Penca> lp = em.createNamedQuery("Penca.findByNombreAndOrganizacion", Penca.class).setParameter("nombre", nombre).setParameter("organizacion", o).getResultList();
+		if (lp.isEmpty()) {
+			return null;
+		}
+		else {
+			return lp.get(0);
+		}
+	}
+	
 	
 	@Override
 	public List<Participante> obtenerParticipantesPenca(int id){
