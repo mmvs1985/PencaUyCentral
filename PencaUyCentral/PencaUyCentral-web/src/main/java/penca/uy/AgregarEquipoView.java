@@ -7,13 +7,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.EquipoPersistenceRemote;
+import beans.interfaces.EquipoBusinessRemote;
 
 @ManagedBean(name = "AgregarEquipoView")
 public class AgregarEquipoView implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EJB EquipoPersistenceRemote equipoBean;
+	@EJB EquipoBusinessRemote equipoBean;
 	
 	private String nombre;
 

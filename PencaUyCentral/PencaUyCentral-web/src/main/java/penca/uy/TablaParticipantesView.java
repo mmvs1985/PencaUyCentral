@@ -2,12 +2,12 @@ package penca.uy;
  
 import java.io.Serializable;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 
-import beans.interfaces.ParticipantePersistenceRemote;
+import beans.interfaces.ParticipanteBusinessRemote;
 import entidades.Participante;
  
 @ManagedBean(name="TablaParticipantesView")
@@ -22,7 +22,7 @@ public class TablaParticipantesView implements Serializable {
 	private List<Participante> participantes;
      
     @EJB
-    ParticipantePersistenceRemote participanteBean;
+    ParticipanteBusinessRemote participanteBean;
  
     @PostConstruct
     public void init() {

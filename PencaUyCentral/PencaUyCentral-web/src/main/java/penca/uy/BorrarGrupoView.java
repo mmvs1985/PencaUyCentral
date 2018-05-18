@@ -2,9 +2,7 @@ package penca.uy;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -13,9 +11,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.FasePersistenceRemote;
-import beans.interfaces.GrupoPersistenceRemote;
-import beans.interfaces.TorneoPersistenceRemote;
+import beans.interfaces.FaseBusinessRemote;
+import beans.interfaces.GrupoBusinessRemote;
+import beans.interfaces.TorneoBusinessRemote;
 import entidades.Fase;
 import entidades.Grupo;
 import entidades.Torneo;
@@ -42,13 +40,13 @@ public class BorrarGrupoView implements Serializable {
 	private List<String> grupos;
 
 	@EJB
-	TorneoPersistenceRemote torneoBean;
+	TorneoBusinessRemote torneoBean;
 	
 	@EJB
-	FasePersistenceRemote faseBean;
+	FaseBusinessRemote faseBean;
 	
 	@EJB
-	GrupoPersistenceRemote grupoBean;
+	GrupoBusinessRemote grupoBean;
 
 	public String getGrupo() {
 		return grupo;

@@ -2,9 +2,7 @@ package penca.uy;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -13,11 +11,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.EquiposGrupoPersistence;
-import beans.interfaces.EquipoPersistenceRemote;
-import beans.interfaces.FasePersistenceRemote;
-import beans.interfaces.GrupoPersistenceRemote;
-import beans.interfaces.TorneoPersistenceRemote;
+import beans.EquiposGrupoBusiness;
+import beans.interfaces.EquipoBusinessRemote;
+import beans.interfaces.FaseBusinessRemote;
+import beans.interfaces.GrupoBusinessRemote;
+import beans.interfaces.TorneoBusinessRemote;
 import entidades.Equipo;
 import entidades.Fase;
 import entidades.Grupo;
@@ -56,19 +54,19 @@ public class BorrarEquiposGrupoView implements Serializable {
 	}
 
 	@EJB
-	TorneoPersistenceRemote torneoBean;
+	TorneoBusinessRemote torneoBean;
 	
 	@EJB
-	FasePersistenceRemote faseBean;
+	FaseBusinessRemote faseBean;
 	
 	@EJB
-	GrupoPersistenceRemote grupoBean;
+	GrupoBusinessRemote grupoBean;
 	
 	@EJB 
-	EquipoPersistenceRemote equipoBean;
+	EquipoBusinessRemote equipoBean;
 	
 	@EJB
-	EquiposGrupoPersistence equiposGrupoBean;
+	EquiposGrupoBusiness equiposGrupoBean;
 
 	public String getGrupo() {
 		return grupo;

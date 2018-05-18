@@ -2,12 +2,12 @@ package penca.uy;
  
 import java.io.Serializable;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 
-import beans.interfaces.EquipoPersistenceRemote;
+import beans.interfaces.EquipoBusinessRemote;
 import entidades.Equipo;
  
 @ManagedBean(name="TablaEquiposView")
@@ -22,7 +22,7 @@ public class TablaEquiposView implements Serializable {
 	private List<Equipo> equipos;
      
     @EJB
-    EquipoPersistenceRemote equipoBean;
+    EquipoBusinessRemote equipoBean;
  
     @PostConstruct
     public void init() {

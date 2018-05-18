@@ -5,10 +5,11 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	Tabla de Tipos de Premio
+	
 </h:head>
 
 <h:body>
+<p:panel header="Tabla de Tipos de Premio" style="margin-bottom:10px;">
 	<p:dataTable var="tipospremio" value="#{TablaTiposPremioView.getTiposPremio()}">
 		<p:column headerText="Id">
 			<h:outputText value="#{tipospremio.id}" />
@@ -17,5 +18,6 @@
 			<h:outputText value="#{tipospremio.nombre}" />
 		</p:column>
 	</p:dataTable>
+</p:panel>
 </h:body>
 </html>

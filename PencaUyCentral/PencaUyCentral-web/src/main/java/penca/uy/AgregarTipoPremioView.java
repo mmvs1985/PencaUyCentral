@@ -7,14 +7,15 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.TiposPremioPersistenceRemote;
+import beans.interfaces.TiposPremioBusinessRemote;
 
 @ManagedBean(name = "AgregarTipoPremioView")
 public class AgregarTipoPremioView implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EJB TiposPremioPersistenceRemote tipopremioBean;
+	@EJB TiposPremioBusinessRemote tipopremioBean;
 	
+	//private ITiposPremioPersistenceController itpc;
 	private String nombre;
 
 	public String getNombre() {
@@ -26,7 +27,10 @@ public class AgregarTipoPremioView implements Serializable {
 	}
 	
 	public void save() {
+		System.out.println("save");
+		//itpc = new TiposPremioPersistenceController();
 		if (tipopremioBean.agregarTipoPremio(nombre)) {
+			System.out.println("Agrego Tipo de Premio");
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Se ha agregado el tipo de premio " + nombre));
 		} else {

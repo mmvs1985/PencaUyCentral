@@ -11,7 +11,6 @@ import entidades.TiposPremio;
 
 @Local
 public interface OrganizacionPersistenceLocal {
-
 	public boolean agregarOrganizacion(String nombre);
 	public Organizacion obtenerOrganizacion(int id);	
 	public Organizacion obtenerOrganizacionPorNombre(String nombre);

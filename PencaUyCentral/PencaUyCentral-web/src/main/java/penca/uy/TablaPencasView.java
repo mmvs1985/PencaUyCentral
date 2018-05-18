@@ -2,12 +2,13 @@ package penca.uy;
  
 import java.io.Serializable;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import beans.interfaces.PencaPersistenceRemote;
+import beans.interfaces.PencaBusinessRemote;
 import entidades.Penca;
  
 @ManagedBean(name="TablaPencasView")
@@ -22,7 +23,7 @@ public class TablaPencasView implements Serializable {
 	private List<Penca> pencas;
      
     @EJB
-    PencaPersistenceRemote pencaBean;
+    PencaBusinessRemote pencaBean;
  
     @PostConstruct
     public void init() {

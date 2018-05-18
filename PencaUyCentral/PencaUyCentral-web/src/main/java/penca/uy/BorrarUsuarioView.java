@@ -2,9 +2,7 @@ package penca.uy;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -13,7 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.UsuarioPersistenceRemote;
+import beans.interfaces.UsuarioBusinessRemote;
 import entidades.Usuario;
 
 @ManagedBean(name="BorrarUsuarioView")
@@ -26,7 +24,7 @@ public class BorrarUsuarioView implements Serializable {
 	private List<String> usuarios;
 
 	@EJB
-	UsuarioPersistenceRemote usuarioBean;
+	UsuarioBusinessRemote usuarioBean;
 
 	@PostConstruct
 	public void init() {

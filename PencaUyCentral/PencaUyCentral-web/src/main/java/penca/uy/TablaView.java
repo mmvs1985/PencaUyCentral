@@ -7,7 +7,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import beans.interfaces.TorneoPersistenceRemote;
+import beans.interfaces.TorneoBusinessRemote;
 import entidades.Torneo;
  
 @ManagedBean(name="TablaView")
@@ -21,7 +21,7 @@ public class TablaView implements Serializable {
 	private List<Torneo> torneos;
      
     @EJB
-    TorneoPersistenceRemote torneoBean;
+    TorneoBusinessRemote torneoBean;
  
     @PostConstruct
     public void init() {

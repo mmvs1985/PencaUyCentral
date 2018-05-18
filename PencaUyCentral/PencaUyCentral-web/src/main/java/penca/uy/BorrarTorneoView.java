@@ -2,9 +2,7 @@ package penca.uy;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -13,7 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.TorneoPersistenceRemote;
+import beans.interfaces.TorneoBusinessRemote;
 import entidades.Torneo;
 
 @ManagedBean(name="BorrarTorneoView")
@@ -24,8 +22,8 @@ public class BorrarTorneoView implements Serializable {
 	private String torneo;
 	private List<String> torneos;
 
-	@EJB
-	TorneoPersistenceRemote torneoBean;
+	@EJB 
+	TorneoBusinessRemote torneoBean;
 
 	@PostConstruct
 	public void init() {

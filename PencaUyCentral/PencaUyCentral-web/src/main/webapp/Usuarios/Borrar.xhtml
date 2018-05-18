@@ -5,11 +5,12 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	Borrar Usuario
+	
 </h:head>
 <h:body>
 
 <h:form>
+<p:panel header="Borrar Usuario" style="margin-bottom:10px;">
     <p:growl id="msgs" showDetail="true" />
  
     <p:panel header="Seleccione un Usuario" style="margin-bottom:10px;">
@@ -23,8 +24,7 @@
   
         <p:commandButton value="Borrar" update="msgs" actionListener="#{BorrarUsuarioView.borrar}" icon="ui-icon-trash" />
     </p:panel>
+</p:panel>
 </h:form>
-
-
 </h:body>
 </html>

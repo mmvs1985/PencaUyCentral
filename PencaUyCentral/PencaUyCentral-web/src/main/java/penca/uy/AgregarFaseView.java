@@ -1,9 +1,7 @@
 package penca.uy;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,10 +10,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-import org.primefaces.event.SelectEvent;
-
-import beans.interfaces.FasePersistenceRemote;
-import beans.interfaces.TorneoPersistenceRemote;
+import beans.interfaces.FaseBusinessRemote;
+import beans.interfaces.TorneoBusinessRemote;
 import entidades.Torneo;
 
 @ManagedBean(name = "AgregarFaseView")
@@ -24,11 +20,10 @@ public class AgregarFaseView implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	FasePersistenceRemote faseBean;
-	
-	
+	FaseBusinessRemote faseBean;
+		
 	@EJB
-	TorneoPersistenceRemote torneoBean;
+	TorneoBusinessRemote torneoBean;
 
 	@PostConstruct
 	public void init() {
@@ -73,7 +68,7 @@ public class AgregarFaseView implements Serializable {
 
 	public void save() {
 		Torneo t = torneoBean.obtenerTorneoPorNombre(torneo);
-		if (faseBean.crearFase(nombre, t.getId())){
+		if (faseBean.agregarFase(nombre, t.getId())){
 				
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage("Se ha agregado la fase " + nombre + " al torneo " + torneo));

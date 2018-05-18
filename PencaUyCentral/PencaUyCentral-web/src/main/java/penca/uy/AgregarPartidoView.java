@@ -12,12 +12,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.EquiposGrupoPersistence;
-import beans.interfaces.EquipoPersistenceRemote;
-import beans.interfaces.FasePersistenceRemote;
-import beans.interfaces.GrupoPersistenceRemote;
-import beans.interfaces.PartidoPersistenceRemote;
-import beans.interfaces.TorneoPersistenceRemote;
+import beans.interfaces.EquipoBusinessRemote;
+import beans.interfaces.EquiposGrupoBusinessRemote;
+import beans.interfaces.FaseBusinessRemote;
+import beans.interfaces.GrupoBusinessRemote;
+import beans.interfaces.PartidoBusinessRemote;
+import beans.interfaces.TorneoBusinessRemote;
 import entidades.Equipo;
 import entidades.Fase;
 import entidades.Grupo;
@@ -85,22 +85,22 @@ public class AgregarPartidoView implements Serializable {
 	}
 
 	@EJB
-	TorneoPersistenceRemote torneoBean;
+	TorneoBusinessRemote torneoBean;
 	
 	@EJB
-	FasePersistenceRemote faseBean;
+	FaseBusinessRemote faseBean;
 	
 	@EJB
-	GrupoPersistenceRemote grupoBean;
+	GrupoBusinessRemote grupoBean;
 	
 	@EJB 
-	EquipoPersistenceRemote equipoBean;
+	EquipoBusinessRemote equipoBean;
 	
 	@EJB
-	EquiposGrupoPersistence equiposGrupoBean;
+	EquiposGrupoBusinessRemote equiposGrupoBean;
 	
 	@EJB
-	PartidoPersistenceRemote partidoBean;
+	PartidoBusinessRemote partidoBean;
 
 	public String getGrupo() {
 		return grupo;

@@ -2,9 +2,7 @@ package penca.uy;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -13,10 +11,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.PencaPersistenceRemote;
-import beans.interfaces.OrganizacionPersistenceRemote;
-import entidades.Penca;
+import beans.interfaces.OrganizacionBusinessRemote;
+import beans.interfaces.PencaBusinessRemote;
 import entidades.Organizacion;
+import entidades.Penca;
 
 @ManagedBean(name="BorrarPencaView")
 @ViewScoped
@@ -29,10 +27,10 @@ public class BorrarPencaView implements Serializable {
 	private List<String> pencas;
 
 	@EJB
-	OrganizacionPersistenceRemote organizacionBean;
+	OrganizacionBusinessRemote organizacionBean;
 	
 	@EJB
-	PencaPersistenceRemote pencaBean;
+	PencaBusinessRemote pencaBean;
 
 	@PostConstruct
 	public void init() {

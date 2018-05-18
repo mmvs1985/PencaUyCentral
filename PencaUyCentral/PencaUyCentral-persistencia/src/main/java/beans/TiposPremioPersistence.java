@@ -30,8 +30,9 @@ public class TiposPremioPersistence implements TiposPremioPersistenceRemote, Tip
     }
     
     
-	@Override
+
 	public boolean agregarTipoPremio(String nombre) {
+		System.out.println("TiposPremioPersistenceBeanAgregar");
 		TiposPremio tp = obtenerTipoPremioPorNombre(nombre);
 		if (tp == null) {	
 			TiposPremio ntp = new TiposPremio();
@@ -49,8 +50,9 @@ public class TiposPremioPersistence implements TiposPremioPersistenceRemote, Tip
 	}	
 	
 	
-	@Override
+
 	public TiposPremio obtenerTipoPremioPorNombre(String nombre) {
+		System.out.println("TiposPremioPersistenceBeanObtener");
 		List<TiposPremio> ltp = em.createNamedQuery("TiposPremio.findByNombre", TiposPremio.class).setParameter("nombre", nombre).getResultList();
 		if (ltp.isEmpty()){
 			return null;

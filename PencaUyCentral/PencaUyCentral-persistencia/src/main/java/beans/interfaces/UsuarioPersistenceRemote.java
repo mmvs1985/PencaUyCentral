@@ -13,6 +13,6 @@ public interface UsuarioPersistenceRemote {
 	public Usuario obtenerUsuario(int id);	
 	public Usuario obtenerUsuarioPorNickname(String nickname);
 	public List<Usuario> obtenerUsuarios();	
-	public boolean usuarioValido(Usuario u);
+	public boolean usuarioValido(String usuario, String password);
 	public boolean eliminarUsuario(int id);
 }

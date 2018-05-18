@@ -3,6 +3,7 @@ package penca.uy;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -10,10 +11,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.ParticipantePersistenceRemote;
-import beans.interfaces.PencaPersistenceRemote;
+import beans.interfaces.ParticipanteBusinessRemote;
 import entidades.Participante;
-import entidades.Penca;
 
 @ManagedBean(name="BorrarParticipanteView")
 @ViewScoped
@@ -29,7 +28,7 @@ public class BorrarParticipanteView implements Serializable {
 	//PencaPersistenceRemote pencaBean;
 	
 	@EJB
-	ParticipantePersistenceRemote participanteBean;
+	ParticipanteBusinessRemote participanteBean;
 
 	@PostConstruct
 	/*public void init() {

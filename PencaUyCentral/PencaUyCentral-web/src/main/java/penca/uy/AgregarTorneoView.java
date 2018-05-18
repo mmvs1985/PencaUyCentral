@@ -11,7 +11,7 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
-import beans.interfaces.TorneoPersistenceRemote;
+import beans.interfaces.TorneoBusinessRemote;
 
 @ManagedBean(name = "AgregarTorneoView")
 public class AgregarTorneoView implements Serializable {
@@ -22,7 +22,7 @@ public class AgregarTorneoView implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	TorneoPersistenceRemote torneoBean;
+	TorneoBusinessRemote torneoBean;
 
 	private String nombre;
 	private String tipo;
@@ -58,7 +58,7 @@ public class AgregarTorneoView implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("El comienzo del Torneo no puede ser anterior a hoy"));
 		} else {
-			if (torneoBean.crearTorneo(nombre, tipo, comienzo)) {
+			if (torneoBean.agregarTorneo(nombre, tipo, comienzo)) {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage("Se ha agregado el torneo " + nombre + " del tipo " + tipo));
 			} else {

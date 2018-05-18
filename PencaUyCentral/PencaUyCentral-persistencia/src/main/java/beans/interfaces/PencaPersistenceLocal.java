@@ -18,5 +18,4 @@ public interface PencaPersistenceLocal {
 	public List<Penca> obtenerPencasPorOrganizacion(int id);
 	public List<Participante> obtenerParticipantesPenca(int id);
 	public boolean eliminarPenca(int id);
-
 }

@@ -11,7 +11,6 @@ import entidades.TiposPremio;
 
 @Remote
 public interface OrganizacionPersistenceRemote {
-
 	public boolean agregarOrganizacion(String nombre);
 	public Organizacion obtenerOrganizacion(int id);
 	public Organizacion obtenerOrganizacionPorNombre(String nombre);

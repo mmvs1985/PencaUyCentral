@@ -2,12 +2,12 @@ package penca.uy;
  
 import java.io.Serializable;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 
-import beans.interfaces.UsuarioPersistenceRemote;
+import beans.interfaces.UsuarioBusinessRemote;
 import entidades.Usuario;
  
 @ManagedBean(name="TablaUsuariosView")
@@ -22,7 +22,7 @@ public class TablaUsuariosView implements Serializable {
 	private List<Usuario> usuarios;
      
     @EJB
-    UsuarioPersistenceRemote usuarioBean;
+    UsuarioBusinessRemote usuarioBean;
  
     @PostConstruct
     public void init() {

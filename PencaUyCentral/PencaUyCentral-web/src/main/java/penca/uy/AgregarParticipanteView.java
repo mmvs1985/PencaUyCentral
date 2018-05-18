@@ -1,9 +1,7 @@
 package penca.uy;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,11 +10,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-import org.primefaces.event.SelectEvent;
-
-import beans.interfaces.PencaPersistenceRemote;
-import beans.interfaces.ParticipantePersistenceRemote;
-import entidades.Participante;
+import beans.interfaces.ParticipanteBusinessRemote;
+import beans.interfaces.PencaBusinessRemote;
 import entidades.Penca;
 
 @ManagedBean(name = "AgregarParticipanteView")
@@ -25,11 +20,11 @@ public class AgregarParticipanteView implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	ParticipantePersistenceRemote participanteBean;
+	ParticipanteBusinessRemote participanteBean;
 	
 	
 	@EJB
-	PencaPersistenceRemote pencaBean;
+	PencaBusinessRemote pencaBean;
 	
 	private String usuario;
 	private String penca;

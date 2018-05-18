@@ -2,12 +2,12 @@ package penca.uy;
  
 import java.io.Serializable;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 
-import beans.interfaces.TiposPremioPersistenceRemote;
+import beans.interfaces.TiposPremioBusinessRemote;
 import entidades.TiposPremio;
  
 @ManagedBean(name="TablaTiposPremioView")
@@ -22,7 +22,7 @@ public class TablaTiposPremioView implements Serializable {
 	private List<TiposPremio> tipospremio;
      
     @EJB
-    TiposPremioPersistenceRemote tipopremioBean;
+    TiposPremioBusinessRemote tipopremioBean;
  
     @PostConstruct
     public void init() {

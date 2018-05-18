@@ -1,22 +1,30 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
 
-<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
-	<ui:define name="content">
-		<h:form>
-			<h:panelGrid columns="2">
-				<h:outputText value="Name"></h:outputText>
-				<h:inputText value="#{loginBean.name}"></h:inputText>
-				<h:outputText value="Password"></h:outputText>
-				<h:inputSecret value="#{loginBean.password}"></h:inputSecret>
-			</h:panelGrid>
-			<h:commandButton value="Login" action="login"></h:commandButton>
-		</h:form>
-	</ui:define>
-</ui:composition>
+</h:head> 
+<body> 
+<h:form>
+<p:panel header="Login" style="margin-bottom:10px;">
+	<h:panelGrid id="grid" cellpadding="5" columns="2" >
+		<f:facet name="header">
+			<p:messages id="msgs" />
+		</f:facet>
+		<p:outputLabel for="usuario" value="Usuario:" />
+		<p:inputText id="usuario" value="#{LoginBean.usuario}"
+			required="true" requiredMessage="Debe ingresar un usuario." />			
+		<p:outputLabel for="password" value="Password:" />
+		<p:inputText id="password" value="#{LoginBean.password}"
+			required="true" requiredMessage="Debe ingresar un password." />
+	</h:panelGrid>
+	<h:panelGrid id="date" columns="6" cellpadding="5">
+		<p:commandButton icon="ui-icon-key" value="Login" id="botonLogin" process="@form"
+			update="grid" actionListener="#{LoginBean.login}" />
+	</h:panelGrid>
+</p:panel>
+</h:form>
+</body> 
 </html>
