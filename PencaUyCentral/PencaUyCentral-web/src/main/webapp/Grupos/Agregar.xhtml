@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	Agregar Grupo
+
 </h:head>
 <h:body>
 
@@ -22,13 +22,14 @@
 					required="true" requiredMessage="Debe tener un nombre." />
 
 
-				<p:panel header="Seleccione un Torneo" style="margin-bottom:10px;">
+				<p:panel header="Seleccione Torneo y Fase" style="margin-bottom:10px;">
 					<h:panelGrid columns="1" cellpadding="5">
 						<p:outputLabel for="torneo" value="Torneo: " />
 						<p:selectOneMenu id="torneo" value="#{AgregarGrupoView.torneo}"
-							style="width:150px">
+							style="width:150px" required="true"
+							requiredMessage="Debe tener un Torneo.">
 							<p:ajax listener="#{AgregarGrupoView.onTorneoChange}" update="fase" />
-							<f:selectItem itemLabel="Torneo" itemValue=""
+							<f:selectItem itemLabel="Seleccione un Torneo" itemValue=""
 								noSelectionOption="true" />
 							<f:selectItems value="#{AgregarGrupoView.torneos}" />
 						</p:selectOneMenu>
@@ -36,7 +37,8 @@
 						<p:outputLabel header="Seleccione una Fase" style="margin-bottom:10px;" />
 						<p:outputLabel for="fase" value="Fase: " />
 						<p:selectOneMenu id="fase" value="#{AgregarGrupoView.fase}"
-							style="width:150px">
+							style="width:150px" required="true"
+							requiredMessage="Debe tener una Fase.">
 							<f:selectItem itemLabel="Seleccione una Fase" itemValue=""
 								noSelectionOption="true" />
 							<f:selectItems value="#{AgregarGrupoView.fases}" />

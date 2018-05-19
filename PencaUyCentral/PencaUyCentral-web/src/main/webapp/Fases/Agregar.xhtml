@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	Agregar Fase
+
 </h:head>
 <h:body>
 
@@ -21,14 +21,11 @@
 				<p:inputText id="nombre" value="#{AgregarFaseView.nombre}"
 					required="true" requiredMessage="Debe tener un nombre." />
 
-				<!--<p:outputLabel for="torneo" value="Torneo:" />
-		<p:inputText id="torneo" value="#{AgregarFaseView.torneo}"
-			required="true" requiredMessage="Debe tener un Torneo." />-->
 				<p:outputLabel for="torneo" value="Torneo: " />
 				<p:selectOneMenu id="torneo" value="#{AgregarFaseView.torneo}"
 					style="width:150px" required="true"
 					requiredMessage="Debe tener un Torneo.">
-					<f:selectItem itemLabel="Torneos" itemValue=""
+					<f:selectItem itemLabel="Seleccione un Torneo" itemValue=""
 						noSelectionOption="true" />
 					<f:selectItems value="#{AgregarFaseView.torneos}" />
 				</p:selectOneMenu>

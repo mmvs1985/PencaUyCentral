@@ -5,21 +5,21 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	Agregar Equipos Grupo
+
 </h:head>
 <h:body>
 
 	<h:form>
 		<p:growl id="msgs" showDetail="true" />
 
-		<p:panel header="Agregar Equipos Grupo" style="margin-bottom:10px;">
+		<p:panel header="Agregar Equipo a Grupo" style="margin-bottom:10px;">
 			<h:panelGrid columns="1" cellpadding="5">
 				<p:outputLabel for="torneo" value="Torneo: " />
 				<p:selectOneMenu id="torneo"
 					value="#{AgregarEquiposGrupoView.torneo}" style="width:150px">
 					<p:ajax listener="#{AgregarEquiposGrupoView.onTorneoChange}"
 						update="fase" />
-					<f:selectItem itemLabel="Torneo" itemValue=""
+					<f:selectItem itemLabel="Seleccione un Torneo" itemValue=""
 						noSelectionOption="true" />
 					<f:selectItems value="#{AgregarEquiposGrupoView.torneos}" />
 				</p:selectOneMenu>

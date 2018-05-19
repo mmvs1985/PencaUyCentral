@@ -38,7 +38,7 @@ public class EquipoBusiness implements EquipoBusinessRemote, EquipoBusinessLocal
     }
     
     @Override
-	public Equipo obtenerEquipoPorNombre(String nombre) {
+	public int obtenerEquipoPorNombre(String nombre) {
     	return bean.obtenerEquipoPorNombre(nombre);
     }
     

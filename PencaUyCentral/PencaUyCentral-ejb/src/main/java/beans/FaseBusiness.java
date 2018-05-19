@@ -1,15 +1,15 @@
 package beans;
 
-import beans.interfaces.FaseBusinessLocal;
-import beans.interfaces.FaseBusinessRemote;
-import beans.interfaces.FasePersistenceRemote;
-import entidades.Fase;
-
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
+import beans.interfaces.FaseBusinessLocal;
+import beans.interfaces.FaseBusinessRemote;
+import beans.interfaces.FasePersistenceRemote;
+import entidades.Fase;
 
 /**
  * Session Bean implementation class FaseBusiness
@@ -28,8 +28,8 @@ public class FaseBusiness implements FaseBusinessRemote, FaseBusinessLocal {
     }
     
     @Override
-	public boolean agregarFase(String nombre,int torneoId) {
-    	return bean.crearFase(nombre, torneoId);
+	public boolean agregarFase(String nombre, int id) {
+    	return bean.crearFase(nombre, id);
     }
     
     @Override
@@ -48,7 +48,7 @@ public class FaseBusiness implements FaseBusinessRemote, FaseBusinessLocal {
     }
     
     @Override
-    public Fase obtenerFasePorNombreYTorneo(int id,String nombre) {
+    public int obtenerFasePorNombreYTorneo(int id,String nombre) {
     	return bean.obtenerFasePorNombreYTorneo(id, nombre);
     }
 

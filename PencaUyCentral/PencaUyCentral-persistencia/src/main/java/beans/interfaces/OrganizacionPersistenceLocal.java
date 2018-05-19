@@ -13,7 +13,7 @@ import entidades.TiposPremio;
 public interface OrganizacionPersistenceLocal {
 	public boolean agregarOrganizacion(String nombre);
 	public Organizacion obtenerOrganizacion(int id);	
-	public Organizacion obtenerOrganizacionPorNombre(String nombre);
+	public int obtenerOrganizacionPorNombre(String nombre);
 	public List<Organizacion> obtenerOrganizaciones();
 	public List<Penca> obtenerPencasOrganizacion(int id);	
 	public boolean eliminarOrganizacion(int id);

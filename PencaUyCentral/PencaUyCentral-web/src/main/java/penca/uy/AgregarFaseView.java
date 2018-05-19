@@ -14,6 +14,7 @@ import beans.interfaces.FaseBusinessRemote;
 import beans.interfaces.TorneoBusinessRemote;
 import entidades.Torneo;
 
+
 @ManagedBean(name = "AgregarFaseView")
 public class AgregarFaseView implements Serializable {
 
@@ -67,9 +68,8 @@ public class AgregarFaseView implements Serializable {
 	}
 
 	public void save() {
-		Torneo t = torneoBean.obtenerTorneoPorNombre(torneo);
-		if (faseBean.agregarFase(nombre, t.getId())){
-				
+		int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+		if (faseBean.agregarFase(nombre, idt)){				
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage("Se ha agregado la fase " + nombre + " al torneo " + torneo));
 			} else {

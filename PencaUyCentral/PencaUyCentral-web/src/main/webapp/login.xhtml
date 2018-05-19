@@ -17,12 +17,12 @@
 		<p:inputText id="usuario" value="#{LoginBean.usuario}"
 			required="true" requiredMessage="Debe ingresar un usuario." />			
 		<p:outputLabel for="password" value="Password:" />
-		<p:inputText id="password" value="#{LoginBean.password}"
+		<p:password id="password" value="#{LoginBean.password}"
 			required="true" requiredMessage="Debe ingresar un password." />
 	</h:panelGrid>
 	<h:panelGrid id="date" columns="6" cellpadding="5">
 		<p:commandButton icon="ui-icon-key" value="Login" id="botonLogin" process="@form"
-			update="grid" actionListener="#{LoginBean.login}" />
+			update="grid" action="#{LoginBean.login}"/>
 	</h:panelGrid>
 </p:panel>
 </h:form>

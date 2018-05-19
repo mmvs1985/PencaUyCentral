@@ -1,16 +1,16 @@
 package beans;
 
-import beans.interfaces.UsuarioBusinessLocal;
-import beans.interfaces.UsuarioBusinessRemote;
-import beans.interfaces.UsuarioPersistenceRemote;
-import entidades.Usuario;
-
 import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
+import beans.interfaces.UsuarioBusinessLocal;
+import beans.interfaces.UsuarioBusinessRemote;
+import beans.interfaces.UsuarioPersistenceRemote;
+import entidades.Usuario;
 
 /**
  * Session Bean implementation class UsuariosBusiness
@@ -39,7 +39,7 @@ public class UsuarioBusiness implements UsuarioBusinessRemote, UsuarioBusinessLo
     }
     
     @Override
-	public Usuario obtenerUsuarioPorNickname(String nickname) {
+	public int obtenerUsuarioPorNickname(String nickname) {
     	return bean.obtenerUsuarioPorNickname(nickname);
     }
     

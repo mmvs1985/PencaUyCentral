@@ -56,8 +56,8 @@ public class BorrarUsuarioView implements Serializable {
 		FacesMessage msg;
 		if (usuario != null) {
 			System.out.println("el Usuario no es null, es " + usuario);
-			Usuario u = usuarioBean.obtenerUsuarioPorNickname(usuario);
-			usuarioBean.eliminarUsuario(u.getId());			
+			int idu = usuarioBean.obtenerUsuarioPorNickname(usuario);
+			usuarioBean.eliminarUsuario(idu);			
 			msg = new FacesMessage("Se borró el Usuario " + usuario);
 			
 		} else {

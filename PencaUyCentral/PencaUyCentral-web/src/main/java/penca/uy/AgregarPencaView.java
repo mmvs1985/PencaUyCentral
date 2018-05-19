@@ -65,8 +65,8 @@ public class AgregarPencaView implements Serializable {
 	}	
 
 	public void save() {
-		Organizacion o = organizacionBean.obtenerOrganizacionPorNombre(organizacion);
-		if (pencaBean.agregarPenca(nombre, o)){				
+		int ido = organizacionBean.obtenerOrganizacionPorNombre(organizacion);
+		if (pencaBean.agregarPenca(nombre, ido)){				
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage("Se ha agregado la Penca " + nombre + " al la organizacion " + organizacion));
 			} else {

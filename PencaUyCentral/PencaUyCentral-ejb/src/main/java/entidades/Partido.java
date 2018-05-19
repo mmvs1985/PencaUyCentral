@@ -2,36 +2,76 @@ package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import entidades.Equipo;
-import entidades.Grupo;
-
 import java.util.Date;
 
 
+/**
+ * The persistent class for the "Partidos" database table.
+ * 
+ */
+@Entity
+@Table(name="\"Partidos\"")
+@NamedQuery(name="Partido.findAll", query="SELECT p FROM Partido p")
 public class Partido implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="\"Id\"")
 	private Integer id;
+/*
+	@Column(name="\"EquipoGanadorId\"")
+	private Integer equipoGanadorId;
 
+	@Column(name="\"EquipoVisitaId\"")
+	private Integer equipoVisitaId;
+
+	@Column(name="\"EqupoLocalId\"")
+	private Integer equpoLocalId;
+*/
+	@Column(name="\"Estado\"")
 	private String estado;
 
+	@Temporal(TemporalType.DATE)
+	@Column(name="\"Fecha\"")
 	private Date fecha;
 
+	@Column(name="\"GolesEquipoLocal\"")
 	private Integer golesEquipoLocal;
 
+	@Column(name="\"GolesEquipoVisita\"")
 	private Integer golesEquipoVisita;
 
+	//@Column(name="\"GrupoId\"")
+	//private Integer grupoId;
+
+	//bi-directional many-to-one association to Equipo
+	@ManyToOne
+	@JoinColumn(name="\"EquipoGanadorId\"")
 	private Equipo equipoGanador;
 
+	//bi-directional many-to-one association to Equipo
+	@ManyToOne
+	@JoinColumn(name="\"EquipoVisitaId\"")
 	private Equipo equipoVisita;
 
+	//bi-directional many-to-one association to Equipo
+	@ManyToOne
+	@JoinColumn(name="\"EqupoLocalId\"")
 	private Equipo equipoLocal;
 
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	@JoinColumn(name="\"GrupoId\"")
 	private Grupo grupo;
 
-
+/*
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	@JoinColumn(name="\"GrupoId2\"")
+	private Grupo grupos2;
+*/
 	public Partido() {
 	}
 

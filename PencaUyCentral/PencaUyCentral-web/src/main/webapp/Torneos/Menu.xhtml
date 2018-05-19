@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	
+</h:head>
+<h:body>
+	<h:form>
+		<p:panel header="Menú de Opciones sobre Torneos" style="margin-bottom:10px;">
+			<h:panelGrid id="grid" cellpadding="5" columns="1">
+				<p:outputLabel value="Usted se ha identificado como: #{LoginBean.usuario}" />
+				<p:panel header="Elija su Opción:" style="margin-bottom:10px;">
+					<h:panelGrid columns="3" cellpadding="5">
+						<p:commandButton value="Agregar Torneo" id="btnAgregarTorneo" process="@form"
+							update="grid" action="Agregar?faces-redirect=true" />
+						<p:commandButton value="Borrar Torneo" id="btnBorrarTorneo" process="@form"
+							update="grid" action="Borrar?faces-redirect=true" />
+						<p:commandButton value="Listar Torneos" id="btnListarTorneos" process="@form"
+							update="grid" action="Tabla?faces-redirect=true" />
+					</h:panelGrid>
+					<p:separator />
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:commandButton value="Agregar Fase a Torneo" id="btnAgregarFase" process="@form"
+							update="grid" action="/Fases/Agregar?faces-redirect=true" />
+						<p:commandButton value="Borrar Fase de Torneo" id="btnBorrarFase" process="@form"
+							update="grid" action="/Fases/Borrar?faces-redirect=true" />
+					</h:panelGrid>
+					<p:separator />
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:commandButton value="Agregar Grupo a Fase" id="btnAgregarGrupo" process="@form"
+							update="grid" action="/Grupos/Agregar?faces-redirect=true" />
+						<p:commandButton value="Borrar Grupo de Fase" id="btnBorrarGrupo" process="@form"
+							update="grid" action="/Grupos/Borrar?faces-redirect=true" />
+					</h:panelGrid>
+					<p:separator />
+					<h:panelGrid columns="1" cellpadding="5">
+						<p:commandButton value="Agregar Partido a Grupo" id="btnAgregarPartido" process="@form"
+							update="grid" action="/Partidos/Agregar?faces-redirect=true" />
+					</h:panelGrid>
+				</p:panel>
+			</h:panelGrid>			
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

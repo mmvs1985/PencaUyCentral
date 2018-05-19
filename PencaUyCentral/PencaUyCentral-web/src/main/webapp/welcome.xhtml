@@ -1,14 +1,40 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
-	<ui:define name="content">
-		<h:outputLabel value="Welcome #{loginBean.name}"></h:outputLabel>
-	</ui:define>
-</ui:composition>
+<h:head>
+	
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:panel header="Bienvenido a PencaUy Central" style="margin-bottom:10px;">
+			<h:panelGrid id="grid" cellpadding="5" columns="1">
+				<p:outputLabel value="Usted se ha identificado como: #{LoginBean.usuario}" />
+				<p:panel header="Seleccione su Opción" style="margin-bottom:10px;">
+					<h:panelGrid id="agregar" columns="2" cellpadding="5">
+						<p:commandButton value="Equipos" id="btnEquipos" process="@form"
+							update="grid" action="Equipos/Menu?faces-redirect=true" />
+						<p:commandButton value="Organizaciones" id="btnOrganizaciones" process="@form"
+							update="grid" action="Organizaciones/Menu?faces-redirect=true" />
+						<p:commandButton value="Pencas" id="btnPencas" process="@form"
+							update="grid" action="Pencas/Menu?faces-redirect=true" />
+						<p:commandButton value="Usuarios" id="btnUsuarios" process="@form"
+							update="grid" action="Usuarios/Menu?faces-redirect=true" />
+						<p:commandButton value="Participantes" id="btnParticipantes" process="@form"
+							update="grid" action="Participantes/Menu?faces-redirect=true" />
+						<p:commandButton value="Torneos" id="btnTorneos" process="@form"
+							update="grid" action="Torneos/Menu?faces-redirect=true" />
+						<p:commandButton value="Tipos de Premio" id="btnTiposPremio" process="@form"
+							update="grid" action="TiposPremio/Menu?faces-redirect=true" />
+					</h:panelGrid>
+				</p:panel>
+			</h:panelGrid>			
+		</p:panel>
+	</h:form>
+
+
+</h:body>
 </html>

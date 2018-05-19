@@ -55,8 +55,8 @@ public class BorrarEquipoView implements Serializable {
 		FacesMessage msg;
 		if (equipo != null) {
 			System.out.println("el equipo no es null, es " + equipo);
-			Equipo e = equipoBean.obtenerEquipoPorNombre(equipo);
-			equipoBean.eliminarEquipo(e.getId());			
+			int ide = equipoBean.obtenerEquipoPorNombre(equipo);
+			equipoBean.eliminarEquipo(ide);			
 			msg = new FacesMessage("Se borró el equipo " + equipo);
 			
 		} else {

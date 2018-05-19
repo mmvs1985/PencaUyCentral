@@ -2,28 +2,49 @@ package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import entidades.EquiposGrupo;
-import entidades.Fase;
-import entidades.Partido;
-
 import java.util.List;
 
+
+/**
+ * The persistent class for the "Grupos" database table.
+ * 
+ */
+@Entity
+@Table(name="\"Grupos\"")
+@NamedQuery(name="Grupo.findAll", query="SELECT g FROM Grupo g")
 public class Grupo implements Serializable {
 	
 	private static final long serialVersionUID = 1L;	
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="\"Id\"")
 	private Integer id;
-
+/*
+	@Column(name="\"FaseId\"")
+	private Integer faseId;
+*/
+	@Column(name="\"Nombre\"")
 	private String nombre;
 
+	//bi-directional many-to-one association to Equipos_Grupo
+	@OneToMany(mappedBy="grupo")
 	private List<EquiposGrupo> equiposGrupo;
 
+	//bi-directional many-to-one association to Fase
+	@ManyToOne
+	@JoinColumn(name="\"FaseId\"")
 	private Fase fase;
 
+	//bi-directional many-to-one association to Partido
+	@OneToMany(mappedBy="grupo")
 	private List<Partido> partidos;
 
-
+/*
+	//bi-directional many-to-one association to Partido
+	@OneToMany(mappedBy="grupo2")
+	private List<Partido> partidos2;
+*/
 	public Grupo() {
 	}
 

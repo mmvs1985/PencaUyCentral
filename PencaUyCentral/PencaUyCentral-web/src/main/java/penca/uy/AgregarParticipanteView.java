@@ -65,8 +65,8 @@ public class AgregarParticipanteView implements Serializable {
 	}	
 
 	public void save() {
-		Penca p = pencaBean.obtenerPencaPorNombre(penca);
-		if (participanteBean.agregarParticipante(usuario, p)){				
+		int idp = pencaBean.obtenerPencaPorNombre(penca);
+		if (participanteBean.agregarParticipante(usuario, idp)){				
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage("Se ha agregado el Participante " + usuario + " al la Penca " + penca));
 			} else {

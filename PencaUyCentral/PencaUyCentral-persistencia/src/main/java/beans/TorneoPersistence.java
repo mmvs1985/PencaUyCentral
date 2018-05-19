@@ -66,15 +66,15 @@ public class TorneoPersistence implements TorneoPersistenceRemote, TorneoPersist
 	    
 	   
 	    @SuppressWarnings("unchecked")
-	    public Torneo obtenerTorneoPorNombre(String nombre) {
+	    public int obtenerTorneoPorNombre(String nombre) {
 	    	List<Torneo> list =(List<Torneo>)em.createQuery( "Select d from "+ Torneo.class.getSimpleName()+" d where d.nombre = '"+nombre + "'" ).getResultList();
 	    	if (!(list.isEmpty())) {
 	    		Torneo torneo = list.get(0);
 	    		System.out.println("obtuve un torneo");
-	    		return torneo;
+	    		return torneo.getId();
 	    	}else {
 	    		System.out.println("no obtuve nada");
-	    		return null;
+	    		return 0;
 	    	}
 	    	
 	    	

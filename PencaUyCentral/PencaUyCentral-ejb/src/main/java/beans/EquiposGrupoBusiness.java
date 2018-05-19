@@ -1,15 +1,15 @@
 package beans;
 
-import beans.interfaces.EquiposGrupoBusinessLocal;
-import beans.interfaces.EquiposGrupoBusinessRemote;
-import beans.interfaces.EquiposGrupoPersistenceRemote;
-import entidades.Equipo;
-
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
+import beans.interfaces.EquiposGrupoBusinessLocal;
+import beans.interfaces.EquiposGrupoBusinessRemote;
+import beans.interfaces.EquiposGrupoPersistenceRemote;
+import entidades.Equipo;
 
 /**
  * Session Bean implementation class EquiposGrupoBusiness

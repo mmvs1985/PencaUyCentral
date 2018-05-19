@@ -29,20 +29,17 @@ public class FasePersistence implements FasePersistenceRemote, FasePersistenceLo
     public FasePersistence() {
         // TODO Auto-generated constructor stub
     }
-    
-    public boolean crearFase(String nombre,int torneoId) {
-    	
+        
+    public boolean crearFase(String nombre, int idt) {    	
     	Fase fase = new Fase(nombre);
-    	Torneo t = em.find(Torneo.class, torneoId);
-    	
+    	Torneo t = em.find(Torneo.class, idt);
     	fase.setTorneo(t);
     	t.addFase(fase);
     	em.persist(fase);
     	return true;
     }    
     
-    public Fase obtenerFase(int id) {
-    	
+    public Fase obtenerFase(int id) {    	
     	return em.find(Fase.class, id);    	
     }    
     
@@ -60,11 +57,11 @@ public class FasePersistence implements FasePersistenceRemote, FasePersistenceLo
     }
     
     @SuppressWarnings("unchecked")
-    public Fase obtenerFasePorNombreYTorneo(int id,String nombre){
+    public int obtenerFasePorNombreYTorneo(int id,String nombre){
     	List<Fase> list =(List<Fase>)em.createQuery( "Select d from "+ Fase.class.getSimpleName()+" d where d.torneo = "+id+" and d.nombre ='" + nombre +"'").getResultList();
     	if (!(list.isEmpty())) {
-    		return list.get(0);
-    	}else return null;
+    		return list.get(0).getId();
+    	}else return -1;
     }
 
 }

@@ -1,22 +1,41 @@
 package entidades;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.List;
 
-import entidades.Organizacion;
-import entidades.Participante;
 
-
+/**
+ * The persistent class for the "Pencas" database table.
+ * 
+ */
+@Entity
+@Table(name="\"Pencas\"")
+@NamedQueries({
+	@NamedQuery(name="Penca.findAll", query="SELECT p FROM Penca p"),
+	@NamedQuery(name = "Penca.findByNombre", query = "SELECT p FROM Penca p WHERE p.nombre = :nombre"),
+	@NamedQuery(name = "Penca.findByNombreAndOrganizacion", query = "SELECT p FROM Penca p WHERE p.nombre = :nombre AND p.organizacion = :organizacion"),
+	@NamedQuery(name = "Penca.findByOrganizacion", query = "SELECT p FROM Penca p WHERE p.organizacion = :organizacion")
+})
 public class Penca implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="\"Id\"")
 	private Integer id;
-
+	
+	@Column(name="\"Nombre\"")
 	private String nombre;
 
+	//bi-directional many-to-one association to Participante
+	@OneToMany(mappedBy="penca")
 	private List<Participante> participantes;
 
+	//bi-directional many-to-one association to Organizacione
+	@ManyToOne
+	@JoinColumn(name="\"OrganizacionId\"")
 	private Organizacion organizacion;
 
 	public Penca() {

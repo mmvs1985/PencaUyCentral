@@ -78,8 +78,8 @@ public class BorrarFaseView implements Serializable {
 	 public void onTorneoChange() {
 	        if(torneo !=null && !torneo.equals("")) {
 	        	System.out.println("Este es el torneo "+ torneo);
-	        	Torneo t = torneoBean.obtenerTorneoPorNombre(torneo);
-	        	List<Fase> listaFases = faseBean.obtenerFasesPorTorneo(t.getId());
+	        	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+	        	List<Fase> listaFases = faseBean.obtenerFasesPorTorneo(idt);
 	        	int x = listaFases.size();
 	    		fases = new ArrayList<String>();
 	    		for (int j = 0; j < x; j++) {
@@ -92,9 +92,9 @@ public class BorrarFaseView implements Serializable {
 		FacesMessage msg;
 		if (fase != null) {
 			System.out.println("la fase no es null, es " + fase);
-			Torneo t = torneoBean.obtenerTorneoPorNombre(torneo);
-			Fase f = faseBean.obtenerFasePorNombreYTorneo(t.getId(), fase);
-			faseBean.eliminarFase(f.getId());			
+			int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+			int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
+			faseBean.eliminarFase(idf);			
 			msg = new FacesMessage("Se borró la fase " + fase);
 			
 		} else {

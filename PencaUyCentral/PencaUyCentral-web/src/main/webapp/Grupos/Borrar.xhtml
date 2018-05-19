@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	Borrar Fase
+
 </h:head>
 <h:body>
 
@@ -18,7 +18,7 @@
 				<p:selectOneMenu id="torneo" value="#{BorrarGrupoView.torneo}"
 					style="width:150px">
 					<p:ajax listener="#{BorrarGrupoView.onTorneoChange}" update="fase" />
-					<f:selectItem itemLabel="Torneo" itemValue=""
+					<f:selectItem itemLabel="Seleccione un Torneo" itemValue=""
 						noSelectionOption="true" />
 					<f:selectItems value="#{BorrarGrupoView.torneos}" />
 				</p:selectOneMenu>

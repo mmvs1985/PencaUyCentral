@@ -10,7 +10,7 @@ import entidades.Equipo;
 public interface EquipoBusinessRemote {
 	public boolean agregarEquipo(String nombre);
 	public Equipo obtenerEquipo(int id);	
-	public Equipo obtenerEquipoPorNombre(String nombre);
+	public int obtenerEquipoPorNombre(String nombre);
 	public List<Equipo> obtenerEquipos();
 	public boolean eliminarEquipo(int id);
 }

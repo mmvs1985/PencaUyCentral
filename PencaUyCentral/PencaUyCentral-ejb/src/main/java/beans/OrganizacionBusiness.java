@@ -38,7 +38,7 @@ public class OrganizacionBusiness implements OrganizacionBusinessRemote, Organiz
     }
     
     @Override
-	public Organizacion obtenerOrganizacionPorNombre(String nombre) {
+	public int obtenerOrganizacionPorNombre(String nombre) {
     	return bean.obtenerOrganizacionPorNombre(nombre);
     }
     
@@ -56,5 +56,5 @@ public class OrganizacionBusiness implements OrganizacionBusinessRemote, Organiz
 	public boolean eliminarOrganizacion(int id) {
     	return bean.eliminarOrganizacion(id);
     }
-
+	
 }

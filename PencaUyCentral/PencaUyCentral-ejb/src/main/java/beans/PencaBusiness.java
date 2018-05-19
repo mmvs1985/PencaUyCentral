@@ -1,17 +1,17 @@
 package beans;
 
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
 import beans.interfaces.PencaBusinessLocal;
 import beans.interfaces.PencaBusinessRemote;
 import beans.interfaces.PencaPersistenceRemote;
 import entidades.Organizacion;
 import entidades.Participante;
 import entidades.Penca;
-
-import java.util.List;
-
-import javax.ejb.EJB;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
 
 /**
  * Session Bean implementation class PencaBusiness
@@ -30,8 +30,8 @@ public class PencaBusiness implements PencaBusinessRemote, PencaBusinessLocal {
     }
     
     @Override
-	public boolean agregarPenca(String nombre, Organizacion o) {
-    	return bean.agregarPenca(nombre, o);
+	public boolean agregarPenca(String nombre, int ido) {
+    	return bean.agregarPenca(nombre, ido);
     }
     
     @Override
@@ -40,12 +40,12 @@ public class PencaBusiness implements PencaBusinessRemote, PencaBusinessLocal {
     }
     
     @Override
-	public Penca obtenerPencaPorNombre(String nombre) {
+	public int obtenerPencaPorNombre(String nombre) {
     	return bean.obtenerPencaPorNombre(nombre);
     }
     
     @Override
-	public Penca obtenerPencaPorNombreYOrganizacion(int id, String nombre) {
+	public int obtenerPencaPorNombreYOrganizacion(int id, String nombre) {
     	return bean.obtenerPencaPorNombreYOrganizacion(id, nombre);
     }
     

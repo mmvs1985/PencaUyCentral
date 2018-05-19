@@ -30,8 +30,8 @@ public class OrganizacionPersistence implements OrganizacionPersistenceRemote, O
     
 	@Override
 	public boolean agregarOrganizacion(String nombre) {
-		Organizacion o = obtenerOrganizacionPorNombre(nombre);
-		if (o == null) {		
+		int ido = obtenerOrganizacionPorNombre(nombre);
+		if (ido == -1) {		
 			Organizacion no = new Organizacion();
 			no.setNombre(nombre);
 			em.persist(no);
@@ -52,13 +52,13 @@ public class OrganizacionPersistence implements OrganizacionPersistenceRemote, O
 	}
 	
 	@Override
-	public Organizacion obtenerOrganizacionPorNombre(String nombre) {
+	public int obtenerOrganizacionPorNombre(String nombre) {
 		List<Organizacion> lo = em.createNamedQuery("Organizacion.findByNombre", Organizacion.class).setParameter("nombre", nombre).getResultList();
 		if (lo.isEmpty()) {
-			return null;
+			return -1;
 		}
 		else {
-			return lo.get(0);
+			return lo.get(0).getId();
 		}
 	}	
 	

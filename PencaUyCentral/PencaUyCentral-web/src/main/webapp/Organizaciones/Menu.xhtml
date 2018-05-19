@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	
+</h:head>
+<h:body>
+	<h:form>
+		<p:panel header="Menú de Operaciones sobre Organizaciones" style="margin-bottom:10px;">
+			<h:panelGrid id="grid" cellpadding="5" columns="1">
+				<p:outputLabel value="Usted se ha identificado como: #{LoginBean.usuario}" />
+				<p:panel header="Elija su Opción:" style="margin-bottom:10px;">
+					<h:panelGrid columns="3" cellpadding="5">
+						<p:commandButton value="Agregar" id="btnAgregar" process="@form"
+							update="grid" action="Agregar?faces-redirect=true" />
+						<p:commandButton value="Borrar" id="btnBorrar" process="@form"
+							update="grid" action="Borrar?faces-redirect=true" />
+						<p:commandButton value="Listar" id="btnListar" process="@form"
+							update="grid" action="Tabla?faces-redirect=true" />
+					</h:panelGrid>
+				</p:panel>
+			</h:panelGrid>			
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

@@ -53,13 +53,13 @@ public class UsuarioPersistence implements UsuarioPersistenceRemote, UsuarioPers
 	}
 	
 	@Override
-	public Usuario obtenerUsuarioPorNickname(String nickname) {
+	public int obtenerUsuarioPorNickname(String nickname) {
 		List<Usuario> lu = em.createNamedQuery("Usuario.findByNickname", Usuario.class).setParameter("nickname", nickname).getResultList();
 		if (lu.isEmpty()) {
-			return null;
+			return -1;
 		}
 		else {
-			return lu.get(0);
+			return lu.get(0).getId();
 		}
 	}
 	

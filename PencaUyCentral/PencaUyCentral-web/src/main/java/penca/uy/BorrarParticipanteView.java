@@ -103,8 +103,8 @@ public class BorrarParticipanteView implements Serializable {
 		FacesMessage msg;
 		if (participante != null) {
 			System.out.println("la Participante no es null, es " + participante);
-			Participante p = participanteBean.obtenerParticipantePorUsuario(participante);
-			participanteBean.eliminarParticipante(p.getId());			
+			int idp = participanteBean.obtenerParticipantePorUsuario(participante);
+			participanteBean.eliminarParticipante(idp);			
 			msg = new FacesMessage("Se borró el Participante " + participante);			
 		} else {
 			System.out.println("la Penca es null");

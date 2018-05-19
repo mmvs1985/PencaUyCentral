@@ -35,8 +35,8 @@ public class EquipoPersistence implements EquipoPersistenceRemote, EquipoPersist
 	public boolean agregarEquipo(String nombre) {
 		//List<Equipo> le = em.createNamedQuery("Equipo.findByNombre", Equipo.class).setParameter("nombre", nombre).getResultList();
     	//if (em.createQuery("SELECT e FROM "+ Equipo.class.getSimpleName()+" e WHERE e.nombre = '" + nombre +"'").getResultList().isEmpty()) {
-    	Equipo e = obtenerEquipoPorNombre(nombre);
-    	if (e == null) {
+    	int ide = obtenerEquipoPorNombre(nombre);
+    	if (ide == -1) {
 			Equipo ne = new Equipo();
 			ne.setNombre(nombre);		
 			em.persist(ne);
@@ -52,13 +52,13 @@ public class EquipoPersistence implements EquipoPersistenceRemote, EquipoPersist
 	}	
 	
 	@Override
-	public Equipo obtenerEquipoPorNombre(String nombre) {
+	public int obtenerEquipoPorNombre(String nombre) {
 		List<Equipo> le = em.createNamedQuery("Equipo.findByNombre", Equipo.class).setParameter("nombre", nombre).getResultList();
 		if (le.isEmpty()) {
-			return null;
+			return -1;
 		}
 		else {
-			return le.get(0);
+			return le.get(0).getId();
 		}
 	}		
 	

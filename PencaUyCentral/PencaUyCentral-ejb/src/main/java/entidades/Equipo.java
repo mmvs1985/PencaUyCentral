@@ -2,26 +2,45 @@ package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import entidades.EquiposGrupo;
-import entidades.Partido;
-
 import java.util.List;
 
+
+/**
+ * The persistent class for the "Equipos" database table.
+ * 
+ */
+@Entity
+@Table(name="\"Equipos\"")  
+@NamedQueries({
+	@NamedQuery(name = "Equipo.findAll", query="SELECT e FROM Equipo e"),
+	@NamedQuery(name = "Equipo.findByNombre", query = "SELECT e FROM Equipo e WHERE e.nombre = :nombre")
+})
 public class Equipo implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="\"Id\"")
 	private Integer id;
 
+	@Column(name="\"Nombre\"")
 	private String nombre;
 
+	//bi-directional many-to-one association to Equipos_Grupo
+	@OneToMany(mappedBy="equipo")
 	private List<EquiposGrupo> equiposGrupo;
 
+	//bi-directional many-to-one association to Partido
+	@OneToMany(mappedBy="equipoGanador")
 	private List<Partido> partidosEquipoGanador;
 
+	//bi-directional many-to-one association to Partido
+	@OneToMany(mappedBy="equipoVisita")
 	private List<Partido> partidosEquipoVisita;
 
+	//bi-directional many-to-one association to Partido
+	@OneToMany(mappedBy="equipoLocal")
 	private List<Partido> partidosEquipoLocal;
 
 	public Equipo() {

@@ -11,7 +11,7 @@ import entidades.Usuario;
 public interface UsuarioBusinessLocal {
 	public boolean agregarUsuario(String nombre, String apellido, String email, String nickname, String password, Date fechaNac);
 	public Usuario obtenerUsuario(int id);	
-	public Usuario obtenerUsuarioPorNickname(String nickname);
+	public int obtenerUsuarioPorNickname(String nickname);
 	public List<Usuario> obtenerUsuarios();	
 	public boolean usuarioValido(String usuario, String password);
 	public boolean eliminarUsuario(int id);

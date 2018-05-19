@@ -54,13 +54,13 @@ public class GrupoPersistence implements GrupoPersistenceRemote, GrupoPersistenc
 	}
 
 	@SuppressWarnings("unchecked")
-	public Grupo obtenerGrupoPorNombreYFase(String nombre, int id) {
+	public int obtenerGrupoPorNombreYFase(String nombre, int id) {
 		List<Grupo> list = new ArrayList<>();
 		list = (List<Grupo>) em.createQuery("Select g from " + Grupo.class.getSimpleName()+ " g where g.fase = " + id + " and g.nombre ='" + nombre + "'").getResultList();
 		if (!(list.isEmpty())) {
-			return list.get(0);
+			return list.get(0).getId();
 		} else
-			return null;
+			return -1;
 	}
 	
     @SuppressWarnings("unchecked")

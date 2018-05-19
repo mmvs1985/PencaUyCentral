@@ -5,21 +5,21 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	Borrar Equipos Grupo
+
 </h:head>
 <h:body>
 
 	<h:form>
 		<p:growl id="msgs" showDetail="true" />
 
-		<p:panel header="Borrar Equipos Grupo" style="margin-bottom:10px;">
+		<p:panel header="Borrar Equipo de Grupo" style="margin-bottom:10px;">
 			<h:panelGrid columns="1" cellpadding="5">
 				<p:outputLabel for="torneo" value="Torneo: " />
 				<p:selectOneMenu id="torneo"
 					value="#{BorrarEquiposGrupoView.torneo}" style="width:150px">
 					<p:ajax listener="#{BorrarEquiposGrupoView.onTorneoChange}"
 						update="fase" />
-					<f:selectItem itemLabel="Torneo" itemValue=""
+					<f:selectItem itemLabel="Seleccione un Torneo" itemValue=""
 						noSelectionOption="true" />
 					<f:selectItems value="#{BorrarEquiposGrupoView.torneos}" />
 				</p:selectOneMenu>

@@ -164,8 +164,8 @@ public class AgregarPartidoView implements Serializable {
 	 public void onTorneoChange() {
 	        if(torneo !=null && !torneo.equals("")) {
 	        	System.out.println("Este es el torneo "+ torneo);
-	        	Torneo t = torneoBean.obtenerTorneoPorNombre(torneo);
-	        	List<Fase> listaFases = faseBean.obtenerFasesPorTorneo(t.getId());
+	        	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+	        	List<Fase> listaFases = faseBean.obtenerFasesPorTorneo(idt);
 	        	int x = listaFases.size();
 	    		fases = new ArrayList<String>();
 	    		for (int j = 0; j < x; j++) {
@@ -178,10 +178,9 @@ public class AgregarPartidoView implements Serializable {
 		 System.out.println("entre al onFaseChange");
 		 if(fase !=null && !fase.equals("")) {
 	        	System.out.println("Esta es la fase "+ fase);
-	        	Torneo t = torneoBean.obtenerTorneoPorNombre(torneo);
-	        	Fase f = faseBean.obtenerFasePorNombreYTorneo(t.getId(), fase);
-	        	System.out.println("obtuve la fase "+f.getNombre());
-	        	List<Grupo> listaGrupos = grupoBean.obtenerGruposPorFase(f.getId());
+	        	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+	        	int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
+	        	List<Grupo> listaGrupos = grupoBean.obtenerGruposPorFase(idf);
 	        	int z = listaGrupos.size();
 	    		grupos = new ArrayList<String>();
 	    		for (int y = 0; y < z; y++) {
@@ -192,14 +191,12 @@ public class AgregarPartidoView implements Serializable {
 	 
 	 
 	 public void onGrupoChange() {
-		 System.out.println("entre al onGrupoChange");
 		 if(grupo !=null && !grupo.equals("")) {
 	        	System.out.println("Esta es el grupo "+ grupo);
-	        	Torneo t = torneoBean.obtenerTorneoPorNombre(torneo);
-	        	Fase f = faseBean.obtenerFasePorNombreYTorneo(t.getId(), fase);
-	        	System.out.println("obtuve la fase "+f.getNombre());
-	        	Grupo g = grupoBean.obtenerGrupoPorNombreYFase(grupo,f.getId());
-	        	List<Equipo> listaEquipos = equiposGrupoBean.obtenerEquiposPorGrupo(g.getId());
+	        	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+	        	int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
+	        	int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo,idf);
+	        	List<Equipo> listaEquipos = equiposGrupoBean.obtenerEquiposPorGrupo(idg);
 	        	int z = listaEquipos.size();
 	        	equiposLocal = new ArrayList<String>();
 	        	equiposVisita = new ArrayList<String>();
@@ -208,7 +205,7 @@ public class AgregarPartidoView implements Serializable {
 	    			equiposVisita.add(listaEquipos.get(y).getNombre());
 	    		}
 	        }
-	   }
+	 }
 
 	public void save() {
 		FacesMessage msg;
@@ -219,19 +216,13 @@ public class AgregarPartidoView implements Serializable {
 						msg = new FacesMessage("La fecha del partido no puede ser anterior a hoy"));
 			}else {					
 					System.out.println("el grupo "+grupo+" no es null, la fase "+fase+ "no es null");
-					Torneo t = torneoBean.obtenerTorneoPorNombre(torneo);
-					System.out.println("obtuve el torneo "+t.getNombre());
-					Fase f = faseBean.obtenerFasePorNombreYTorneo(t.getId(), fase);
-					System.out.println("obtuve la fase "+f.getNombre());
-					//grupoBean.crearGrupo(nombre, f.getId());
-					Grupo g = grupoBean.obtenerGrupoPorNombreYFase(grupo, f.getId());
-					System.out.println("obtuve el grupo "+g.getNombre());
-					Equipo el = equipoBean.obtenerEquipoPorNombre(equipoLocal);
-					Equipo ev = equipoBean.obtenerEquipoPorNombre(equipoVisita);
-					System.out.println("obtuve el equipo local "+el.getNombre());
-					System.out.println("obtuve el equipo visita "+ev.getNombre());
+					int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+					int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
+					int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo, idf);
+					int idel = equipoBean.obtenerEquipoPorNombre(equipoLocal);
+					int idev = equipoBean.obtenerEquipoPorNombre(equipoVisita);
 					//equiposGrupoBean.agregarEquiposGrupo(e.getId(),g.getId());
-					partidoBean.agregarPartido(el.getId(), ev.getId(), g.getId(), fecha);
+					partidoBean.agregarPartido(idel, idev, idg, fecha);
 					msg = new FacesMessage("Se añadió el partido  " + equipoLocal + " vs "+equipoVisita+" en el  grupo "+grupo);
 				}
 							

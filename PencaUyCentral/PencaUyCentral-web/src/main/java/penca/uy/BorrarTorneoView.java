@@ -55,8 +55,8 @@ public class BorrarTorneoView implements Serializable {
 		FacesMessage msg;
 		if (torneo != null) {
 			System.out.println("el torneo no es null, es " + torneo);
-			Torneo t = torneoBean.obtenerTorneoPorNombre(torneo);
-			torneoBean.eliminarTorneo(t.getId());			
+			int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+			torneoBean.eliminarTorneo(idt);			
 			msg = new FacesMessage("Se borró el torneo " + torneo);
 			
 		} else {

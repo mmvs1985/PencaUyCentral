@@ -1,21 +1,36 @@
 package entidades;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.List;
 
-import entidades.Grupo;
-import entidades.Torneo;
 
+/**
+ * The persistent class for the "Fases" database table.
+ * 
+ */
+@Entity
+@Table(name="\"Fases\"")
+@NamedQuery(name="Fase.findAll", query="SELECT f FROM Fase f")
 public class Fase implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="\"Id\"")
 	private Integer id;
 
+	@Column(name="\"Nombre\"")
 	private String nombre;
 
+	//bi-directional many-to-one association to Torneo
+	@ManyToOne
+	@JoinColumn(name="\"TorneoId\"")
 	private Torneo torneo;
 
+	//bi-directional many-to-one association to Grupo
+	@OneToMany(mappedBy="fase")
 	private List<Grupo> grupos;
 
 	public Fase() {

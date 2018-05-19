@@ -137,8 +137,8 @@ public class BorrarEquiposGrupoView implements Serializable {
 	 public void onTorneoChange() {
 	        if(torneo !=null && !torneo.equals("")) {
 	        	System.out.println("Este es el torneo "+ torneo);
-	        	Torneo t = torneoBean.obtenerTorneoPorNombre(torneo);
-	        	List<Fase> listaFases = faseBean.obtenerFasesPorTorneo(t.getId());
+	        	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+	        	List<Fase> listaFases = faseBean.obtenerFasesPorTorneo(idt);
 	        	int x = listaFases.size();
 	    		fases = new ArrayList<String>();
 	    		for (int j = 0; j < x; j++) {
@@ -151,10 +151,9 @@ public class BorrarEquiposGrupoView implements Serializable {
 		 System.out.println("entre al onFaseChange");
 		 if(fase !=null && !fase.equals("")) {
 	        	System.out.println("Esta es la fase "+ fase);
-	        	Torneo t = torneoBean.obtenerTorneoPorNombre(torneo);
-	        	Fase f = faseBean.obtenerFasePorNombreYTorneo(t.getId(), fase);
-	        	System.out.println("obtuve la fase "+f.getNombre());
-	        	List<Grupo> listaGrupos = grupoBean.obtenerGruposPorFase(f.getId());
+	        	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+	        	int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
+	        	List<Grupo> listaGrupos = grupoBean.obtenerGruposPorFase(idf);
 	        	int z = listaGrupos.size();
 	    		grupos = new ArrayList<String>();
 	    		for (int y = 0; y < z; y++) {
@@ -167,11 +166,10 @@ public class BorrarEquiposGrupoView implements Serializable {
 		 System.out.println("entre al onGrupoChange");
 		 if(grupo !=null && !grupo.equals("")) {
 	        	System.out.println("Esta es la grupo "+ grupo);
-	        	Torneo t = torneoBean.obtenerTorneoPorNombre(torneo);
-	        	Fase f = faseBean.obtenerFasePorNombreYTorneo(t.getId(), fase);
-	        	System.out.println("obtuve la fase "+f.getNombre());
-	        	Grupo g = grupoBean.obtenerGrupoPorNombreYFase(grupo,f.getId());
-	        	List<Equipo> listaEquipos = equiposGrupoBean.obtenerEquiposPorGrupo(g.getId());
+	        	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+	        	int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
+	        	int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo,idf);
+	        	List<Equipo> listaEquipos = equiposGrupoBean.obtenerEquiposPorGrupo(idg);
 	        	int z = listaEquipos.size();
 	    		equipos = new ArrayList<String>();
 	    		for (int y = 0; y < z; y++) {
@@ -179,22 +177,19 @@ public class BorrarEquiposGrupoView implements Serializable {
 	    		}
 	        }
 	   }
+	 
+	 
 	public void borrar() {
 		FacesMessage msg;
 		if ((grupo != null) && (equipo != null)) {
 			System.out.println("el grupo "+grupo+" no es null, la fase "+fase+ "no es null");
-			Torneo t = torneoBean.obtenerTorneoPorNombre(torneo);
-			System.out.println("obtuve el torneo "+t.getNombre());
-			Fase f = faseBean.obtenerFasePorNombreYTorneo(t.getId(), fase);
-			System.out.println("obtuve la fase "+f.getNombre());
+			int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+			int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);			
 			//grupoBean.crearGrupo(nombre, f.getId());
-			Grupo g = grupoBean.obtenerGrupoPorNombreYFase(grupo, f.getId());
-			System.out.println("obtuve el grupo "+g.getNombre());
-			Equipo e = equipoBean.obtenerEquipoPorNombre(equipo);
-			System.out.println("obtuve el equipo "+e.getNombre());
-			equiposGrupoBean.eliminarEquiposGrupo(e.getId(),g.getId());
-			msg = new FacesMessage("Se borró el equipo  " + equipo + " del grupo "+ grupo);
-			
+			int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo, idf);
+			int ide = equipoBean.obtenerEquipoPorNombre(equipo);			
+			equiposGrupoBean.eliminarEquiposGrupo(ide,idg);
+			msg = new FacesMessage("Se borró el equipo  " + equipo + " del grupo "+ grupo);			
 		} else {
 			System.out.println("el torneo es null");
 			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "El Torneo no es válido.");

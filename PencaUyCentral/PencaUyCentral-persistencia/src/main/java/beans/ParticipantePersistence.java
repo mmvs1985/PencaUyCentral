@@ -32,15 +32,15 @@ public class ParticipantePersistence implements ParticipantePersistenceRemote, P
     
 
 	@Override
-	public boolean agregarParticipante(String usuario, Penca p) {
-		Penca pe = em.find(Penca.class, p.getId());
+	public boolean agregarParticipante(String usuario, int idp) {
+		Penca pe = em.find(Penca.class, idp);
 		if (pe != null) {	
-			Participante pa = obtenerParticipantePorUsuario(usuario);
-			if (pa == null) {
-				pa = new Participante();
+			int idpa = obtenerParticipantePorUsuario(usuario);
+			if (idpa == -1) {
+				Participante pa = new Participante();
 				pa.setUsuario(usuario);
 				pa.setPuntos(0);
-				pa.setPenca(p);
+				pa.setPenca(pe);
 				em.persist(pa);
 				return true;
 			} else {
@@ -57,13 +57,13 @@ public class ParticipantePersistence implements ParticipantePersistenceRemote, P
 	}	
 	
 	@Override
-	public Participante obtenerParticipantePorUsuario(String usuario) {
+	public int obtenerParticipantePorUsuario(String usuario) {
 		List<Participante> lp = em.createNamedQuery("Participante.findByUsuario", Participante.class).setParameter("usuario", usuario).getResultList();
 		if (lp.isEmpty()) {
-			return null;
+			return -1;
 		}
 		else {
-			return lp.get(0);
+			return lp.get(0).getId();
 		}
 	}	
 	

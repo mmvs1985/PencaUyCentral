@@ -3,20 +3,34 @@ package entidades;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import entidades.Penca;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * The persistent class for the "Organizaciones" database table.
+ * 
+ */
+@Entity
+@Table(name="\"Organizaciones\"")
+@NamedQueries({
+	@NamedQuery(name = "Organizacion.findAll", query="SELECT o FROM Organizacion o"),
+	@NamedQuery(name = "Organizacion.findByNombre",query = "SELECT o FROM Organizacion o WHERE o.nombre = :nombre")
+})
 public class Organizacion implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="\"Id\"")
 	private Integer id;
 
+	@Column(name="\"Nombre\"")
 	private String nombre;
 
+	//bi-directional many-to-one association to Penca
+	@OneToMany(mappedBy="organizacion")
 	private List<Penca> pencas;
 
 	public Organizacion() {

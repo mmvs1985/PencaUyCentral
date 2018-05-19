@@ -55,8 +55,8 @@ public class BorrarOrganizacionView implements Serializable {
 		FacesMessage msg;
 		if (organizacion != null) {
 			System.out.println("la organizacion no es null, es " + organizacion);
-			Organizacion o = organizacionBean.obtenerOrganizacionPorNombre(organizacion);
-			organizacionBean.eliminarOrganizacion(o.getId());			
+			int ido = organizacionBean.obtenerOrganizacionPorNombre(organizacion);
+			organizacionBean.eliminarOrganizacion(ido);			
 			msg = new FacesMessage("Se borró la organización " + organizacion);
 			
 		} else {

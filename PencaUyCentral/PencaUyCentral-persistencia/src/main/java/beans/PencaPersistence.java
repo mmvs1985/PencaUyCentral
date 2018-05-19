@@ -31,11 +31,11 @@ public class PencaPersistence implements PencaPersistenceRemote, PencaPersistenc
     }
     
     @Override
-	public boolean agregarPenca(String nombre, Organizacion o) {
-		Organizacion org = em.find(Organizacion.class, o.getId());
-		if (org != null) {	
-			Penca pe = obtenerPencaPorNombre(nombre);
-			if (pe == null) {
+	public boolean agregarPenca(String nombre, int ido) {
+		Organizacion o = em.find(Organizacion.class, ido);
+		if (o != null) {	
+			int idpe = obtenerPencaPorNombre(nombre);
+			if (idpe == -1) {
 				Penca p = new Penca();
 				p.setNombre(nombre);
 				p.setOrganizacion(o);
@@ -56,13 +56,13 @@ public class PencaPersistence implements PencaPersistenceRemote, PencaPersistenc
 	}	
 	
 	@Override
-	public Penca obtenerPencaPorNombre(String nombre) {
+	public int obtenerPencaPorNombre(String nombre) {
 		List<Penca> lp = em.createNamedQuery("Penca.findByNombre", Penca.class).setParameter("nombre", nombre).getResultList();
 		if (lp.isEmpty()) {
-			return null;
+			return -1;
 		}
 		else {
-			return lp.get(0);
+			return lp.get(0).getId();
 		}
 	}	
 	
@@ -78,14 +78,14 @@ public class PencaPersistence implements PencaPersistenceRemote, PencaPersistenc
 	}
 	
 	@Override
-	public Penca obtenerPencaPorNombreYOrganizacion(int id, String nombre) {
+	public int obtenerPencaPorNombreYOrganizacion(int id, String nombre) {
 		Organizacion o = em.find(Organizacion.class, id);
 		List<Penca> lp = em.createNamedQuery("Penca.findByNombreAndOrganizacion", Penca.class).setParameter("nombre", nombre).setParameter("organizacion", o).getResultList();
 		if (lp.isEmpty()) {
-			return null;
+			return -1;
 		}
 		else {
-			return lp.get(0);
+			return lp.get(0).getId();
 		}
 	}
 	

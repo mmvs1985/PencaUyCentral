@@ -1,16 +1,16 @@
 package beans;
 
-import beans.interfaces.TorneoBusinessLocal;
-import beans.interfaces.TorneoBusinessRemote;
-import beans.interfaces.TorneoPersistenceRemote;
-import entidades.Torneo;
-
 import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
+import beans.interfaces.TorneoBusinessLocal;
+import beans.interfaces.TorneoBusinessRemote;
+import beans.interfaces.TorneoPersistenceRemote;
+import entidades.Torneo;
 
 /**
  * Session Bean implementation class TorneoBusiness
@@ -54,7 +54,7 @@ public class TorneoBusiness implements TorneoBusinessRemote, TorneoBusinessLocal
     }
     
     @Override
-    public Torneo obtenerTorneoPorNombre(String nombre) {
+    public int obtenerTorneoPorNombre(String nombre) {
     	return bean.obtenerTorneoPorNombre(nombre);
     }
     

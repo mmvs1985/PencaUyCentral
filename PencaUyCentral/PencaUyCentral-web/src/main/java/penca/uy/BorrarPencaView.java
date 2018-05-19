@@ -78,8 +78,8 @@ public class BorrarPencaView implements Serializable {
 	public void onOrganizacionChange() {
         if ((organizacion != null) && (!organizacion.equals(""))) {
         	System.out.println("Esta es la Organizacion "+ organizacion);
-        	Organizacion o = organizacionBean.obtenerOrganizacionPorNombre(organizacion);
-        	List<Penca> listaPencas = pencaBean.obtenerPencasPorOrganizacion(o.getId());
+        	int ido = organizacionBean.obtenerOrganizacionPorNombre(organizacion);
+        	List<Penca> listaPencas = pencaBean.obtenerPencasPorOrganizacion(ido);
         	int x = listaPencas.size();
         	System.out.println("Pencas de la organizacion: " + x);
     		pencas = new ArrayList<String>();
@@ -96,9 +96,9 @@ public class BorrarPencaView implements Serializable {
 		FacesMessage msg;
 		if (penca != null) {
 			System.out.println("la Penca no es null, es " + penca);
-			Organizacion o = organizacionBean.obtenerOrganizacionPorNombre(organizacion);
-			Penca p = pencaBean.obtenerPencaPorNombreYOrganizacion(o.getId(), penca);
-			pencaBean.eliminarPenca(p.getId());			
+			int ido = organizacionBean.obtenerOrganizacionPorNombre(organizacion);
+			int idp = pencaBean.obtenerPencaPorNombreYOrganizacion(ido, penca);
+			pencaBean.eliminarPenca(idp);			
 			msg = new FacesMessage("Se borró la Penca " + penca);
 			
 		} else {

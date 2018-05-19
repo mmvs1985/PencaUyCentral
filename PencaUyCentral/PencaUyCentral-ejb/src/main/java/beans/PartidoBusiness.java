@@ -1,15 +1,15 @@
 package beans;
 
-import beans.interfaces.PartidoBusinessLocal;
-import beans.interfaces.PartidoBusinessRemote;
-import beans.interfaces.PartidoPersistenceRemote;
-import entidades.Partido;
-
 import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
+import beans.interfaces.PartidoBusinessLocal;
+import beans.interfaces.PartidoBusinessRemote;
+import beans.interfaces.PartidoPersistenceRemote;
+import entidades.Partido;
 
 /**
  * Session Bean implementation class PartidoBusiness

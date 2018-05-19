@@ -19,10 +19,7 @@
                 <f:selectItem itemLabel="Equipos" itemValue="" noSelectionOption="true" />
                 <f:selectItems value="#{BorrarEquipoView.equipos}" />
             </p:selectOneMenu>
-        </h:panelGrid>
- 
-        <p:separator />
- 
+        </h:panelGrid> 
         <p:commandButton value="Borrar" update="msgs" actionListener="#{BorrarEquipoView.borrar}" icon="ui-icon-trash" />
     </p:panel>
 </h:form>

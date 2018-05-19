@@ -5,15 +5,17 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import beans.interfaces.UsuarioBusinessRemote;
 
 @ManagedBean(name = "LoginBean")
+@SessionScoped
 public class LoginBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@EJB UsuarioBusinessRemote loginBean;
+	@EJB UsuarioBusinessRemote bean;
 	
 	private String usuario;
 	private String password;
@@ -34,13 +36,12 @@ public class LoginBean implements Serializable {
 		this.password = password;
 	}
 	
-	public void login() {
-		if (loginBean.usuarioValido(usuario, password)) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("Existe el usuario " + usuario));
+	public String login() {
+		if (bean.usuarioValido(usuario, password)) {
+			return "usuarioValido"; 
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("Verifique usuario y/o password."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Verifique usuario y/o password."));
+			return "usuarioInvalido";			
 		}
 	}
 	

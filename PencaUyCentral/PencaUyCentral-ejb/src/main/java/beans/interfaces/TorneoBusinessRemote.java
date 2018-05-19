@@ -14,6 +14,6 @@ public interface TorneoBusinessRemote {
     public boolean eliminarTorneo(int id);
     public boolean agregarFase(int id);
     public List<Torneo> obtenerTodos();
-    public Torneo obtenerTorneoPorNombre(String nombre);
+    public int obtenerTorneoPorNombre(String nombre);
     public boolean eliminarTodosTorneo();
 }

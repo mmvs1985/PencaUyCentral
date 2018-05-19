@@ -1,15 +1,15 @@
 package beans;
 
-import beans.interfaces.GrupoBusinessLocal;
-import beans.interfaces.GrupoBusinessRemote;
-import beans.interfaces.GrupoPersistenceRemote;
-import entidades.Grupo;
-
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
+import beans.interfaces.GrupoBusinessLocal;
+import beans.interfaces.GrupoBusinessRemote;
+import beans.interfaces.GrupoPersistenceRemote;
+import entidades.Grupo;
 
 /**
  * Session Bean implementation class GrupoBusiness
@@ -38,7 +38,7 @@ public class GrupoBusiness implements GrupoBusinessRemote, GrupoBusinessLocal {
     }
     
     @Override
-	public Grupo obtenerGrupoPorNombreYFase(String nombre,int id) {
+	public int obtenerGrupoPorNombreYFase(String nombre,int id) {
     	return bean.obtenerGrupoPorNombreYFase(nombre, id);
     }
     

@@ -110,8 +110,8 @@ public class BorrarGrupoView implements Serializable {
 	 public void onTorneoChange() {
 	        if(torneo !=null && !torneo.equals("")) {
 	        	System.out.println("Este es el torneo "+ torneo);
-	        	Torneo t = torneoBean.obtenerTorneoPorNombre(torneo);
-	        	List<Fase> listaFases = faseBean.obtenerFasesPorTorneo(t.getId());
+	        	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+	        	List<Fase> listaFases = faseBean.obtenerFasesPorTorneo(idt);
 	        	int x = listaFases.size();
 	    		fases = new ArrayList<String>();
 	    		for (int j = 0; j < x; j++) {
@@ -123,10 +123,9 @@ public class BorrarGrupoView implements Serializable {
 	 public void onFaseChange() {
 	        if(fase !=null && !fase.equals("")) {
 	        	System.out.println("Esta es la fase "+ fase);
-	        	Torneo t = torneoBean.obtenerTorneoPorNombre(torneo);
-	        	Fase f = faseBean.obtenerFasePorNombreYTorneo(t.getId(), fase);
-	        	System.out.println("obtuve la fase "+f.getNombre());
-	        	List<Grupo> listaGrupos = grupoBean.obtenerGruposPorFase(f.getId());
+	        	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+	        	int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
+	        	List<Grupo> listaGrupos = grupoBean.obtenerGruposPorFase(idf);
 	        	int z = listaGrupos.size();
 	    		grupos = new ArrayList<String>();
 	    		for (int y = 0; y < z; y++) {
@@ -139,14 +138,10 @@ public class BorrarGrupoView implements Serializable {
 		FacesMessage msg;
 		if (grupo != null) {
 			System.out.println("el grupo no es null, es " + grupo);
-			Torneo t2 = torneoBean.obtenerTorneoPorNombre(torneo);
-			System.out.println("Obtuve el torneo "+t2.getNombre());
-			Fase f = faseBean.obtenerFasePorNombreYTorneo(t2.getId(), fase);
-			System.out.println("Obtuve la fase "+f.getNombre());
-			
-			Grupo g = grupoBean.obtenerGrupoPorNombreYFase(grupo, f.getId());
-			System.out.println("el id del torneo a borrar es "+g.getId());
-			grupoBean.eliminarGrupo(g.getId());
+			int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+			int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
+			int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo, idf);
+			grupoBean.eliminarGrupo(idg);
 			msg = new FacesMessage("Se borró el Grupo  " + grupo + " de la fase "+ fase);
 			
 		} else {

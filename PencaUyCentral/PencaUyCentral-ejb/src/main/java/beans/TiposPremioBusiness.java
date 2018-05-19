@@ -1,15 +1,15 @@
 package beans;
 
-import beans.interfaces.TiposPremioBusinessLocal;
-import beans.interfaces.TiposPremioBusinessRemote;
-import beans.interfaces.TiposPremioPersistenceRemote;
-import entidades.TiposPremio;
-
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
+import beans.interfaces.TiposPremioBusinessLocal;
+import beans.interfaces.TiposPremioBusinessRemote;
+import beans.interfaces.TiposPremioPersistenceRemote;
+import entidades.TiposPremio;
 
 /**
  * Session Bean implementation class TiposPremioBusiness
@@ -45,7 +45,7 @@ public class TiposPremioBusiness implements TiposPremioBusinessRemote, TiposPrem
 	}
 	
 	@Override
-	public TiposPremio obtenerTipoPremioPorNombre(String nombre) {
+	public int obtenerTipoPremioPorNombre(String nombre) {
 		return bean.obtenerTipoPremioPorNombre(nombre);
 	}
 	

@@ -4,9 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 
-import entidades.Equipo;
-import entidades.Grupo;
-
+@Embeddable
 public class Equipos_Grupo_Identidad implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

@@ -31,10 +31,6 @@ public class TiposPremioPersistenceController implements ITiposPremioPersistence
 		return beanTiposPremio.obtenerTipoPremio(id);
 	}
 	
-	public TiposPremio obtenerTipoPremioPorNombre(String nombre) {
-		return beanTiposPremio.obtenerTipoPremioPorNombre(nombre);
-	}
-	
 	public boolean eliminarTipoPremio(int id) {
 		return beanTiposPremio.eliminarTipoPremio(id);
 	}

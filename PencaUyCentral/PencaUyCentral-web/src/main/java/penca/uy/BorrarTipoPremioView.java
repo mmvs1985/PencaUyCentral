@@ -55,8 +55,8 @@ public class BorrarTipoPremioView implements Serializable {
 		FacesMessage msg;
 		if (tipopremio != null) {
 			System.out.println("el tipo de premio no es null, es " + tipopremio);
-			TiposPremio tp = tipopremioBean.obtenerTipoPremioPorNombre(tipopremio);
-			tipopremioBean.eliminarTipoPremio(tp.getId());			
+			int idtp = tipopremioBean.obtenerTipoPremioPorNombre(tipopremio);
+			tipopremioBean.eliminarTipoPremio(idtp);			
 			msg = new FacesMessage("Se borró el tipo de premio " + tipopremio);
 			
 		} else {

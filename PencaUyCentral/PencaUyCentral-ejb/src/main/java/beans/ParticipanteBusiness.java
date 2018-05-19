@@ -1,17 +1,16 @@
 package beans;
 
-import beans.interfaces.OrganizacionPersistenceRemote;
-import beans.interfaces.ParticipanteBusinessLocal;
-import beans.interfaces.ParticipanteBusinessRemote;
-import beans.interfaces.ParticipantePersistenceRemote;
-import entidades.Participante;
-import entidades.Penca;
-
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
+import beans.interfaces.ParticipanteBusinessLocal;
+import beans.interfaces.ParticipanteBusinessRemote;
+import beans.interfaces.ParticipantePersistenceRemote;
+import entidades.Participante;
+import entidades.Penca;
 
 /**
  * Session Bean implementation class ParticipanteBusiness
@@ -30,8 +29,8 @@ public class ParticipanteBusiness implements ParticipanteBusinessRemote, Partici
     }
     
     @Override
-	public boolean agregarParticipante(String usuario, Penca p) {
-    	return bean.agregarParticipante(usuario, p);
+	public boolean agregarParticipante(String usuario, int idp) {
+    	return bean.agregarParticipante(usuario, idp);
     }
     
     @Override
@@ -40,7 +39,7 @@ public class ParticipanteBusiness implements ParticipanteBusinessRemote, Partici
     }
     
     @Override
-	public Participante obtenerParticipantePorUsuario(String usuario) {
+	public int obtenerParticipantePorUsuario(String usuario) {
     	return bean.obtenerParticipantePorUsuario(usuario);
     }
     
