@@ -70,14 +70,13 @@ public class UsuarioPersistence implements UsuarioPersistenceRemote, UsuarioPers
 	
 	@Override
 	public boolean usuarioValido(String usuario, String password) {
-		List<Usuario> lu = em.createNamedQuery("Usuario.findByNickname", Usuario.class).setParameter("nickname", usuario).getResultList();
+		List<Usuario> lu = em.createNamedQuery("Usuario.findByCredentials", Usuario.class).setParameter("nickname", usuario).setParameter("password", password).getResultList();
 		if (lu.isEmpty()) {
 			return false;
 		}
 		else {
 			return true;
-		}
-		//return ((Usuario) em.createNamedQuery("Usuario.findByCredentials", Usuario.class).setParameter("nickname", usuario).setParameter("password", password).getSingleResult() != null);
+		}		
 	}   
 	
 	@Override

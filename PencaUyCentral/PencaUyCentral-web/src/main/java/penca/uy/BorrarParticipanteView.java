@@ -108,7 +108,7 @@ public class BorrarParticipanteView implements Serializable {
 			msg = new FacesMessage("Se borró el Participante " + participante);			
 		} else {
 			System.out.println("la Penca es null");
-			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "La Penca no es válido.");
+			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "El Participante no es válido.");
 		}
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}

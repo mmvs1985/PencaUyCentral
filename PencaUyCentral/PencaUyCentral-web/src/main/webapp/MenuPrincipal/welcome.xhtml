@@ -5,30 +5,34 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	
+	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
 </h:head>
 <h:body>
-
-	<h:form>
+	<p:menubar>
+		<f:facet name="options">
+			<p:commandButton value="Cerrar Sesión" actionListener="#{LoginBean.cerrarSesion()}" action="/login?faces-redirect=true" icon="ui-icon-power"/>
+		</f:facet>
+	</p:menubar>
+	<h:form>		
 		<p:panel header="Bienvenido a PencaUy Central" style="margin-bottom:10px;">
 			<h:panelGrid id="grid" cellpadding="5" columns="1">
 				<p:outputLabel value="Usted se ha identificado como: #{LoginBean.usuario}" />
 				<p:panel header="Seleccione su Opción" style="margin-bottom:10px;">
 					<h:panelGrid id="agregar" columns="2" cellpadding="5">
 						<p:commandButton value="Equipos" id="btnEquipos" process="@form"
-							update="grid" action="Equipos/Menu?faces-redirect=true" />
+							update="grid" action="/Equipos/Menu?faces-redirect=true" />
 						<p:commandButton value="Organizaciones" id="btnOrganizaciones" process="@form"
-							update="grid" action="Organizaciones/Menu?faces-redirect=true" />
+							update="grid" action="/Organizaciones/Menu?faces-redirect=true" />
 						<p:commandButton value="Pencas" id="btnPencas" process="@form"
-							update="grid" action="Pencas/Menu?faces-redirect=true" />
+							update="grid" action="/Pencas/Menu?faces-redirect=true" />
 						<p:commandButton value="Usuarios" id="btnUsuarios" process="@form"
-							update="grid" action="Usuarios/Menu?faces-redirect=true" />
+							update="grid" action="/Usuarios/Menu?faces-redirect=true" />
 						<p:commandButton value="Participantes" id="btnParticipantes" process="@form"
-							update="grid" action="Participantes/Menu?faces-redirect=true" />
+							update="grid" action="/Participantes/Menu?faces-redirect=true" />
 						<p:commandButton value="Torneos" id="btnTorneos" process="@form"
-							update="grid" action="Torneos/Menu?faces-redirect=true" />
+							update="grid" action="/Torneos/Menu?faces-redirect=true" />
 						<p:commandButton value="Tipos de Premio" id="btnTiposPremio" process="@form"
-							update="grid" action="TiposPremio/Menu?faces-redirect=true" />
+							update="grid" action="/TiposPremio/Menu?faces-redirect=true" />
 					</h:panelGrid>
 				</p:panel>
 			</h:panelGrid>			

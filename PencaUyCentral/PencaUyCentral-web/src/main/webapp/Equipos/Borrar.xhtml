@@ -8,12 +8,16 @@
 	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
 </h:head>
 <h:body>
-
+<p:menubar>
+	<f:facet name="options">
+		<p:commandButton value="Cerrar Sesión" actionListener="#{LoginBean.cerrarSesion()}" action="/login?faces-redirect=true" icon="ui-icon-power"/>
+	</f:facet>
+</p:menubar>
 <h:form>
     <p:growl id="msgs" showDetail="true" />
  
     <p:panel header="Borrar Equipo" style="margin-bottom:10px;">
-        <h:panelGrid columns="1" cellpadding="5">
+        <h:panelGrid columns="2" cellpadding="5">
             <p:outputLabel for="equipo" value="Equipo: " />
             <p:selectOneMenu id="equipo" value="#{BorrarEquipoView.equipo}" style="width:150px">
                 <f:selectItem itemLabel="Seleccione un Equipo" itemValue="" noSelectionOption="true" />

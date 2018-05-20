@@ -27,15 +27,9 @@
 		<navigation-case>
       		<from-action>#{LoginBean.login}</from-action>
       		<from-outcome>usuarioValido</from-outcome>
-      		<to-view-id>/welcome.xhtml</to-view-id>
+      		<to-view-id>/MenuPrincipal/welcome.xhtml</to-view-id>
       		<redirect/>
-   		</navigation-case>
-		<navigation-case>
-      		<from-action>#{LoginBean.login}</from-action>
-      		<from-outcome>usuarioInvalido</from-outcome>
-      		<to-view-id>/login.xhtml</to-view-id>
-      		<redirect/>
-   		</navigation-case>
+   		</navigation-case>		
 	</navigation-rule>
 	<application />
 </faces-config>

@@ -8,11 +8,15 @@
 	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
 </h:head>
 <h:body>
-
+<p:menubar>
+	<f:facet name="options">
+		<p:commandButton value="Cerrar Sesión" actionListener="#{LoginBean.cerrarSesion()}" action="/login?faces-redirect=true" icon="ui-icon-power"/>
+	</f:facet>
+</p:menubar>
 	<h:form>
 		<p:panel header="Agregar Fase" style="margin-bottom:10px;">
 
-			<h:panelGrid id="grid" cellpadding="5" columns="1">
+			<h:panelGrid id="grid" cellpadding="5" columns="2">
 				<f:facet name="header">
 					<p:messages id="msgs" />
 				</f:facet>

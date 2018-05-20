@@ -7,6 +7,11 @@
 	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
 </h:head>
 <h:body>
+<p:menubar>
+	<f:facet name="options">
+		<p:commandButton value="Cerrar Sesión" actionListener="#{LoginBean.cerrarSesion()}" action="/login?faces-redirect=true" icon="ui-icon-power"/>
+	</f:facet>
+</p:menubar>
 	<h:form>
 		<p:panel header="Menú de Opciones sobre Torneos" style="margin-bottom:10px;">
 			<h:panelGrid id="grid" cellpadding="5" columns="1">

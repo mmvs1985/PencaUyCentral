@@ -1,17 +1,15 @@
 package penca.uy;
 
-import java.io.IOException;
 import java.io.Serializable;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import beans.interfaces.UsuarioBusinessRemote;
-import entidades.Usuario;
 
 @ManagedBean(name = "LoginBean")
 @SessionScoped
@@ -59,6 +57,17 @@ public class LoginBean implements Serializable {
 		} catch (Exception e) {
 			
 		}
+	}
+	
+	public void cerrarSesion() {
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		/*try {
+			ExternalContext extctx = FacesContext.getCurrentInstance().getExternalContext();
+			extctx.invalidateSession();
+			extctx.redirect("./../login.xhtml");
+		} catch (Exception e) {
+			
+		}*/		
 	}
 	
 }

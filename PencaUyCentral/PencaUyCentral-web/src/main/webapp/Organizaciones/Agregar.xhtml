@@ -8,6 +8,11 @@
 	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
 </h:head> 
 <body> 
+<p:menubar>
+	<f:facet name="options">
+		<p:commandButton value="Cerrar Sesión" actionListener="#{LoginBean.cerrarSesion()}" action="/login?faces-redirect=true" icon="ui-icon-power"/>
+	</f:facet>
+</p:menubar>
 <h:form>
 <p:panel header="Agregar Organización" style="margin-bottom:10px;">
 	<h:panelGrid id="grid" cellpadding="5" columns="2" >
@@ -17,7 +22,6 @@
 		<p:outputLabel for="nombre" value="Nombre:" />
 		<p:inputText id="nombre" value="#{AgregarOrganizacionView.nombre}"
 			required="true" requiredMessage="Debe tener un nombre." />
-
 	</h:panelGrid>
 	<h:panelGrid id="date" columns="6" cellpadding="5">
 		<p:commandButton value="Agregar" id="botonAgregar" process="@form"

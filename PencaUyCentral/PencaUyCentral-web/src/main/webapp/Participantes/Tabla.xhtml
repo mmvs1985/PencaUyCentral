@@ -7,8 +7,13 @@
 <h:head>
 	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
 </h:head>
-
 <h:body>
+<p:menubar>
+	<f:facet name="options">
+		<p:commandButton value="Cerrar Sesión" actionListener="#{LoginBean.cerrarSesion()}" action="/login?faces-redirect=true" icon="ui-icon-power"/>
+	</f:facet>
+</p:menubar>
+	<p:commandButton value="Cerrar Sesión" actionListener="#{LoginBean.cerrarSesion}" action="/login?faces-redirect=true" />
 	<p:panel header="Tabla de Participantes" style="margin-bottom:10px;">
 		<p:dataTable var="participante" value="#{TablaParticipantesView.getParticipantes()}">
 			<p:column headerText="Id">

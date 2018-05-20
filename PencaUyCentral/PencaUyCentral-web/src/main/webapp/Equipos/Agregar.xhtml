@@ -5,26 +5,30 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
-</h:head> 
+	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>	
+</h:head>
 <body> 
-<h:form>
-	<p:panel header="Agregar Equipo" style="margin-bottom:10px;">
-	<h:panelGrid id="grid" cellpadding="5" columns="2" >
-		<f:facet name="header">
-			<p:messages id="msgs" />
+	<p:menubar>
+		<f:facet name="options">
+			<p:commandButton value="Cerrar Sesión" actionListener="#{LoginBean.cerrarSesion()}" action="/login?faces-redirect=true" icon="ui-icon-power"/>
 		</f:facet>
-		<p:outputLabel for="nombre" value="Nombre:" />
-		<p:inputText id="nombre" value="#{AgregarEquipoView.nombre}"
-			required="true" requiredMessage="Debe tener un nombre." />
+	</p:menubar>
+	<h:form>
+		<p:panel header="Agregar Equipo" style="margin-bottom:10px;">
+		<h:panelGrid id="grid" cellpadding="5" columns="2" >
+			<f:facet name="header">
+				<p:messages id="msgs" />
+			</f:facet>
+			<p:outputLabel for="nombre" value="Nombre:" />
+			<p:inputText id="nombre" value="#{AgregarEquipoView.nombre}"
+				required="true" requiredMessage="Debe tener un nombre." />
 
-	</h:panelGrid>
-	<h:panelGrid id="date" columns="6" cellpadding="5">
-		<p:commandButton value="Agregar" id="botonAgregar" process="@form"
-			update="grid" actionListener="#{AgregarEquipoView.save}" />
-	</h:panelGrid>
-	</p:panel>
-</h:form>
-
+		</h:panelGrid>
+		<h:panelGrid id="date" columns="1" cellpadding="5">
+			<p:commandButton value="Agregar" id="botonAgregar" process="@form"
+				update="grid" actionListener="#{AgregarEquipoView.save}" />
+		</h:panelGrid>
+		</p:panel>
+	</h:form>
 </body> 
 </html>
