@@ -5,11 +5,12 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	Agregar Torneo
+	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
 </h:head>
 <h:body>
 
 <h:form>
+<p:panel header="Agregar Torneo" style="margin-bottom:10px;">
 	<h:panelGrid id="grid" cellpadding="5" columns="1" >
 		<f:facet name="header">
 			<p:messages id="msgs" />
@@ -43,7 +44,7 @@
  
         </p:panelGrid>
     </p:dialog>
-
+</p:panel>
 </h:form>
 
 

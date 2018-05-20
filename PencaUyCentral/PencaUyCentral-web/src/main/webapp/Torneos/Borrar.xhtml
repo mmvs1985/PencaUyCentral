@@ -5,18 +5,17 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	Borrar Torneo
+	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
 </h:head>
 <h:body>
 
 <h:form>
-    <p:growl id="msgs" showDetail="true" />
- 
-    <p:panel header="Seleccione un Torneo" style="margin-bottom:10px;">
+    <p:growl id="msgs" showDetail="true" /> 
+    <p:panel header="Borrar Torneo" style="margin-bottom:10px;">
         <h:panelGrid columns="1" cellpadding="5">
             <p:outputLabel for="torneo" value="Torneo: " />
             <p:selectOneMenu id="torneo" value="#{BorrarTorneoView.torneo}" style="width:150px">
-                <f:selectItem itemLabel="Torneos" itemValue="" noSelectionOption="true" />
+                <f:selectItem itemLabel="Seleccione un Torneo" itemValue="" noSelectionOption="true" />
                 <f:selectItems value="#{BorrarTorneoView.torneos}" />
             </p:selectOneMenu>
         </h:panelGrid>

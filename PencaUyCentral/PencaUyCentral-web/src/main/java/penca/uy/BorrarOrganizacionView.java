@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 
 import beans.interfaces.OrganizacionBusinessRemote;
 import entidades.Organizacion;
+import entidades.Penca;
 
 @ManagedBean(name="BorrarOrganizacionView")
 @ViewScoped
@@ -56,9 +57,14 @@ public class BorrarOrganizacionView implements Serializable {
 		if (organizacion != null) {
 			System.out.println("la organizacion no es null, es " + organizacion);
 			int ido = organizacionBean.obtenerOrganizacionPorNombre(organizacion);
-			organizacionBean.eliminarOrganizacion(ido);			
-			msg = new FacesMessage("Se borró la organización " + organizacion);
-			
+			List<Penca> lpo = organizacionBean.obtenerPencasOrganizacion(ido);
+			if (lpo == null) {
+				organizacionBean.eliminarOrganizacion(ido);			
+				msg = new FacesMessage("Se borró la organización " + organizacion);
+			}
+			else {
+				msg = new FacesMessage("No es posible borrar la organización " + organizacion + " dado que tiene pencas asociadas");
+			}
 		} else {
 			System.out.println("La organizacion es null");
 			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "La organizacion no es válida.");

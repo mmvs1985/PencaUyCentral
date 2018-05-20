@@ -3,6 +3,7 @@ package beans;
 import beans.interfaces.EquipoPersistenceLocal;
 import beans.interfaces.EquipoPersistenceRemote;
 import entidades.Equipo;
+import entidades.EquiposGrupo;
 import entidades.Grupo;
 import entidades.Organizacion;
 import entidades.Torneo;
@@ -63,14 +64,20 @@ public class EquipoPersistence implements EquipoPersistenceRemote, EquipoPersist
 	}		
 	
 	@Override
-	//@SuppressWarnings("unchecked")
 	public List<Equipo> obtenerEquipos(){
 		return (List<Equipo>) em.createNamedQuery("Equipo.findAll", Equipo.class).getResultList();
-		/*List<Equipo> le = em.createQuery( "SELECT e FROM "+ Equipo.class.getSimpleName()+" e").getResultList();
-    	return le;*/
 	}
 	
-
+	@Override
+	public List<EquiposGrupo> obtenerGruposEquipo(int id) {
+		List<EquiposGrupo> leg = em.createQuery("SELECT eg FROM " + EquiposGrupo.class.getSimpleName() + " eg WHERE eg.equipo = " + id).getResultList();
+		if (leg.isEmpty()) {
+			return null;
+		}
+		else {
+			return leg;
+		}
+	}
 	
 	@Override
 	public boolean eliminarEquipo(int id) {

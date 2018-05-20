@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 
 import beans.interfaces.EquipoBusinessRemote;
 import entidades.Equipo;
+import entidades.EquiposGrupo;
 
 @ManagedBean(name="BorrarEquipoView")
 @ViewScoped
@@ -56,9 +57,13 @@ public class BorrarEquipoView implements Serializable {
 		if (equipo != null) {
 			System.out.println("el equipo no es null, es " + equipo);
 			int ide = equipoBean.obtenerEquipoPorNombre(equipo);
-			equipoBean.eliminarEquipo(ide);			
-			msg = new FacesMessage("Se borró el equipo " + equipo);
-			
+			List<EquiposGrupo> leg = equipoBean.obtenerGruposEquipo(ide);
+			if (leg == null) {
+				equipoBean.eliminarEquipo(ide);			
+				msg = new FacesMessage("Se borró el equipo " + equipo);
+			} else {
+				msg = new FacesMessage("No es posible borrar el equipo " + equipo + " dado que tiene grupos asociados");
+			}			
 		} else {
 			System.out.println("el equipo es null");
 			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "El Equipo no es válido.");

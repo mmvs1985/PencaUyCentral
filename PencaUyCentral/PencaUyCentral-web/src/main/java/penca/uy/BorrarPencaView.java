@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 import beans.interfaces.OrganizacionBusinessRemote;
 import beans.interfaces.PencaBusinessRemote;
 import entidades.Organizacion;
+import entidades.Participante;
 import entidades.Penca;
 
 @ManagedBean(name="BorrarPencaView")
@@ -98,9 +99,14 @@ public class BorrarPencaView implements Serializable {
 			System.out.println("la Penca no es null, es " + penca);
 			int ido = organizacionBean.obtenerOrganizacionPorNombre(organizacion);
 			int idp = pencaBean.obtenerPencaPorNombreYOrganizacion(ido, penca);
-			pencaBean.eliminarPenca(idp);			
-			msg = new FacesMessage("Se borró la Penca " + penca);
-			
+			List<Participante> lpp = pencaBean.obtenerParticipantesPenca(idp);
+			if (lpp == null) {
+				pencaBean.eliminarPenca(idp);			
+				msg = new FacesMessage("Se borró la Penca " + penca);
+			}
+			else {
+				msg = new FacesMessage("No es posible borrar la penca " + penca + " dado que tiene participantes asociados");
+			}
 		} else {
 			System.out.println("la Organizacion es null");
 			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "La Organizacion no es válido.");

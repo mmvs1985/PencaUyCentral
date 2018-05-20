@@ -4,7 +4,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	
+	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
 </h:head>
 <h:body>
 	<h:form>
@@ -22,21 +22,28 @@
 					</h:panelGrid>
 					<p:separator />
 					<h:panelGrid columns="2" cellpadding="5">
-						<p:commandButton value="Agregar Fase a Torneo" id="btnAgregarFase" process="@form"
+						<p:commandButton value="Agregar Fase" id="btnAgregarFase" process="@form"
 							update="grid" action="/Fases/Agregar?faces-redirect=true" />
-						<p:commandButton value="Borrar Fase de Torneo" id="btnBorrarFase" process="@form"
+						<p:commandButton value="Borrar Fase" id="btnBorrarFase" process="@form"
 							update="grid" action="/Fases/Borrar?faces-redirect=true" />
 					</h:panelGrid>
 					<p:separator />
 					<h:panelGrid columns="2" cellpadding="5">
-						<p:commandButton value="Agregar Grupo a Fase" id="btnAgregarGrupo" process="@form"
+						<p:commandButton value="Agregar Grupo" id="btnAgregarGrupo" process="@form"
 							update="grid" action="/Grupos/Agregar?faces-redirect=true" />
-						<p:commandButton value="Borrar Grupo de Fase" id="btnBorrarGrupo" process="@form"
+						<p:commandButton value="Borrar Grupo" id="btnBorrarGrupo" process="@form"
 							update="grid" action="/Grupos/Borrar?faces-redirect=true" />
 					</h:panelGrid>
 					<p:separator />
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:commandButton value="Agregar Equipo" id="btnAgregarEquipo" process="@form"
+							update="grid" action="/EquiposGrupo/Agregar?faces-redirect=true" />
+						<p:commandButton value="Borrar Equipo" id="btnBorrarEquipo" process="@form"
+							update="grid" action="/EquiposGrupo/Borrar?faces-redirect=true" />
+					</h:panelGrid>
+					<p:separator />
 					<h:panelGrid columns="1" cellpadding="5">
-						<p:commandButton value="Agregar Partido a Grupo" id="btnAgregarPartido" process="@form"
+						<p:commandButton value="Agregar Partido" id="btnAgregarPartido" process="@form"
 							update="grid" action="/Partidos/Agregar?faces-redirect=true" />
 					</h:panelGrid>
 				</p:panel>

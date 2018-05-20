@@ -4,6 +4,7 @@ import beans.interfaces.EquipoBusinessLocal;
 import beans.interfaces.EquipoBusinessRemote;
 import beans.interfaces.EquipoPersistenceRemote;
 import entidades.Equipo;
+import entidades.EquiposGrupo;
 
 import java.util.List;
 
@@ -45,6 +46,11 @@ public class EquipoBusiness implements EquipoBusinessRemote, EquipoBusinessLocal
     @Override
 	public List<Equipo> obtenerEquipos(){
     	return bean.obtenerEquipos();
+    }
+    
+    @Override
+    public List<EquiposGrupo> obtenerGruposEquipo(int id){
+    	return bean.obtenerGruposEquipo(id);
     }
     
     @Override

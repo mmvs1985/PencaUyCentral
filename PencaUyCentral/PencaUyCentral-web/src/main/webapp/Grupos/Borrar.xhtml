@@ -5,10 +5,9 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-
+	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
 </h:head>
 <h:body>
-
 	<h:form>
 		<p:growl id="msgs" showDetail="true" />
 
