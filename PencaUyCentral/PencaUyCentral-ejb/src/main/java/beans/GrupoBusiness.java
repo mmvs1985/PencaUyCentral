@@ -10,6 +10,7 @@ import beans.interfaces.GrupoBusinessLocal;
 import beans.interfaces.GrupoBusinessRemote;
 import beans.interfaces.GrupoPersistenceRemote;
 import entidades.Grupo;
+import entidades.Partido;
 
 /**
  * Session Bean implementation class GrupoBusiness
@@ -50,6 +51,11 @@ public class GrupoBusiness implements GrupoBusinessRemote, GrupoBusinessLocal {
     @Override
 	public List<Grupo> obtenerGruposPorFase(int id){
     	return bean.obtenerGruposPorFase(id);
+    }
+    
+    @Override
+    public List<Partido> obtenerPartidosGrupo(int id){
+    	return bean.obtenerPartidosGrupo(id);
     }
     
 }

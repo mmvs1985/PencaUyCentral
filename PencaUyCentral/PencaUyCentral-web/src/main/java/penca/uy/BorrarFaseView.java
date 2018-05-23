@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 import beans.interfaces.FaseBusinessRemote;
 import beans.interfaces.TorneoBusinessRemote;
 import entidades.Fase;
+import entidades.Grupo;
 import entidades.Torneo;
 
 @ManagedBean(name="BorrarFaseView")
@@ -94,9 +95,14 @@ public class BorrarFaseView implements Serializable {
 			System.out.println("la fase no es null, es " + fase);
 			int idt = torneoBean.obtenerTorneoPorNombre(torneo);
 			int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
-			faseBean.eliminarFase(idf);			
-			msg = new FacesMessage("Se borró la fase " + fase);
-			
+			List<Grupo> lgf = faseBean.obtenerGruposFase(idf);
+			if (lgf.isEmpty()) {
+				faseBean.eliminarFase(idf);			
+				msg = new FacesMessage("Se borró la fase " + fase);	
+			}
+			else {
+				msg = new FacesMessage("No es posible borrar la fase " + fase + " dado que tiene grupos asociados");
+			}			
 		} else {
 			System.out.println("el torneo es null");
 			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "El Torneo no es válido.");

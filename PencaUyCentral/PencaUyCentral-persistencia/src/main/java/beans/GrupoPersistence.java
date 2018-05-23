@@ -13,6 +13,7 @@ import beans.interfaces.GrupoPersistenceLocal;
 import beans.interfaces.GrupoPersistenceRemote;
 import entidades.Fase;
 import entidades.Grupo;
+import entidades.Partido;
 import entidades.Torneo;
 
 /**
@@ -65,7 +66,7 @@ public class GrupoPersistence implements GrupoPersistenceRemote, GrupoPersistenc
 	
     @SuppressWarnings("unchecked")
     public List<Grupo> obtenerGruposPorFase(int id){
-    	List<Grupo> list= new ArrayList();
+    	List<Grupo> list= new ArrayList<>();
     	list =(List<Grupo>)em.createQuery( "Select g from "+ Grupo.class.getSimpleName()+" g where g.fase = "+id ).getResultList();
     	return list;
     }
@@ -79,5 +80,13 @@ public class GrupoPersistence implements GrupoPersistenceRemote, GrupoPersistenc
 		System.out.println("pude eliminar");
 		return true;
 	}
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Partido> obtenerPartidosGrupo(int id){
+    	List<Partido> list= new ArrayList<>();
+    	list =(List<Partido>) em.createQuery( "Select p from "+ Partido.class.getSimpleName()+" p where p.grupo = "+id ).getResultList();
+    	return list;
+    }
 
 }

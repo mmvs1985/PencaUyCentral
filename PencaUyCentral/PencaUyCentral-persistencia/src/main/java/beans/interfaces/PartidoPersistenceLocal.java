@@ -13,4 +13,6 @@ public interface PartidoPersistenceLocal {
 	public boolean agregarPartido(int elocal, int evisita, int grupo, Date fecha);
 	public Partido obtenerPartido(int id);
 	public boolean eliminarPartido(int id);
+	public int obtenerPartidoPorGrupoEquipoLocalYEquipoVisitante(int idg, int idel, int idev);
+	public List<Equipo> obtenerEquipoVisitantePartido(int idel, int idg);
 }

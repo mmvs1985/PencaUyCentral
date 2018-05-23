@@ -10,6 +10,7 @@ import beans.interfaces.EquiposGrupoBusinessLocal;
 import beans.interfaces.EquiposGrupoBusinessRemote;
 import beans.interfaces.EquiposGrupoPersistenceRemote;
 import entidades.Equipo;
+import entidades.EquiposGrupo;
 
 /**
  * Session Bean implementation class EquiposGrupoBusiness
@@ -40,6 +41,11 @@ public class EquiposGrupoBusiness implements EquiposGrupoBusinessRemote, Equipos
     @Override
 	public boolean eliminarEquiposGrupo(int equipo,int grupo) {
     	return bean.eliminarEquiposGrupo(equipo, grupo);
+    }
+    
+    @Override
+    public List<EquiposGrupo> obtenerEquiposGrupo(int idg){
+    	return bean.obtenerEquiposGrupo(idg);
     }
 
 }

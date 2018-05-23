@@ -12,6 +12,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import beans.interfaces.TorneoBusinessRemote;
+import entidades.Fase;
+import entidades.Penca;
 import entidades.Torneo;
 
 @ManagedBean(name="BorrarTorneoView")
@@ -54,11 +56,15 @@ public class BorrarTorneoView implements Serializable {
 	public void borrar() {
 		FacesMessage msg;
 		if (torneo != null) {
-			System.out.println("el torneo no es null, es " + torneo);
 			int idt = torneoBean.obtenerTorneoPorNombre(torneo);
-			torneoBean.eliminarTorneo(idt);			
-			msg = new FacesMessage("Se borró el torneo " + torneo);
-			
+			List<Fase> lft = torneoBean.obtenerFasesTorneo(idt);
+			if (lft.isEmpty()) {
+				torneoBean.eliminarTorneo(idt);			
+				msg = new FacesMessage("Se borró el torneo " + torneo);	
+			}
+			else {
+				msg = new FacesMessage("No es posible borrar el torneo " + torneo + " dado que tiene fases asociadas");
+			}
 		} else {
 			System.out.println("el torneo es null");
 			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "El Torneo no es válido.");

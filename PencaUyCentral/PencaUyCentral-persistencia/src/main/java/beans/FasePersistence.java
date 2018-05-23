@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import beans.interfaces.FasePersistenceLocal;
 import beans.interfaces.FasePersistenceRemote;
 import entidades.Fase;
+import entidades.Grupo;
 import entidades.Torneo;
 
 /**
@@ -51,7 +52,7 @@ public class FasePersistence implements FasePersistenceRemote, FasePersistenceLo
     }
     @SuppressWarnings("unchecked")
     public List<Fase> obtenerFasesPorTorneo(int id){
-    	List<Fase> list= new ArrayList();
+    	List<Fase> list= new ArrayList<>();
     	list =(List<Fase>)em.createQuery( "Select d from "+ Fase.class.getSimpleName()+" d where d.torneo = "+id ).getResultList();
     	return list;
     }
@@ -63,5 +64,12 @@ public class FasePersistence implements FasePersistenceRemote, FasePersistenceLo
     		return list.get(0).getId();
     	}else return -1;
     }
+    
+    @SuppressWarnings("unchecked")
+	@Override
+	public List<Grupo> obtenerGruposFase(int id) {
+		List<Grupo> list = em.createQuery( "Select g from " + Grupo.class.getSimpleName()+" g where g.fase = " + id).getResultList();
+		return list;				
+	}	
 
 }

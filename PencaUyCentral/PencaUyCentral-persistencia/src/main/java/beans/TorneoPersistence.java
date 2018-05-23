@@ -2,6 +2,7 @@ package beans;
 
 import entidades.Fase;
 import entidades.Organizacion;
+import entidades.Penca;
 import entidades.Torneo;
 
 import java.util.Date;
@@ -44,7 +45,7 @@ public class TorneoPersistence implements TorneoPersistenceRemote, TorneoPersist
 	        // TODO Auto-generated constructor stub
 	    }
 	    @Override
-	    public boolean crearTorneo(String nombre, String tipo, Date comienzo) {
+	    public boolean crearTorneo(String nombre, String tipo, Date comienzo) {	  
 	    	
 	    	if (em.createQuery( "Select d from "+ Torneo.class.getSimpleName()+" d where d.nombre = '" + nombre+"'").getResultList().isEmpty()) {
 	    		Torneo t = new Torneo(nombre,tipo,comienzo);
@@ -108,7 +109,8 @@ public class TorneoPersistence implements TorneoPersistenceRemote, TorneoPersist
 	    	Torneo t = em.find(Torneo.class, fase.getTorneo().getId());
 	    	t.addFase(fase);
 	    	return true;    		    	
-	    }    
+	    }  
+	    
 	    @SuppressWarnings("unchecked")
 	    public List<Torneo> obtenerTodos(){
 	    	
@@ -116,5 +118,12 @@ public class TorneoPersistence implements TorneoPersistenceRemote, TorneoPersist
 	        System.out.println("obtuve todos los torneos");
 	    	return list;
 	    }
+	    
+	    @SuppressWarnings("unchecked")
+		@Override
+		public List<Fase> obtenerFasesTorneo(int id) {
+			List<Fase> list = em.createQuery( "Select f from "+ Fase.class.getSimpleName()+" f where f.torneo = " + id).getResultList();
+			return list;				
+		}	
 
 	}

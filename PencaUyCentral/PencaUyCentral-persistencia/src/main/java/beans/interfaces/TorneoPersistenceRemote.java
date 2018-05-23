@@ -15,6 +15,7 @@ public interface TorneoPersistenceRemote {
     public boolean eliminarTorneo(int id);
     public boolean agregarFase(int id);
     public List<Torneo> obtenerTodos();
+    public List<Fase> obtenerFasesTorneo(int id);
     public int obtenerTorneoPorNombre(String nombre);
     public boolean eliminarTodosTorneo();
     

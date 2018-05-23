@@ -20,7 +20,10 @@ public class BorrarTipoPremioView implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String tipopremio;
-	private List<String> tipospremio;
+	private List<String> tiposdepremio;
+
+	
+
 
 	@EJB
 	TiposPremioBusinessRemote tipopremioBean;
@@ -29,26 +32,29 @@ public class BorrarTipoPremioView implements Serializable {
 	public void init() {
 		List<TiposPremio> lista = tipopremioBean.obtenerTiposPremio();
 		int i = lista.size();
-		tipospremio = new ArrayList<String>();
+		tiposdepremio = new ArrayList<String>();
 		for (int j = 0; j < i; j++) {
-			tipospremio.add(lista.get(j).getNombre());
+			tiposdepremio.add(lista.get(j).getNombre());
 		}
 	}
-
-	public List<String> getTiposPremio() {
-		return tipospremio;
-	}
-
-	public void setTiposPremio(List<String> tipospremio) {
-		this.tipospremio = tipospremio;
-	}
-
-	public String getTipoPremio() {
+	
+	public String getTipopremio() {
 		return tipopremio;
 	}
 
-	public void setTipoPremio(String tipopremio) {
+
+	public void setTipopremio(String tipopremio) {
 		this.tipopremio = tipopremio;
+	}
+
+
+	public List<String> getTiposdepremio() {
+		return tiposdepremio;
+	}
+
+
+	public void setTiposdepremio(List<String> tiposdepremio) {
+		this.tiposdepremio = tiposdepremio;
 	}
 
 	public void borrar() {

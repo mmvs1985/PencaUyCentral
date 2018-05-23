@@ -11,11 +11,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import beans.interfaces.EquiposGrupoBusinessRemote;
 import beans.interfaces.FaseBusinessRemote;
 import beans.interfaces.GrupoBusinessRemote;
 import beans.interfaces.TorneoBusinessRemote;
+import entidades.EquiposGrupo;
 import entidades.Fase;
 import entidades.Grupo;
+import entidades.Partido;
 import entidades.Torneo;
 
 @ManagedBean(name="BorrarGrupoView")
@@ -47,6 +50,9 @@ public class BorrarGrupoView implements Serializable {
 	
 	@EJB
 	GrupoBusinessRemote grupoBean;
+	
+	@EJB
+	EquiposGrupoBusinessRemote equiposgrupoBean;
 
 	public String getGrupo() {
 		return grupo;
@@ -141,12 +147,23 @@ public class BorrarGrupoView implements Serializable {
 			int idt = torneoBean.obtenerTorneoPorNombre(torneo);
 			int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
 			int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo, idf);
-			grupoBean.eliminarGrupo(idg);
-			msg = new FacesMessage("Se borró el Grupo  " + grupo + " de la fase "+ fase);
-			
+			List<Partido> lpg = grupoBean.obtenerPartidosGrupo(idg);
+			if (lpg.isEmpty()) {
+				List<EquiposGrupo> leg = equiposgrupoBean.obtenerEquiposGrupo(idg);				
+				if (leg.isEmpty()) {
+					grupoBean.eliminarGrupo(idg);	
+					msg = new FacesMessage("Se borró el Grupo  " + grupo + " de la fase "+ fase);
+				}
+				else {
+					msg = new FacesMessage("No es posible borrar el grupo " + grupo + " dado que tiene equipos asociados");
+				}
+			}
+			else {
+				msg = new FacesMessage("No es posible borrar el grupo " + grupo + " dado que tiene partidos asociados");
+			}					
 		} else {
 			System.out.println("el torneo es null");
-			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "El Torneo no es válido.");
+			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "El Grupo no es válido.");
 		}
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}

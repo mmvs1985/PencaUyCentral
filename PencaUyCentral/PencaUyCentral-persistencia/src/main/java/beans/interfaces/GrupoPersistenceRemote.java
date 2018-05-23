@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import entidades.Grupo;
+import entidades.Partido;
 
 @Remote
 public interface GrupoPersistenceRemote {
@@ -14,5 +15,5 @@ public interface GrupoPersistenceRemote {
 	public int obtenerGrupoPorNombreYFase(String nombre,int id);
 	public boolean eliminarGrupo(int id);
 	public List<Grupo> obtenerGruposPorFase(int id);
-
+	public List<Partido> obtenerPartidosGrupo(int id);
 }

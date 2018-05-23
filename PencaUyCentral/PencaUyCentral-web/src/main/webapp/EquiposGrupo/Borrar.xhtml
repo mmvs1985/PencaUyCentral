@@ -10,7 +10,7 @@
 <h:body>
 <p:menubar>
 	<f:facet name="options">
-		<p:commandButton value="Cerrar Sesión" actionListener="#{LoginBean.cerrarSesion()}" action="/login?faces-redirect=true" icon="ui-icon-power"/>
+		<p:commandButton value="Cerrar Sesión" actionListener="#{LoginBean.cerrarSesion}" action="/login?faces-redirect=true" icon="ui-icon-power"/>
 	</f:facet>
 </p:menubar>
 	<h:form>
@@ -19,10 +19,8 @@
 		<p:panel header="Borrar Equipo de Grupo" style="margin-bottom:10px;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel for="torneo" value="Torneo: " />
-				<p:selectOneMenu id="torneo"
-					value="#{BorrarEquiposGrupoView.torneo}" style="width:150px">
-					<p:ajax listener="#{BorrarEquiposGrupoView.onTorneoChange}"
-						update="fase" />
+				<p:selectOneMenu id="torneo" value="#{BorrarEquiposGrupoView.torneo}" style="width:150px">
+					<p:ajax listener="#{BorrarEquiposGrupoView.onTorneoChange}"	update="fase" />
 					<f:selectItem itemLabel="Seleccione un Torneo" itemValue=""
 						noSelectionOption="true" />
 					<f:selectItems value="#{BorrarEquiposGrupoView.torneos}" />
@@ -30,28 +28,23 @@
 
 
 				<p:outputLabel for="fase" value="Fase: " />
-				<p:selectOneMenu id="fase" value="#{BorrarEquiposGrupoView.fase}"
-					style="width:150px">
-					<p:ajax listener="#{BorrarEquiposGrupoView.onFaseChange}"
-						update="grupo" />
+				<p:selectOneMenu id="fase" value="#{BorrarEquiposGrupoView.fase}" style="width:150px">
+					<p:ajax listener="#{BorrarEquiposGrupoView.onFaseChange}" update="grupo" />
 					<f:selectItem itemLabel="Seleccione una Fase" itemValue=""
 						noSelectionOption="true" />
 					<f:selectItems value="#{BorrarEquiposGrupoView.fases}" />
 				</p:selectOneMenu>
 
 				<p:outputLabel for="grupo" value="Grupo: " />
-				<p:selectOneMenu id="grupo" value="#{BorrarEquiposGrupoView.grupo}"
-					style="width:150px">
-					<p:ajax listener="#{BorrarEquiposGrupoView.onGrupoChange}"
-						update="equipo" />
+				<p:selectOneMenu id="grupo" value="#{BorrarEquiposGrupoView.grupo}"	style="width:150px">
+					<p:ajax listener="#{BorrarEquiposGrupoView.onGrupoChange}" update="equipo" />
 					<f:selectItem itemLabel="Seleccione un Grupo" itemValue=""
 						noSelectionOption="true" />
 					<f:selectItems value="#{BorrarEquiposGrupoView.grupos}" />
 				</p:selectOneMenu>
 
 				<p:outputLabel for="equipo" value="Equipo: " />
-				<p:selectOneMenu id="equipo" value="#{BorrarEquiposGrupoView.equipo}"
-					style="width:150px">
+				<p:selectOneMenu id="equipo" value="#{BorrarEquiposGrupoView.equipo}" style="width:150px">
 					<f:selectItem itemLabel="Seleccione un Equipo" itemValue=""
 						noSelectionOption="true" />
 					<f:selectItems value="#{BorrarEquiposGrupoView.equipos}" />

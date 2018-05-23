@@ -20,16 +20,7 @@ public class Partido implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="\"Id\"")
 	private Integer id;
-/*
-	@Column(name="\"EquipoGanadorId\"")
-	private Integer equipoGanadorId;
 
-	@Column(name="\"EquipoVisitaId\"")
-	private Integer equipoVisitaId;
-
-	@Column(name="\"EqupoLocalId\"")
-	private Integer equpoLocalId;
-*/
 	@Column(name="\"Estado\"")
 	private String estado;
 
@@ -42,9 +33,6 @@ public class Partido implements Serializable {
 
 	@Column(name="\"GolesEquipoVisita\"")
 	private Integer golesEquipoVisita;
-
-	//@Column(name="\"GrupoId\"")
-	//private Integer grupoId;
 
 	//bi-directional many-to-one association to Equipo
 	@ManyToOne
@@ -66,12 +54,6 @@ public class Partido implements Serializable {
 	@JoinColumn(name="\"GrupoId\"")
 	private Grupo grupo;
 
-/*
-	//bi-directional many-to-one association to Grupo
-	@ManyToOne
-	@JoinColumn(name="\"GrupoId2\"")
-	private Grupo grupos2;
-*/
 	public Partido() {
 	}
 
@@ -82,31 +64,7 @@ public class Partido implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-/*
-	public Integer getEquipoGanadorId() {
-		return this.equipoGanadorId;
-	}
 
-	public void setEquipoGanadorId(Integer equipoGanadorId) {
-		this.equipoGanadorId = equipoGanadorId;
-	}
-
-	public Integer getEquipoVisitaId() {
-		return this.equipoVisitaId;
-	}
-
-	public void setEquipoVisitaId(Integer equipoVisitaId) {
-		this.equipoVisitaId = equipoVisitaId;
-	}
-
-	public Integer getEqupoLocalId() {
-		return this.equpoLocalId;
-	}
-
-	public void setEqupoLocalId(Integer equpoLocalId) {
-		this.equpoLocalId = equpoLocalId;
-	}
-*/
 	public String getEstado() {
 		return this.estado;
 	}
@@ -139,14 +97,6 @@ public class Partido implements Serializable {
 		this.golesEquipoVisita = golesEquipoVisita;
 	}
 
-	/*public Integer getGrupoId() {
-		return this.grupoId;
-	}
-
-	public void setGrupoId(Integer grupoId) {
-		this.grupoId = grupoId;
-	}
-*/
 	public Equipo getEquipoGanador() {
 		return this.equipoGanador;
 	}
@@ -178,13 +128,5 @@ public class Partido implements Serializable {
 	public void setGrupo(Grupo grupo) {
 		this.grupo = grupo;
 	}
-/*
-	public Grupo getGrupoId2() {
-		return this.grupos2;
-	}
 
-	public void setGrupoId2(Grupo grupos2) {
-		this.grupos2 = grupos2;
-	}
-*/
 }

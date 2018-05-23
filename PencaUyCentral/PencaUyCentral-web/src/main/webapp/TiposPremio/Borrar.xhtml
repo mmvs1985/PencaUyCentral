@@ -10,7 +10,7 @@
 <h:body>
 <p:menubar>
 	<f:facet name="options">
-		<p:commandButton value="Cerrar Sesión" actionListener="#{LoginBean.cerrarSesion()}" action="/login?faces-redirect=true" icon="ui-icon-power"/>
+		<p:commandButton value="Cerrar Sesión" actionListener="#{LoginBean.cerrarSesion}" action="/login?faces-redirect=true" icon="ui-icon-power"/>
 	</f:facet>
 </p:menubar>
 <h:form>
@@ -20,12 +20,9 @@
             <p:outputLabel for="tipopremio" value="Tipo de Premio: " />
             <p:selectOneMenu id="tipopremio" value="#{BorrarTipoPremioView.tipopremio}" style="width:150px">
                 <f:selectItem itemLabel="Tipos de Premio" itemValue="" noSelectionOption="true" />
-                <f:selectItems value="#{BorrarTipoPremioView.tipospremio}" />
+                <f:selectItems value="#{BorrarTipoPremioView.tiposdepremio}" />
             </p:selectOneMenu>
-        </h:panelGrid>
- 
-        <p:separator />
- 
+        </h:panelGrid> 
         <p:commandButton value="Borrar" update="msgs" actionListener="#{BorrarTipoPremioView.borrar}" icon="ui-icon-trash" />
     </p:panel>	
 </h:form>

@@ -10,6 +10,7 @@ import beans.interfaces.FaseBusinessLocal;
 import beans.interfaces.FaseBusinessRemote;
 import beans.interfaces.FasePersistenceRemote;
 import entidades.Fase;
+import entidades.Grupo;
 
 /**
  * Session Bean implementation class FaseBusiness
@@ -50,6 +51,10 @@ public class FaseBusiness implements FaseBusinessRemote, FaseBusinessLocal {
     @Override
     public int obtenerFasePorNombreYTorneo(int id,String nombre) {
     	return bean.obtenerFasePorNombreYTorneo(id, nombre);
+    }
+    
+    public List<Grupo> obtenerGruposFase(int id) {
+    	return bean.obtenerGruposFase(id);
     }
 
 }

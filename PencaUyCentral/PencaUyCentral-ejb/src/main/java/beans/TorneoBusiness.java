@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import beans.interfaces.TorneoBusinessLocal;
 import beans.interfaces.TorneoBusinessRemote;
 import beans.interfaces.TorneoPersistenceRemote;
+import entidades.Fase;
 import entidades.Torneo;
 
 /**
@@ -52,6 +53,12 @@ public class TorneoBusiness implements TorneoBusinessRemote, TorneoBusinessLocal
     public List<Torneo> obtenerTodos(){
     	return bean.obtenerTodos();
     }
+    
+    @Override
+    public List<Fase> obtenerFasesTorneo(int id){
+    	return bean.obtenerFasesTorneo(id);
+    }
+    
     
     @Override
     public int obtenerTorneoPorNombre(String nombre) {

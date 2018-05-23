@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import entidades.Fase;
+import entidades.Grupo;
 
 @Remote
 public interface FaseBusinessRemote {
@@ -13,4 +14,5 @@ public interface FaseBusinessRemote {
     public boolean eliminarFase(int id);
     public List<Fase> obtenerFasesPorTorneo(int id);
     public int obtenerFasePorNombreYTorneo(int id,String nombre);
+    public List<Grupo> obtenerGruposFase(int id);
 }

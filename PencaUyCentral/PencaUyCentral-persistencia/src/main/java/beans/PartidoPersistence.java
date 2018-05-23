@@ -3,11 +3,13 @@ package beans;
 import beans.interfaces.PartidoPersistenceLocal;
 import beans.interfaces.PartidoPersistenceRemote;
 import entidades.Equipo;
+import entidades.Fase;
 import entidades.Grupo;
 import entidades.Organizacion;
 import entidades.Partido;
 import entidades.Torneo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -58,7 +60,23 @@ public class PartidoPersistence implements PartidoPersistenceRemote, PartidoPers
 		return (Partido) em.find(Partido.class, id);
 	}	
 		
+	@Override
+	@SuppressWarnings("unchecked")
+    public int obtenerPartidoPorGrupoEquipoLocalYEquipoVisitante(int idg, int idel, int idev){
+    	List<Partido> list = em.createQuery( "Select p from "+ Partido.class.getSimpleName()+" p where p.grupo = " + idg +" and p.equipoLocal = " + idel + " and p.equipoVisita = " + idev).getResultList();
+    	if (!(list.isEmpty())) {
+    		return list.get(0).getId();
+    	}else return -1;
+    }
 	
+	@Override	
+	public List<Equipo> obtenerEquipoVisitantePartido(int idel, int idg) {
+		Partido p = (Partido) em.createQuery("Select p from "+ Partido.class.getSimpleName() + " p where p.grupo = " + idg + " and p.equipoLocal = " + idel).getResultList().get(0);
+		Equipo ev = p.getEquipoVisitante();
+		List<Equipo> lev = new ArrayList<Equipo>();
+		lev.add(ev);
+		return lev;
+	}
 
 	
 	@Override

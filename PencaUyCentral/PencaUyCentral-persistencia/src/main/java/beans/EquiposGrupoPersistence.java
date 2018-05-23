@@ -1,12 +1,5 @@
 package beans;
 
-import beans.interfaces.EquiposGrupoPersistenceLocal;
-import beans.interfaces.EquiposGrupoPersistenceRemote;
-import entidades.Equipo;
-import entidades.EquiposGrupo;
-import entidades.Grupo;
-import entidades.Torneo;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,6 +8,12 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import beans.interfaces.EquiposGrupoPersistenceLocal;
+import beans.interfaces.EquiposGrupoPersistenceRemote;
+import entidades.Equipo;
+import entidades.EquiposGrupo;
+import entidades.Grupo;
 
 /**
  * Session Bean implementation class EquipoPersistence
@@ -71,9 +70,15 @@ public class EquiposGrupoPersistence implements EquiposGrupoPersistenceRemote, E
 	            System.out.println("Agregué el equipo "+eg.getEquipo().getNombre()+" a la lista");
 	        }
 	        return listEquipo;
-		}
-			
+		}			
 		else return null ;
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<EquiposGrupo> obtenerEquiposGrupo(int idg){
+		List<EquiposGrupo> list = em.createQuery( "Select eg from "+ EquiposGrupo.class.getSimpleName()+" eg where eg.grupo = "+ idg).getResultList();
+		return list;
 	}
 	
 	@SuppressWarnings("unchecked")
