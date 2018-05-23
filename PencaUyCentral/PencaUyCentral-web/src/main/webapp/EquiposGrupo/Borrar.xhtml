@@ -26,7 +26,6 @@
 					<f:selectItems value="#{BorrarEquiposGrupoView.torneos}" />
 				</p:selectOneMenu>
 
-
 				<p:outputLabel for="fase" value="Fase: " />
 				<p:selectOneMenu id="fase" value="#{BorrarEquiposGrupoView.fase}" style="width:150px">
 					<p:ajax listener="#{BorrarEquiposGrupoView.onFaseChange}" update="grupo" />
@@ -49,12 +48,9 @@
 						noSelectionOption="true" />
 					<f:selectItems value="#{BorrarEquiposGrupoView.equipos}" />
 				</p:selectOneMenu>
-
-
 			</h:panelGrid>
 
-			<p:commandButton value="Borrar" update="msgs"
-				actionListener="#{BorrarEquiposGrupoView.borrar}"
+			<p:commandButton value="Borrar" update="msgs" actionListener="#{BorrarEquiposGrupoView.borrar}"
 				 />
 		</p:panel>
 	</h:form>

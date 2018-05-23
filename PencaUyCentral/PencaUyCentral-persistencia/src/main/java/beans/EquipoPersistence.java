@@ -68,6 +68,7 @@ public class EquipoPersistence implements EquipoPersistenceRemote, EquipoPersist
 		return (List<Equipo>) em.createNamedQuery("Equipo.findAll", Equipo.class).getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<EquiposGrupo> obtenerGruposEquipo(int id) {
 		List<EquiposGrupo> leg = em.createQuery("SELECT eg FROM " + EquiposGrupo.class.getSimpleName() + " eg WHERE eg.equipo = " + id).getResultList();

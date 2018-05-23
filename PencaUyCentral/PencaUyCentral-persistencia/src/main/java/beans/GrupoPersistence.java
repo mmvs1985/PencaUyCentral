@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 
 import beans.interfaces.GrupoPersistenceLocal;
 import beans.interfaces.GrupoPersistenceRemote;
+import entidades.EquiposGrupo;
 import entidades.Fase;
 import entidades.Grupo;
 import entidades.Partido;
@@ -88,5 +89,17 @@ public class GrupoPersistence implements GrupoPersistenceRemote, GrupoPersistenc
     	list =(List<Partido>) em.createQuery( "Select p from "+ Partido.class.getSimpleName()+" p where p.grupo = "+id ).getResultList();
     	return list;
     }
+    
+    @SuppressWarnings("unchecked")
+	@Override
+	public List<EquiposGrupo> obtenerEquiposGrupo(int id) {
+		List<EquiposGrupo> leg = em.createQuery("SELECT eg FROM " + EquiposGrupo.class.getSimpleName() + " eg WHERE eg.grupo = " + id).getResultList();
+		if (leg.isEmpty()) {
+			return null;
+		}
+		else {
+			return leg;
+		}
+	}
 
 }

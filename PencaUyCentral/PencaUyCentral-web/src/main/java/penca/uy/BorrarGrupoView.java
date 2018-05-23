@@ -128,7 +128,6 @@ public class BorrarGrupoView implements Serializable {
 	 
 	 public void onFaseChange() {
 	        if(fase !=null && !fase.equals("")) {
-	        	System.out.println("Esta es la fase "+ fase);
 	        	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
 	        	int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
 	        	List<Grupo> listaGrupos = grupoBean.obtenerGruposPorFase(idf);
@@ -143,13 +142,12 @@ public class BorrarGrupoView implements Serializable {
 	public void borrar() {
 		FacesMessage msg;
 		if (grupo != null) {
-			System.out.println("el grupo no es null, es " + grupo);
 			int idt = torneoBean.obtenerTorneoPorNombre(torneo);
 			int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
 			int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo, idf);
 			List<Partido> lpg = grupoBean.obtenerPartidosGrupo(idg);
 			if (lpg.isEmpty()) {
-				List<EquiposGrupo> leg = equiposgrupoBean.obtenerEquiposGrupo(idg);				
+				List<EquiposGrupo> leg = grupoBean.obtenerEquiposGrupo(idg);				
 				if (leg.isEmpty()) {
 					grupoBean.eliminarGrupo(idg);	
 					msg = new FacesMessage("Se borró el Grupo  " + grupo + " de la fase "+ fase);

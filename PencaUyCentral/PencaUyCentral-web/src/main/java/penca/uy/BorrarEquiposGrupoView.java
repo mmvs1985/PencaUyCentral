@@ -129,8 +129,7 @@ public class BorrarEquiposGrupoView implements Serializable {
 	}
 	
 	 public void onTorneoChange() {
-	        if(torneo !=null && !torneo.equals("")) {
-	        	System.out.println("Este es el torneo "+ torneo);
+	        if (torneo !=null && !torneo.equals("")) {
 	        	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
 	        	List<Fase> listaFases = faseBean.obtenerFasesPorTorneo(idt);
 	        	int x = listaFases.size();
@@ -143,8 +142,7 @@ public class BorrarEquiposGrupoView implements Serializable {
 	 
 	 public void onFaseChange() {
 		 System.out.println("entre al onFaseChange");
-		 if(fase !=null && !fase.equals("")) {
-	        	System.out.println("Esta es la fase "+ fase);
+		 if (fase !=null && !fase.equals("")) {
 	        	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
 	        	int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
 	        	List<Grupo> listaGrupos = grupoBean.obtenerGruposPorFase(idf);
@@ -157,38 +155,35 @@ public class BorrarEquiposGrupoView implements Serializable {
 	   }
 
 	 public void onGrupoChange() {
-		 System.out.println("entre al onGrupoChange");
-		 if(grupo !=null && !grupo.equals("")) {
-	        	System.out.println("Esta es la grupo "+ grupo);
-	        	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
-	        	int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
-	        	int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo,idf);
-	        	List<EquiposGrupo> listaEquiposGrupo = equiposgrupoBean.obtenerEquiposGrupo(idg);
-	        	System.out.println("Paso el obtenerEquiposPorGrupo");
-	        	int z = listaEquiposGrupo.size();
-	        	System.out.println(z);
-	    		equipos = new ArrayList<String>();
-	    		System.out.println(listaEquiposGrupo.get(0));
-	    		for (int y = 0; y < z; y++) {	    			
-	    			equipos.add(listaEquiposGrupo.get(y).getEquipo().getNombre());
-	    		}
-	        }
-	   }
+		 if (grupo !=null && !grupo.equals("")) {
+	       	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+	       	int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
+	       	int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo,idf);
+	       	List<EquiposGrupo> lista = grupoBean.obtenerEquiposGrupo(idg);
+	       	int z = lista.size();
+	    	equipos = new ArrayList<String>();
+	    	for (int y = 0; y < z; y++) {	    			
+	    		equipos.add(lista.get(y).getEquipo().getNombre());
+	    	}
+	     }
+	 }
 	 
 	 
 	public void borrar() {
 		FacesMessage msg;
 		if ((grupo != null) && (equipo != null)) {
-			System.out.println("el grupo "+grupo+" no es null, la fase "+fase+ "no es null");
 			int idt = torneoBean.obtenerTorneoPorNombre(torneo);
 			int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);			
 			int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo, idf);
-			int ide = equipoBean.obtenerEquipoPorNombre(equipo);			
-			equiposgrupoBean.eliminarEquiposGrupo(ide,idg);
-			msg = new FacesMessage("Se borró el equipo  " + equipo + " del grupo "+ grupo);			
+			int ide = equipoBean.obtenerEquipoPorNombre(equipo);
+			if ((ide != -1) && (idg != -1)) {
+				equiposgrupoBean.eliminarEquiposGrupo(ide,idg);
+				msg = new FacesMessage("Se borró el equipo " + equipo + " del grupo "+ grupo);
+			} else {
+				msg = new FacesMessage("No existe el equipo " + equipo + " en el grupo "+ grupo);
+			}			
 		} else {
-			System.out.println("el torneo es null");
-			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "El Torneo no es válido.");
+			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "El Equipo en el Grupo no es válido.");
 		}
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}

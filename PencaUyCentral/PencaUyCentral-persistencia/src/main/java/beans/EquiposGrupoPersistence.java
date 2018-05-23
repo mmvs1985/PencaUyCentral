@@ -74,12 +74,12 @@ public class EquiposGrupoPersistence implements EquiposGrupoPersistenceRemote, E
 		else return null ;
 	}
 	
-	@Override
+	/*@Override
 	@SuppressWarnings("unchecked")
 	public List<EquiposGrupo> obtenerEquiposGrupo(int idg){
 		List<EquiposGrupo> list = em.createQuery( "Select eg from "+ EquiposGrupo.class.getSimpleName()+" eg where eg.grupo = "+ idg).getResultList();
 		return list;
-	}
+	}*/
 	
 	@SuppressWarnings("unchecked")
 	public boolean eliminarEquiposGrupo(int equipo,int grupo) {

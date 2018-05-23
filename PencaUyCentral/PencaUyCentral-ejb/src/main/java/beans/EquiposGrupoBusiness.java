@@ -43,9 +43,9 @@ public class EquiposGrupoBusiness implements EquiposGrupoBusinessRemote, Equipos
     	return bean.eliminarEquiposGrupo(equipo, grupo);
     }
     
-    @Override
+    /*@Override
     public List<EquiposGrupo> obtenerEquiposGrupo(int idg){
     	return bean.obtenerEquiposGrupo(idg);
-    }
+    }*/
 
 }

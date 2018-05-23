@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import beans.interfaces.GrupoBusinessLocal;
 import beans.interfaces.GrupoBusinessRemote;
 import beans.interfaces.GrupoPersistenceRemote;
+import entidades.EquiposGrupo;
 import entidades.Grupo;
 import entidades.Partido;
 
@@ -56,6 +57,11 @@ public class GrupoBusiness implements GrupoBusinessRemote, GrupoBusinessLocal {
     @Override
     public List<Partido> obtenerPartidosGrupo(int id){
     	return bean.obtenerPartidosGrupo(id);
+    }
+    
+    @Override
+    public List<EquiposGrupo> obtenerEquiposGrupo(int id){
+    	return bean.obtenerEquiposGrupo(id);
     }
     
 }

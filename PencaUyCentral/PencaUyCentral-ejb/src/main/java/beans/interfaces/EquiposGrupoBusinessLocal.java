@@ -12,5 +12,5 @@ public interface EquiposGrupoBusinessLocal {
 	public boolean agregarEquiposGrupo(int equipo,int grupo);
 	public List<Equipo> obtenerEquiposPorGrupo(int grupo);
 	public boolean eliminarEquiposGrupo(int equipo,int grupo);
-	public List<EquiposGrupo> obtenerEquiposGrupo(int idg);
+	//public List<EquiposGrupo> obtenerEquiposGrupo(int idg);
 }
