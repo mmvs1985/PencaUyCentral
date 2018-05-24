@@ -7,13 +7,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.OrganizacionBusinessRemote;
+import beans.interfaces.OrganizacionPersistenceRemote;
 
 @ManagedBean(name = "AgregarOrganizacionView")
 public class AgregarOrganizacionView implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EJB OrganizacionBusinessRemote organizacionBean;
+	@EJB OrganizacionPersistenceRemote organizacionBean;
 	
 	private String nombre;
 

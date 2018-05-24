@@ -7,13 +7,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.TiposPremioBusinessRemote;
+import beans.interfaces.TiposPremioPersistenceRemote;
 
 @ManagedBean(name = "AgregarTipoPremioView")
 public class AgregarTipoPremioView implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EJB TiposPremioBusinessRemote tipopremioBean;
+	@EJB TiposPremioPersistenceRemote tipopremioBean;
 	
 	//private ITiposPremioPersistenceController itpc;
 	private String nombre;

@@ -11,8 +11,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.FaseBusinessRemote;
-import beans.interfaces.TorneoBusinessRemote;
+import beans.interfaces.FasePersistenceRemote;
+import beans.interfaces.TorneoPersistenceRemote;
 import entidades.Fase;
 import entidades.Grupo;
 import entidades.Torneo;
@@ -28,10 +28,10 @@ public class BorrarFaseView implements Serializable {
 	private List<String> fases;
 
 	@EJB
-	TorneoBusinessRemote torneoBean;
+	TorneoPersistenceRemote torneoBean;
 	
 	@EJB
-	FaseBusinessRemote faseBean;
+	FasePersistenceRemote faseBean;
 
 	@PostConstruct
 	public void init() {

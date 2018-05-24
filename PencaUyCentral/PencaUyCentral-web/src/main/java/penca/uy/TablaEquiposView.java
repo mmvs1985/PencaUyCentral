@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
-import beans.interfaces.EquipoBusinessRemote;
+import beans.interfaces.EquipoPersistenceRemote;
 import entidades.Equipo;
  
 @ManagedBean(name="TablaEquiposView")
@@ -22,7 +22,7 @@ public class TablaEquiposView implements Serializable {
 	private List<Equipo> equipos;
      
     @EJB
-    EquipoBusinessRemote equipoBean;
+    EquipoPersistenceRemote equipoBean;
  
     @PostConstruct
     public void init() {

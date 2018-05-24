@@ -9,14 +9,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.UsuarioBusinessRemote;
+import beans.interfaces.UsuarioPersistenceRemote;
 
 @ManagedBean(name = "LoginBean")
 @SessionScoped
 public class LoginBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@EJB UsuarioBusinessRemote bean;
+	@EJB UsuarioPersistenceRemote bean;
 	
 	private String usuario;
 	private String password;

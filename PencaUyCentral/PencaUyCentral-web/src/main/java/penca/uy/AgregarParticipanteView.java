@@ -10,8 +10,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.ParticipanteBusinessRemote;
-import beans.interfaces.PencaBusinessRemote;
+import beans.interfaces.ParticipantePersistenceRemote;
+import beans.interfaces.PencaPersistenceRemote;
 import entidades.Penca;
 
 @ManagedBean(name = "AgregarParticipanteView")
@@ -20,11 +20,11 @@ public class AgregarParticipanteView implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	ParticipanteBusinessRemote participanteBean;
+	ParticipantePersistenceRemote participanteBean;
 	
 	
 	@EJB
-	PencaBusinessRemote pencaBean;
+	PencaPersistenceRemote pencaBean;
 	
 	private String usuario;
 	private String penca;

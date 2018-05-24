@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
-import beans.interfaces.TiposPremioBusinessRemote;
+import beans.interfaces.TiposPremioPersistenceRemote;
 import entidades.TiposPremio;
  
 @ManagedBean(name="TablaTiposPremioView")
@@ -22,7 +22,7 @@ public class TablaTiposPremioView implements Serializable {
 	private List<TiposPremio> tipospremio;
      
     @EJB
-    TiposPremioBusinessRemote tipopremioBean;
+    TiposPremioPersistenceRemote tipopremioBean;
  
     @PostConstruct
     public void init() {

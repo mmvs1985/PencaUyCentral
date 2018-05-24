@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
-import beans.interfaces.OrganizacionBusinessRemote;
+import beans.interfaces.OrganizacionPersistenceRemote;
 import entidades.Organizacion;
  
 @ManagedBean(name="TablaOrganizacionesView")
@@ -22,7 +22,7 @@ public class TablaOrganizacionesView implements Serializable {
 	private List<Organizacion> organizaciones;
      
     @EJB
-    OrganizacionBusinessRemote organizacionBean;
+    OrganizacionPersistenceRemote organizacionBean;
  
     @PostConstruct
     public void init() {

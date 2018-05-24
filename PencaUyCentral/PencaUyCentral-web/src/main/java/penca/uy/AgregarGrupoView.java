@@ -11,9 +11,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.FaseBusinessRemote;
-import beans.interfaces.GrupoBusinessRemote;
-import beans.interfaces.TorneoBusinessRemote;
+import beans.interfaces.FasePersistenceRemote;
+import beans.interfaces.GrupoPersistenceRemote;
+import beans.interfaces.TorneoPersistenceRemote;
 import entidades.Fase;
 import entidades.Torneo;
 
@@ -39,13 +39,13 @@ public class AgregarGrupoView implements Serializable {
 	private List<String> grupos;
 
 	@EJB
-	TorneoBusinessRemote torneoBean;
+	TorneoPersistenceRemote torneoBean;
 	
 	@EJB
-	FaseBusinessRemote faseBean;
+	FasePersistenceRemote faseBean;
 	
 	@EJB
-	GrupoBusinessRemote grupoBean;
+	GrupoPersistenceRemote grupoBean;
 
 	public String getGrupo() {
 		return grupo;
@@ -125,7 +125,7 @@ public class AgregarGrupoView implements Serializable {
 			System.out.println("la fase no es null, es " + fase);
 			int idt = torneoBean.obtenerTorneoPorNombre(torneo);
 			int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
-			grupoBean.agregarGrupo(nombre, idf);
+			grupoBean.crearGrupo(nombre, idf);
 			msg = new FacesMessage("Se creó el Grupo  " + nombre + " en la fase "+ fase);
 			
 		} else {

@@ -11,7 +11,7 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
-import beans.interfaces.UsuarioBusinessRemote;
+import beans.interfaces.UsuarioPersistenceRemote;
 
 @ManagedBean(name = "AgregarUsuarioView")
 public class AgregarUsuarioView implements Serializable {
@@ -22,7 +22,7 @@ public class AgregarUsuarioView implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	UsuarioBusinessRemote usuarioBean;
+	UsuarioPersistenceRemote usuarioBean;
 
 	private String nombre;
 	private String apellido;

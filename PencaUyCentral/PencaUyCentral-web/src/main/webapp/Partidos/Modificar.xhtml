@@ -1,0 +1,71 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
+</h:head>
+<h:body>
+<p:menubar>
+	<f:facet name="options">
+		<p:commandButton value="Cerrar Sesión" actionListener="#{LoginBean.cerrarSesion}" action="/login?faces-redirect=true" icon="ui-icon-power"/>
+	</f:facet>
+</p:menubar>
+	<h:form>
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:panel header="Actualizar Partido" style="margin-bottom:10px;">
+			<h:panelGrid columns="2" cellpadding="7">
+				<p:outputLabel for="torneo" value="Torneo: " />
+				<p:selectOneMenu id="torneo" value="#{ModificarPartidoView.torneo}"
+					style="width:150px">
+					<p:ajax listener="#{ModificarPartidoView.onTorneoChange}" update="fase" />
+					<f:selectItem itemLabel="Seleccione un Torneo" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{ModificarPartidoView.torneos}" />
+				</p:selectOneMenu>
+				<p:outputLabel for="fase" value="Fase: " />
+				<p:selectOneMenu id="fase" value="#{ModificarPartidoView.fase}" style="width:150px">
+					<p:ajax listener="#{ModificarPartidoView.onFaseChange}" update="grupo" />
+					<f:selectItem itemLabel="Seleccione una Fase" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{ModificarPartidoView.fases}" />
+				</p:selectOneMenu>
+				<p:outputLabel for="grupo" value="Grupo: " />
+				<p:selectOneMenu id="grupo" value="#{ModificarPartidoView.grupo}" style="width:150px">
+					<p:ajax listener="#{ModificarPartidoView.onGrupoChange}" update="equipolocal" />
+					<f:selectItem itemLabel="Seleccione un Grupo" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{ModificarPartidoView.grupos}" />
+				</p:selectOneMenu>
+				<p:outputLabel for="equipolocal" value="Equipo Local: " />
+				<p:selectOneMenu id="equipolocal" value="#{ModificarPartidoView.equipolocal}" style="width:150px">
+					<p:ajax listener="#{ModificarPartidoView.onEquipoLocalChange}" update="equipovisita" />
+					<f:selectItem itemLabel="Seleccione el Equipo Local" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{ModificarPartidoView.equiposdelocal}" />
+				</p:selectOneMenu>
+				<p:outputLabel for="equipovisita" value="Equipo Visita: " />
+				<p:selectOneMenu id="equipovisita" value="#{ModificarPartidoView.equipovisita}" style="width:150px">					
+					<f:selectItem itemLabel="Seleccione el Equipo Visita" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{ModificarPartidoView.equiposdevisita}" />
+				</p:selectOneMenu>				
+				<p:outputLabel for="goleslocal" value="Goles Local:" />
+				<p:inputText id="goleslocal" value="#{ModificarPartidoView.goleslocal}"
+						required="true" requiredMessage="Debe tener goles local." />
+				<p:outputLabel for="golesvisita" value="Goles Visita:" />
+				<p:inputText id="golesvisita" value="#{ModificarPartidoView.golesvisita}"
+						required="true" requiredMessage="Debe tener goles visitante." />				
+			</h:panelGrid>
+			<p:commandButton value="Actualizar" update="msgs"
+				actionListener="#{ModificarPartidoView.actualizar}" icon="ui-icon-trash" />
+		</p:panel>
+	</h:form>
+
+
+</h:body>
+</html>
+

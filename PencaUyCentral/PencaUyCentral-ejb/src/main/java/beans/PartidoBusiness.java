@@ -53,5 +53,22 @@ public class PartidoBusiness implements PartidoBusinessRemote, PartidoBusinessLo
     public List<Equipo> obtenerEquipoVisitantePartido(int idel, int idg) {
     	return bean.obtenerEquipoVisitantePartido(idel, idg);
     }
+    
+    @Override
+    public boolean actualizarPartido(int idg, int idel, int idev, int golesel, int golesev) {
+    	int idgana;
+    	if (golesel < golesev) {
+    		idgana = idev;
+    	}
+    	else {
+    		idgana = idel;
+    	}
+    	return bean.actualizarPartido(idg, idel, idev, golesel, golesev, idgana);
+    }
+    
+    @Override
+    public Date obtenerFechaPartido(int idp) {
+    	return bean.obtenerFechaPartido(idp);
+    }
 
 }

@@ -8,9 +8,6 @@
         <dependent-module archiveName="PencaUyCentral-servicios.war" deploy-path="/" handle="module:/resource/PencaUyCentral-servicios/PencaUyCentral-servicios">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="PencaUyCentral-ejb.jar" deploy-path="/" handle="module:/resource/PencaUyCentral-ejb/PencaUyCentral-ejb">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="PencaUyCentral-persistencia.jar" deploy-path="/" handle="module:/resource/PencaUyCentral-persistencia/PencaUyCentral-persistencia">
             <dependency-type>uses</dependency-type>
         </dependent-module>

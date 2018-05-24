@@ -14,9 +14,6 @@
     </web>
   </module>
   <module>
-    <ejb>PencaUyCentral-ejb.jar</ejb>
-  </module>
-  <module>
     <ejb>PencaUyCentral-persistencia.jar</ejb>
   </module>
   <library-directory>lib</library-directory>

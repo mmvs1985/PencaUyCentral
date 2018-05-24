@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
-import beans.interfaces.UsuarioBusinessRemote;
+import beans.interfaces.UsuarioPersistenceRemote;
 import entidades.Usuario;
  
 @ManagedBean(name="TablaUsuariosView")
@@ -22,7 +22,7 @@ public class TablaUsuariosView implements Serializable {
 	private List<Usuario> usuarios;
      
     @EJB
-    UsuarioBusinessRemote usuarioBean;
+    UsuarioPersistenceRemote usuarioBean;
  
     @PostConstruct
     public void init() {

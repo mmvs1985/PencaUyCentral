@@ -11,7 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.TorneoBusinessRemote;
+import beans.interfaces.TorneoPersistenceRemote;
 import entidades.Fase;
 import entidades.Penca;
 import entidades.Torneo;
@@ -25,7 +25,7 @@ public class BorrarTorneoView implements Serializable {
 	private List<String> torneos;
 
 	@EJB 
-	TorneoBusinessRemote torneoBean;
+	TorneoPersistenceRemote torneoBean;
 
 	@PostConstruct
 	public void init() {

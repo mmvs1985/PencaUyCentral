@@ -11,7 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.TiposPremioBusinessRemote;
+import beans.interfaces.TiposPremioPersistenceRemote;
 import entidades.TiposPremio;
 
 @ManagedBean(name="BorrarTipoPremioView")
@@ -22,11 +22,8 @@ public class BorrarTipoPremioView implements Serializable {
 	private String tipopremio;
 	private List<String> tiposdepremio;
 
-	
-
-
 	@EJB
-	TiposPremioBusinessRemote tipopremioBean;
+	TiposPremioPersistenceRemote tipopremioBean;
 
 	@PostConstruct
 	public void init() {

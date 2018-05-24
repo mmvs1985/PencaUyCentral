@@ -36,9 +36,18 @@
 	<dependencies>
 
 		<!-- Dependency on the EJB module so we can use it's services if needed -->
-		<dependency>
+		<!-- 
+		dependency>
 			<groupId>penca.uy</groupId>
 			<artifactId>PencaUyCentral-ejb</artifactId>
+			<type>ejb</type>
+			<scope>provided</scope>
+		</dependency>
+		-->
+		
+		<dependency>
+			<groupId>penca.uy</groupId>
+			<artifactId>PencaUyCentral-persistencia</artifactId>
 			<type>ejb</type>
 			<scope>provided</scope>
 		</dependency>

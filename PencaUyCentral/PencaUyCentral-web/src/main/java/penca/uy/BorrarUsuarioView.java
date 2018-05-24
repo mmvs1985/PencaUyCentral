@@ -11,7 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.UsuarioBusinessRemote;
+import beans.interfaces.UsuarioPersistenceRemote;
 import entidades.Usuario;
 
 @ManagedBean(name="BorrarUsuarioView")
@@ -24,7 +24,7 @@ public class BorrarUsuarioView implements Serializable {
 	private List<String> usuarios;
 
 	@EJB
-	UsuarioBusinessRemote usuarioBean;
+	UsuarioPersistenceRemote usuarioBean;
 
 	@PostConstruct
 	public void init() {

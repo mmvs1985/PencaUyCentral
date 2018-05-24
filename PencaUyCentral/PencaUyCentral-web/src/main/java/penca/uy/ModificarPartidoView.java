@@ -2,6 +2,7 @@ package penca.uy;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -22,9 +23,9 @@ import entidades.Grupo;
 import entidades.Partido;
 import entidades.Torneo;
 
-@ManagedBean(name="BorrarPartidoView")
+@ManagedBean(name="ModificarPartidoView")
 @ViewScoped
-public class BorrarPartidoView implements Serializable {
+public class ModificarPartidoView implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -38,7 +39,8 @@ public class BorrarPartidoView implements Serializable {
 	private List<String> equiposdelocal;
 	private String equipovisita;
 	private List<String> equiposdevisita;
-	
+	private int goleslocal;
+	private int golesvisita;
 	
 	@EJB
 	TorneoPersistenceRemote torneoBean;
@@ -64,6 +66,22 @@ public class BorrarPartidoView implements Serializable {
 		for (int j = 0; j < i; j++) {
 			torneos.add(lista.get(j).getNombre());
 		}
+	}
+
+	public int getGoleslocal() {
+		return goleslocal;
+	}
+
+	public void setGoleslocal(int goleslocal) {
+		this.goleslocal = goleslocal;
+	}
+
+	public int getGolesvisita() {
+		return golesvisita;
+	}
+
+	public void setGolesvisita(int golesvisita) {
+		this.golesvisita = golesvisita;
 	}
 
 	public String getGrupo() {
@@ -148,8 +166,7 @@ public class BorrarPartidoView implements Serializable {
 	}
 	
 	 public void onTorneoChange() {
-	        if(torneo !=null && !torneo.equals("")) {
-	        	System.out.println("Este es el torneo "+ torneo);
+	        if (torneo !=null && !torneo.equals("")) {
 	        	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
 	        	List<Fase> listaFases = faseBean.obtenerFasesPorTorneo(idt);
 	        	int x = listaFases.size();
@@ -162,7 +179,6 @@ public class BorrarPartidoView implements Serializable {
 	 
 	 public void onFaseChange() {
 	        if (fase !=null && !fase.equals("")) {
-	        	System.out.println("Esta es la fase "+ fase);
 	        	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
 	        	int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
 	        	List<Grupo> listaGrupos = grupoBean.obtenerGruposPorFase(idf);
@@ -176,7 +192,6 @@ public class BorrarPartidoView implements Serializable {
 	 
 	 public void onGrupoChange() {
 	        if (grupo !=null && !grupo.equals("")) {
-	        	System.out.println("Este es el grupo "+ grupo);
 	        	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
 	        	int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
 	        	int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo, idf);
@@ -191,7 +206,6 @@ public class BorrarPartidoView implements Serializable {
 	 
 	 public void onEquipoLocalChange() {
 	        if (equipolocal !=null && !equipolocal.equals("")) {
-	        	System.out.println("Este es el equipolocal "+ equipolocal);
 	        	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
 	        	int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
 	        	int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo, idf);
@@ -204,7 +218,7 @@ public class BorrarPartidoView implements Serializable {
 	        }
 	   }
 
-	public void borrar() {
+	public void actualizar() {
 		FacesMessage msg;
 		if (grupo != null) {
 			int idt = torneoBean.obtenerTorneoPorNombre(torneo);
@@ -214,19 +228,32 @@ public class BorrarPartidoView implements Serializable {
 			int idev = equipoBean.obtenerEquipoPorNombre(equipovisita);
 			int idp = partidoBean.obtenerPartidoPorGrupoEquipoLocalYEquipoVisitante(idg, idel, idev);
 			if (idp != -1) {
-				partidoBean.eliminarPartido(idp);	
-				msg = new FacesMessage("Se borró el partido");
+				Date hoy = new Date();
+				Date fecha = partidoBean.obtenerFechaPartido(idp);
+				if (hoy.before(fecha)) {
+					msg = new FacesMessage("No se pueden actualizar resultados antes de que se juegue el partido en la fecha " + fecha.toString());
+				}
+				else {
+					int ideg;
+					if (golesvisita < goleslocal) {
+						ideg = idel;
+					}
+					else {
+						ideg = idev;
+					}
+					partidoBean.actualizarPartido(idg, idel, idev, goleslocal, golesvisita, ideg);	
+					msg = new FacesMessage("Se actualizó el partido");
+				}
 			}
 			else {
 				msg = new FacesMessage("No existe el partido");
-			}	
-					
+			}						
 		} else {
 			System.out.println("el torneo es null");
-			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "El Torneo no es válido.");
+			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "El Partido no es válido.");
 		}
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-		
-
+	
+	
 }

@@ -77,7 +77,6 @@ public class PartidoPersistence implements PartidoPersistenceRemote, PartidoPers
 		lev.add(ev);
 		return lev;
 	}
-
 	
 	@Override
 	public boolean eliminarPartido(int id) {
@@ -89,6 +88,23 @@ public class PartidoPersistence implements PartidoPersistenceRemote, PartidoPers
 			return false;
 		}	
 	}
+	
+	@Override
+	public boolean actualizarPartido(int idg, int idel, int idev, int golesel, int golesev, int idgana) {
+		int idp = obtenerPartidoPorGrupoEquipoLocalYEquipoVisitante(idg, idel, idev);
+		Partido p = obtenerPartido(idp);
+		p.setGolesEquipoLocal(golesel);
+		p.setGolesEquipoVisita(golesev);
+		Equipo eg = em.find(Equipo.class, idgana);
+		p.setEquipoGanador(eg);
+		p.setEstado("FINALIZADO");
+		em.merge(p);
+		return true;
+	}
 
-
+	@Override
+	public Date obtenerFechaPartido(int idp) {
+		Partido p = obtenerPartido(idp);
+		return p.getFecha();
+	}
 }

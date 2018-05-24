@@ -15,4 +15,6 @@ public interface PartidoBusinessLocal {
 	public boolean eliminarPartido(int id);
 	public int obtenerPartidoPorGrupoEquipoLocalYEquipoVisitante(int idg, int idel, int idev);
 	public List<Equipo> obtenerEquipoVisitantePartido(int idel, int idg);
+	public boolean actualizarPartido(int idg, int idel, int idev, int golesel, int golesev);
+	public Date obtenerFechaPartido(int idp);
 }

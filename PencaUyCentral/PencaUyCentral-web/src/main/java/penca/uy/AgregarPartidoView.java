@@ -12,12 +12,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.EquipoBusinessRemote;
-import beans.interfaces.EquiposGrupoBusinessRemote;
-import beans.interfaces.FaseBusinessRemote;
-import beans.interfaces.GrupoBusinessRemote;
-import beans.interfaces.PartidoBusinessRemote;
-import beans.interfaces.TorneoBusinessRemote;
+import beans.interfaces.EquipoPersistenceRemote;
+import beans.interfaces.EquiposGrupoPersistenceRemote;
+import beans.interfaces.FasePersistenceRemote;
+import beans.interfaces.GrupoPersistenceRemote;
+import beans.interfaces.PartidoPersistenceRemote;
+import beans.interfaces.TorneoPersistenceRemote;
 import entidades.Equipo;
 import entidades.Fase;
 import entidades.Grupo;
@@ -40,10 +40,11 @@ public class AgregarPartidoView implements Serializable {
 	private List<String> grupos;
 	private String equipoLocal;
 	private String equipoVisita;
+	
+	
 	public String getEquipoVisita() {
 		return equipoVisita;
 	}
-
 	
 	public Date getFecha() {
 		return fecha;
@@ -85,22 +86,22 @@ public class AgregarPartidoView implements Serializable {
 	}
 
 	@EJB
-	TorneoBusinessRemote torneoBean;
+	TorneoPersistenceRemote torneoBean;
 	
 	@EJB
-	FaseBusinessRemote faseBean;
+	FasePersistenceRemote faseBean;
 	
 	@EJB
-	GrupoBusinessRemote grupoBean;
+	GrupoPersistenceRemote grupoBean;
 	
 	@EJB 
-	EquipoBusinessRemote equipoBean;
+	EquipoPersistenceRemote equipoBean;
 	
 	@EJB
-	EquiposGrupoBusinessRemote equiposGrupoBean;
+	EquiposGrupoPersistenceRemote equiposGrupoBean;
 	
 	@EJB
-	PartidoBusinessRemote partidoBean;
+	PartidoPersistenceRemote partidoBean;
 
 	public String getGrupo() {
 		return grupo;
@@ -212,21 +213,23 @@ public class AgregarPartidoView implements Serializable {
 		if ((grupo != null) && (equipoLocal != null) && (equipoVisita != null)) {
 			Date hoy = new Date();
 			if (fecha.before(hoy)) {
-				FacesContext.getCurrentInstance().addMessage(null,
-						msg = new FacesMessage("La fecha del partido no puede ser anterior a hoy"));
-			}else {					
-					System.out.println("el grupo "+grupo+" no es null, la fase "+fase+ "no es null");
-					int idt = torneoBean.obtenerTorneoPorNombre(torneo);
-					int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
-					int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo, idf);
-					int idel = equipoBean.obtenerEquipoPorNombre(equipoLocal);
-					int idev = equipoBean.obtenerEquipoPorNombre(equipoVisita);
-					//equiposGrupoBean.agregarEquiposGrupo(e.getId(),g.getId());
-					partidoBean.agregarPartido(idel, idev, idg, fecha);
-					msg = new FacesMessage("Se añadió el partido  " + equipoLocal + " vs "+equipoVisita+" en el  grupo "+grupo);
+				msg = new FacesMessage("La fecha del partido no puede ser anterior a hoy");
+			} else {
+				if (equipoLocal.equals(equipoVisita)) {	
+					msg = new FacesMessage("El Equipo Visitante debe ser distinto del Equipo Local");
+				} else {
+					  System.out.println("el grupo "+grupo+" no es null, la fase "+fase+ "no es null");
+					  int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+					  int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
+					  int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo, idf);
+					  int idel = equipoBean.obtenerEquipoPorNombre(equipoLocal);
+					  int idev = equipoBean.obtenerEquipoPorNombre(equipoVisita);					
+					  partidoBean.agregarPartido(idel, idev, idg, fecha);
+					  msg = new FacesMessage("Se añadió el partido  " + equipoLocal + " vs "+ equipoVisita + " en el  grupo "+grupo);
 				}
-							
-		} else {
+			}
+		}
+		else {
 			System.out.println("el torneo es null");
 			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "El Torneo no es válido.");
 		}

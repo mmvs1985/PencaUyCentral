@@ -11,8 +11,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.OrganizacionBusinessRemote;
-import beans.interfaces.PencaBusinessRemote;
+import beans.interfaces.OrganizacionPersistenceRemote;
+import beans.interfaces.PencaPersistenceRemote;
 import entidades.Organizacion;
 import entidades.Participante;
 import entidades.Penca;
@@ -28,10 +28,10 @@ public class BorrarPencaView implements Serializable {
 	private List<String> pencas;
 
 	@EJB
-	OrganizacionBusinessRemote organizacionBean;
+	OrganizacionPersistenceRemote organizacionBean;
 	
 	@EJB
-	PencaBusinessRemote pencaBean;
+	PencaPersistenceRemote pencaBean;
 
 	@PostConstruct
 	public void init() {

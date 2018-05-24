@@ -11,7 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.ParticipanteBusinessRemote;
+import beans.interfaces.ParticipantePersistenceRemote;
 import entidades.Participante;
 
 @ManagedBean(name="BorrarParticipanteView")
@@ -28,10 +28,10 @@ public class BorrarParticipanteView implements Serializable {
 	//PencaPersistenceRemote pencaBean;
 	
 	@EJB
-	ParticipanteBusinessRemote participanteBean;
+	ParticipantePersistenceRemote participanteBean;
 
-	@PostConstruct
-	/*public void init() {
+	/*@PostConstruct
+	public void init() {
 		List<Penca> lista = pencaBean.obtenerPencas();
 		int i = lista.size();
 		pencas = new ArrayList<String>();
@@ -40,6 +40,7 @@ public class BorrarParticipanteView implements Serializable {
 		}
 	}*/
 	
+	@PostConstruct
 	public void init() {
 		List<Participante> lista = participanteBean.obtenerParticipantes();
 		int i = lista.size();

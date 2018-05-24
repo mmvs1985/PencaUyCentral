@@ -10,8 +10,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.FaseBusinessRemote;
-import beans.interfaces.TorneoBusinessRemote;
+import beans.interfaces.FasePersistenceRemote;
+import beans.interfaces.TorneoPersistenceRemote;
 import entidades.Torneo;
 
 
@@ -21,10 +21,10 @@ public class AgregarFaseView implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	FaseBusinessRemote faseBean;
+	FasePersistenceRemote faseBean;
 		
 	@EJB
-	TorneoBusinessRemote torneoBean;
+	TorneoPersistenceRemote torneoBean;
 
 	@PostConstruct
 	public void init() {
@@ -69,7 +69,7 @@ public class AgregarFaseView implements Serializable {
 
 	public void save() {
 		int idt = torneoBean.obtenerTorneoPorNombre(torneo);
-		if (faseBean.agregarFase(nombre, idt)){				
+		if (faseBean.crearFase(nombre, idt)){				
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage("Se ha agregado la fase " + nombre + " al torneo " + torneo));
 			} else {

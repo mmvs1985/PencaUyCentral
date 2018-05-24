@@ -11,10 +11,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.EquiposGrupoBusinessRemote;
-import beans.interfaces.FaseBusinessRemote;
-import beans.interfaces.GrupoBusinessRemote;
-import beans.interfaces.TorneoBusinessRemote;
+import beans.interfaces.EquiposGrupoPersistenceRemote;
+import beans.interfaces.FasePersistenceRemote;
+import beans.interfaces.GrupoPersistenceRemote;
+import beans.interfaces.TorneoPersistenceRemote;
 import entidades.EquiposGrupo;
 import entidades.Fase;
 import entidades.Grupo;
@@ -43,16 +43,16 @@ public class BorrarGrupoView implements Serializable {
 	private List<String> grupos;
 
 	@EJB
-	TorneoBusinessRemote torneoBean;
+	TorneoPersistenceRemote torneoBean;
 	
 	@EJB
-	FaseBusinessRemote faseBean;
+	FasePersistenceRemote faseBean;
 	
 	@EJB
-	GrupoBusinessRemote grupoBean;
+	GrupoPersistenceRemote grupoBean;
 	
 	@EJB
-	EquiposGrupoBusinessRemote equiposgrupoBean;
+	EquiposGrupoPersistenceRemote equiposgrupoBean;
 
 	public String getGrupo() {
 		return grupo;

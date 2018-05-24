@@ -47,11 +47,13 @@
 							update="grid" action="/EquiposGrupo/Borrar?faces-redirect=true" />
 					</h:panelGrid>
 					<p:separator />
-					<h:panelGrid columns="2" cellpadding="5">
+					<h:panelGrid columns="3" cellpadding="5">
 						<p:commandButton value="Agregar Partido" id="btnAgregarPartido" process="@form"
 							update="grid" action="/Partidos/Agregar?faces-redirect=true" />
 						<p:commandButton value="Borrar Partido" id="btnBorrarPartido" process="@form"
 							update="grid" action="/Partidos/Borrar?faces-redirect=true" />
+						<p:commandButton value="Actualizar Partido" id="btnActualizarPartido" process="@form"
+							update="grid" action="/Partidos/Modificar?faces-redirect=true" />
 					</h:panelGrid>
 				</p:panel>
 			</h:panelGrid>			

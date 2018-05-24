@@ -11,7 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.OrganizacionBusinessRemote;
+import beans.interfaces.OrganizacionPersistenceRemote;
 import entidades.Organizacion;
 import entidades.Penca;
 
@@ -24,7 +24,7 @@ public class BorrarOrganizacionView implements Serializable {
 	private List<String> organizaciones;
 
 	@EJB
-	OrganizacionBusinessRemote organizacionBean;
+	OrganizacionPersistenceRemote organizacionBean;
 
 	@PostConstruct
 	public void init() {

@@ -51,11 +51,13 @@
             <artifactId>PencaUyCentral-servicios</artifactId>
             <type>war</type>
         </dependency>
-        <dependency>
+        <!--  
+        dependency>
             <groupId>penca.uy</groupId>
             <artifactId>PencaUyCentral-ejb</artifactId>
             <type>ejb</type>
         </dependency>
+        -->
         <dependency>
             <groupId>penca.uy</groupId>
             <artifactId>PencaUyCentral-persistencia</artifactId>

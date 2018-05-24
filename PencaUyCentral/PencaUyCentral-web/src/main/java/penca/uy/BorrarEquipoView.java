@@ -11,7 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import beans.interfaces.EquipoBusinessRemote;
+import beans.interfaces.EquipoPersistenceRemote;
 import entidades.Equipo;
 import entidades.EquiposGrupo;
 
@@ -24,7 +24,7 @@ public class BorrarEquipoView implements Serializable {
 	private List<String> equipos;
 
 	@EJB
-	EquipoBusinessRemote equipoBean;
+	EquipoPersistenceRemote equipoBean;
 
 	@PostConstruct
 	public void init() {
