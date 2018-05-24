@@ -75,7 +75,7 @@ public class TorneoPersistence implements TorneoPersistenceRemote, TorneoPersist
 	    		return torneo.getId();
 	    	}else {
 	    		System.out.println("no obtuve nada");
-	    		return 0;
+	    		return -1;
 	    	}
 	    	
 	    	

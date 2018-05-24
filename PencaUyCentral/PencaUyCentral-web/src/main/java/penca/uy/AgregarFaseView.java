@@ -69,13 +69,19 @@ public class AgregarFaseView implements Serializable {
 
 	public void save() {
 		int idt = torneoBean.obtenerTorneoPorNombre(torneo);
-		if (faseBean.crearFase(nombre, idt)){				
+		int idf = faseBean.obtenerFasePorNombreYTorneo(idt, nombre);
+		if (idf == -1) {
+			if (faseBean.crearFase(nombre, idt)) {				
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage("Se ha agregado la fase " + nombre + " al torneo " + torneo));
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage("El torneo no existe"));
 			}
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Ya existe la fase " + nombre + " en el torneo " + torneo));
+		}			
 	}
 
 }

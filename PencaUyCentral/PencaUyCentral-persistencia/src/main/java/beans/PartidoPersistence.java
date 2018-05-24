@@ -69,13 +69,15 @@ public class PartidoPersistence implements PartidoPersistenceRemote, PartidoPers
     	}else return -1;
     }
 	
+	@SuppressWarnings("unchecked")
 	@Override	
-	public List<Equipo> obtenerEquipoVisitantePartido(int idel, int idg) {
-		Partido p = (Partido) em.createQuery("Select p from "+ Partido.class.getSimpleName() + " p where p.grupo = " + idg + " and p.equipoLocal = " + idel).getResultList().get(0);
-		Equipo ev = p.getEquipoVisitante();
+	public List<Equipo> obtenerEquiposVisitantesPartidosConEquipoLocal(int idel, int idg) {
+		List<Partido> lp = em.createQuery("Select p from "+ Partido.class.getSimpleName() + " p where p.grupo = " + idg + " and p.equipoLocal = " + idel).getResultList();
 		List<Equipo> lev = new ArrayList<Equipo>();
-		lev.add(ev);
-		return lev;
+		for (int i = 0; i < lp.size(); i++) {
+			lev.add(lp.get(i).getEquipoVisitante());
+		}		
+		return lev;	 
 	}
 	
 	@Override

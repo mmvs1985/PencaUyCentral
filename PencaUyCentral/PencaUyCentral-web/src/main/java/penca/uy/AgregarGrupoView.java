@@ -125,12 +125,17 @@ public class AgregarGrupoView implements Serializable {
 			System.out.println("la fase no es null, es " + fase);
 			int idt = torneoBean.obtenerTorneoPorNombre(torneo);
 			int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
-			grupoBean.crearGrupo(nombre, idf);
-			msg = new FacesMessage("Se creó el Grupo  " + nombre + " en la fase "+ fase);
-			
+			int idg = grupoBean.obtenerGrupoPorNombreYFase(nombre, idf);
+			if (idg == -1) {
+				grupoBean.crearGrupo(nombre, idf);
+				msg = new FacesMessage("Se creó el grupo  " + nombre + " en la fase "+ fase);
+			}
+			else {
+				msg = new FacesMessage("El grupo " + nombre + " ya existe en la fase " + fase);
+			}
 		} else {
 			System.out.println("el torneo es null");
-			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "El Torneo no es válido.");
+			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "La Fase no es válida.");
 		}
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
