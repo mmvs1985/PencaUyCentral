@@ -39,8 +39,8 @@ public class GrupoPersistence implements GrupoPersistenceRemote, GrupoPersistenc
 				+ "' and d.fase =" + fase).getResultList().isEmpty()) {
 			Grupo g = new Grupo();
 			Fase f = em.find(Fase.class, fase);
-			g.setFase(f);
 			g.setNombre(nombre);
+			f.addGrupo(g);
 			em.persist(g);
 			return true;
 		} else {

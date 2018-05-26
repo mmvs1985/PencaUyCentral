@@ -30,7 +30,7 @@ public class Fase implements Serializable {
 	private Torneo torneo;
 
 	//bi-directional many-to-one association to Grupo
-	@OneToMany(mappedBy="fase")
+	@OneToMany(mappedBy="fase", fetch = FetchType.EAGER)
 	private List<Grupo> grupos;
 
 	public Fase() {

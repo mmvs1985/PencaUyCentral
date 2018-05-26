@@ -48,7 +48,8 @@ public class EquiposGrupoPersistence implements EquiposGrupoPersistenceRemote, E
 			eg.setPartidosPerdidos(0);
 			eg.setPosicion(0);
 			eg.setPuntos(0);
-			
+			em.find(Equipo.class, equipo).addEquiposGrupo(eg);
+			em.find(Grupo.class, grupo).addEquiposGrupo(eg);
 			em.persist(eg);
 			return true;
 		} else {

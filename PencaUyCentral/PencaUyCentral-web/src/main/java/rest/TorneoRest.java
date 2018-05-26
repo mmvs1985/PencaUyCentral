@@ -1,0 +1,208 @@
+package rest;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import beans.interfaces.EquipoPersistenceRemote;
+import beans.interfaces.EquiposGrupoPersistenceRemote;
+import beans.interfaces.FasePersistenceRemote;
+import beans.interfaces.GrupoPersistenceRemote;
+import beans.interfaces.TorneoPersistenceRemote;
+import entidades.Equipo;
+import entidades.Fase;
+import entidades.Grupo;
+import entidades.Torneo;
+
+
+
+@Path("/torneos")
+public class TorneoRest {
+	
+	
+	@EJB
+	TorneoPersistenceRemote beanTorneo;
+	@EJB
+	FasePersistenceRemote beanFase;
+	@EJB
+	GrupoPersistenceRemote beanGrupo;
+	@EJB
+	EquiposGrupoPersistenceRemote beanEquiposGrupo;
+	@EJB
+	EquipoPersistenceRemote beanEquipos;
+	
+
+	@GET
+    @Path("/hello")
+	@Produces({MediaType.TEXT_PLAIN})
+    public String sayHello(){
+		System.out.println("entre al get hello");
+        return "Hola pelotudos";
+    }
+	
+	@GET
+    @Path("/{id}")
+	@Produces({MediaType.APPLICATION_JSON})
+    public String getTorneo(@PathParam("id") int id) {
+		Gson g = new Gson();
+		Torneo t = new Torneo();		
+		t =beanTorneo.obtenerTorneo(id);		
+		JsonObject torneo = new JsonObject();
+		torneo.addProperty("id", t.getId());
+		torneo.addProperty("nombre", t.getNombre());
+		torneo.addProperty("tipo", t.getTipo());
+		List<Fase> listaFase = beanTorneo.obtenerFasesTorneo(id);
+		int i = listaFase.size();
+		System.out.println("i es "+i);
+		JsonArray fases = new JsonArray();
+		
+		for (int j=0;j<i;j++) {
+			JsonObject fase = new JsonObject();		
+			fase.addProperty("id",listaFase.get(j).getId());
+			fase.addProperty("nombre", listaFase.get(j).getNombre());
+			List<Grupo> listaGrupo = beanFase.obtenerGruposFase(listaFase.get(j).getId());
+			int x = listaGrupo.size();
+			JsonArray grupos = new JsonArray();
+			
+			for (int k=0;k<x;k++) {
+				List<Equipo> listaEquipo = new ArrayList<Equipo>();
+				System.out.println("j de fases es "+j);
+				System.out.println("k de grupos es "+k);
+				JsonObject grupo = new JsonObject();
+				grupo.addProperty("id", listaGrupo.get(k).getId());
+				grupo.addProperty("nombre", listaGrupo.get(k).getNombre());				
+				JsonArray equipos = new JsonArray();				
+
+				System.out.println(listaGrupo.get(k).getId());
+					
+				listaEquipo = beanEquiposGrupo.obtenerEquiposPorGrupo(listaGrupo.get(k).getId());
+				if (listaEquipo != null) {
+					int y = listaEquipo.size();
+					System.out.println("y es "+y);
+					for (int l=0;l<y;l++) {
+						System.out.println("j de fases es "+j);
+						System.out.println("k de grupos es "+k);
+						System.out.println("l de equiposgrupo es "+l);
+						JsonObject equipo = new JsonObject();
+						equipo.addProperty("id", listaEquipo.get(l).getId());
+						equipo.addProperty("nombre", listaEquipo.get(l).getNombre());
+						System.out.println(listaEquipo.get(l).getNombre());
+						
+						equipos.add(equipo);
+					}			
+					grupo.add("equipos", equipos);
+				}
+				grupos.add(grupo);
+							
+			}	
+			fase.add("grupos", grupos);
+			fases.add(fase);
+		}
+		
+		torneo.add("fases", fases);
+		return g.toJson(torneo);
+		
+		
+		/*
+		 *GsonBuilder convierte automaticamente nuestro Torneo a json 
+		 *
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		new GraphAdapterBuilder()
+		    .addType(Torneo.class)
+		    .addType(Fase.class)
+		    .addType(Grupo.class)
+		    .addType(EquiposGrupo.class)
+		    .addType(Equipo.class)
+		    .registerOn(gsonBuilder);
+		Gson gson = gsonBuilder.create();
+		
+		return gson.toJson(t);
+		*/
+			
+    }
+	
+	
+	
+	@GET
+    @Path("/all")
+	@Produces({MediaType.APPLICATION_JSON})
+    public String getTorneoAll() {
+		Gson g = new Gson();
+		List<Torneo> listaTorneo = beanTorneo.obtenerTodos();
+		
+		JsonArray torneos = new JsonArray();
+		int h = listaTorneo.size();	
+		for (int z=0;z<h;z++) {					
+			Torneo t =beanTorneo.obtenerTorneo(listaTorneo.get(z).getId());		
+			JsonObject torneo = new JsonObject();
+			torneo.addProperty("id", t.getId());
+			torneo.addProperty("nombre", t.getNombre());
+			torneo.addProperty("tipo", t.getTipo());
+			List<Fase> listaFase = beanTorneo.obtenerFasesTorneo(listaTorneo.get(z).getId());
+			int i = listaFase.size();
+			System.out.println("i es "+i);
+			JsonArray fases = new JsonArray();
+			
+			for (int j=0;j<i;j++) {
+				JsonObject fase = new JsonObject();		
+				fase.addProperty("id",listaFase.get(j).getId());
+				fase.addProperty("nombre", listaFase.get(j).getNombre());
+				List<Grupo> listaGrupo = beanFase.obtenerGruposFase(listaFase.get(j).getId());
+				int x = listaGrupo.size();
+				JsonArray grupos = new JsonArray();
+				
+				for (int k=0;k<x;k++) {
+					List<Equipo> listaEquipo = new ArrayList<Equipo>();
+					System.out.println("j de fases es "+j);
+					System.out.println("k de grupos es "+k);
+					JsonObject grupo = new JsonObject();
+					grupo.addProperty("id", listaGrupo.get(k).getId());
+					grupo.addProperty("nombre", listaGrupo.get(k).getNombre());				
+					JsonArray equipos = new JsonArray();				
+
+					System.out.println(listaGrupo.get(k).getId());
+						
+					listaEquipo = beanEquiposGrupo.obtenerEquiposPorGrupo(listaGrupo.get(k).getId());
+					if (listaEquipo != null) {
+						int y = listaEquipo.size();
+						System.out.println("y es "+y);
+						for (int l=0;l<y;l++) {
+							System.out.println("j de fases es "+j);
+							System.out.println("k de grupos es "+k);
+							System.out.println("l de equiposgrupo es "+l);
+							JsonObject equipo = new JsonObject();
+							equipo.addProperty("id", listaEquipo.get(l).getId());
+							equipo.addProperty("nombre", listaEquipo.get(l).getNombre());
+							System.out.println(listaEquipo.get(l).getNombre());
+							
+							equipos.add(equipo);
+						}			
+						grupo.add("equipos", equipos);
+					}
+					grupos.add(grupo);
+								
+				}	
+				fase.add("grupos", grupos);
+				fases.add(fase);
+			}
+			
+			torneo.add("fases", fases);
+			torneos.add(torneo);
+		}	
+		
+		return 	g.toJson(torneos);
+	}
+	
+}
+
+

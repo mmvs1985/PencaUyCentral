@@ -34,7 +34,7 @@ public class Torneo implements Serializable {
 	private String tipo;
 
 	//bi-directional many-to-one association to Fase
-	@OneToMany(mappedBy="torneo")
+	@OneToMany(mappedBy="torneo", fetch = FetchType.EAGER)
 	private List<Fase> fases;
 
 	public Torneo() {

@@ -28,19 +28,19 @@ public class Equipo implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-one association to Equipos_Grupo
-	@OneToMany(mappedBy="equipo")
+	@OneToMany(mappedBy="equipo", fetch = FetchType.EAGER)
 	private List<EquiposGrupo> equiposGrupo;
 
 	//bi-directional many-to-one association to Partido
-	@OneToMany(mappedBy="equipoGanador")
+	@OneToMany(mappedBy="equipoGanador", fetch = FetchType.EAGER)
 	private List<Partido> partidosEquipoGanador;
 
 	//bi-directional many-to-one association to Partido
-	@OneToMany(mappedBy="equipoVisita")
+	@OneToMany(mappedBy="equipoVisita", fetch = FetchType.EAGER)
 	private List<Partido> partidosEquipoVisita;
 
 	//bi-directional many-to-one association to Partido
-	@OneToMany(mappedBy="equipoLocal")
+	@OneToMany(mappedBy="equipoLocal", fetch = FetchType.EAGER)
 	private List<Partido> partidosEquipoLocal;
 
 	public Equipo() {

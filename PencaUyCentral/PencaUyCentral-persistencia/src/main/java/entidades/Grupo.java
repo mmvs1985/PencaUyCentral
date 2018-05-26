@@ -28,7 +28,7 @@ public class Grupo implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-one association to Equipos_Grupo
-	@OneToMany(mappedBy="grupo")
+	@OneToMany(mappedBy="grupo", fetch = FetchType.EAGER)
 	private List<EquiposGrupo> equiposGrupo;
 
 	//bi-directional many-to-one association to Fase
@@ -37,7 +37,7 @@ public class Grupo implements Serializable {
 	private Fase fase;
 
 	//bi-directional many-to-one association to Partido
-	@OneToMany(mappedBy="grupo")
+	@OneToMany(mappedBy="grupo", fetch = FetchType.EAGER)
 	private List<Partido> partidos;
 
 /*

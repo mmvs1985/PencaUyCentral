@@ -34,7 +34,7 @@ public class FasePersistence implements FasePersistenceRemote, FasePersistenceLo
     public boolean crearFase(String nombre, int idt) {    	
     	Fase fase = new Fase(nombre);
     	Torneo t = em.find(Torneo.class, idt);
-    	fase.setTorneo(t);
+    	
     	t.addFase(fase);
     	em.persist(fase);
     	return true;
