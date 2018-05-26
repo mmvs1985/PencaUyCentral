@@ -36,9 +36,7 @@ public class EquiposGrupo implements Serializable {
 	//bi-directional many-to-one association to Grupo
 	@ManyToOne
 	@JoinColumn(name="\"GrupoId\"")
-	private Grupo grupo;
-	
-	
+	private Grupo grupo;	
 	
 	@Column(name="\"GolenContra\"")
 	private Integer golenContra;

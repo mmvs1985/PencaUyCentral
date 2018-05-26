@@ -17,6 +17,7 @@ import beans.interfaces.FasePersistenceRemote;
 import beans.interfaces.GrupoPersistenceRemote;
 import beans.interfaces.TorneoPersistenceRemote;
 import entidades.Equipo;
+import entidades.EquiposGrupo;
 import entidades.Fase;
 import entidades.Grupo;
 import entidades.Torneo;
@@ -171,13 +172,27 @@ public class AgregarEquiposGrupoView implements Serializable {
 			int idt = torneoBean.obtenerTorneoPorNombre(torneo);			
 			int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
 			int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo, idf);
-			int ide = equipoBean.obtenerEquipoPorNombre(equipo);			
-			equiposGrupoBean.agregarEquiposGrupo(ide,idg);
-			msg = new FacesMessage("Se añadió el equipo  " + equipo + " en el grupo "+ grupo);
-			
+			List<EquiposGrupo> lista = grupoBean.obtenerEquiposGrupo(idg);
+			int x = lista.size();
+			boolean encontrado = false;
+			int i = 0;
+			while (i < x && !encontrado) {
+				if (lista.get(i).getEquipo().getNombre().equals(equipo)) {
+					encontrado = true;
+				} else {
+					i++;
+				}				
+			}
+			if (encontrado) {
+				msg = new FacesMessage("El equipo " + equipo + " ya se encuentra en el grupo "+ grupo);
+			} else {
+				int ide = equipoBean.obtenerEquipoPorNombre(equipo);			
+				equiposGrupoBean.agregarEquiposGrupo(ide,idg);
+				msg = new FacesMessage("Se añadió el equipo  " + equipo + " en el grupo "+ grupo);
+			}			
 		} else {
 			System.out.println("el torneo es null");
-			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "El Torneo no es válido.");
+			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "El Grupo no es válido.");
 		}
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}

@@ -50,8 +50,8 @@ public class PartidoBusiness implements PartidoBusinessRemote, PartidoBusinessLo
     }
     
     @Override
-    public List<Equipo> obtenerEquipoVisitantePartido(int idel, int idg) {
-    	return bean.obtenerEquipoVisitantePartido(idel, idg);
+    public List<Equipo> obtenerEquiposVisitantesPartidosConEquipoLocal(int idel, int idg) {
+    	return bean.obtenerEquiposVisitantesPartidosConEquipoLocal(idel, idg);
     }
     
     @Override

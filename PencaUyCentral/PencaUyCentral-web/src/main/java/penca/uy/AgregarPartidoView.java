@@ -223,9 +223,15 @@ public class AgregarPartidoView implements Serializable {
 					  int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
 					  int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo, idf);
 					  int idel = equipoBean.obtenerEquipoPorNombre(equipoLocal);
-					  int idev = equipoBean.obtenerEquipoPorNombre(equipoVisita);					
-					  partidoBean.agregarPartido(idel, idev, idg, fecha);
-					  msg = new FacesMessage("Se añadió el partido  " + equipoLocal + " vs "+ equipoVisita + " en el  grupo "+grupo);
+					  int idev = equipoBean.obtenerEquipoPorNombre(equipoVisita);	
+					  int idp1 = partidoBean.obtenerPartidoPorGrupoEquipoLocalYEquipoVisitante(idg, idel, idev);
+					  int idp2 = partidoBean.obtenerPartidoPorGrupoEquipoLocalYEquipoVisitante(idg, idev, idel);
+					  if (idp1 == -1 && idp2 == -1) {
+						  partidoBean.agregarPartido(idel, idev, idg, fecha);
+						  msg = new FacesMessage("Se añadió el partido  " + equipoLocal + " vs "+ equipoVisita + " en el  grupo "+grupo);
+					  } else {
+						  msg = new FacesMessage("Ya existe el partido " + equipoLocal + " vs "+ equipoVisita + " en el  grupo "+grupo);
+					  }
 				}
 			}
 		}

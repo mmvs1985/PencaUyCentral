@@ -196,10 +196,13 @@ public class BorrarPartidoView implements Serializable {
 	        	int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
 	        	int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo, idf);
 	        	int idel = equipoBean.obtenerEquipoPorNombre(equipolocal);
-	        	List<Equipo> lev = partidoBean.obtenerEquipoVisitantePartido(idel, idg);
+	        	List<Equipo> lev = partidoBean.obtenerEquiposVisitantesPartidosConEquipoLocal(idel, idg);
 	        	equiposdevisita = new ArrayList<String>();
-	    		for (int y = 0; y < 1; y++) {
-	    			equiposdevisita.add(lev.get(y).getNombre());
+	        	int z = lev.size();
+	    		for (int y = 0; y < z; y++) {
+	    			if (!equiposdevisita.contains(lev.get(y).getNombre())) {
+	    				equiposdevisita.add(lev.get(y).getNombre());
+	    			}
 	    		}
 	        }
 	   }
