@@ -164,6 +164,8 @@ public class TorneoRest {
 			torneo.addProperty("id", t.getId());
 			torneo.addProperty("nombre", t.getNombre());
 			torneo.addProperty("tipo", t.getTipo());
+			torneo.addProperty("comienzo", t.getComienzo().toString());
+
 			List<Fase> listaFase = beanTorneo.obtenerFasesTorneo(listaTorneo.get(z).getId());
 			int i = listaFase.size();
 			System.out.println("i es "+i);
@@ -178,32 +180,44 @@ public class TorneoRest {
 				JsonArray grupos = new JsonArray();
 				
 				for (int k=0;k<x;k++) {
-					List<Equipo> listaEquipo = new ArrayList<Equipo>();
+					List<EquiposGrupo> listaEquiposGrupo = new ArrayList<EquiposGrupo>();
 					System.out.println("j de fases es "+j);
 					System.out.println("k de grupos es "+k);
 					JsonObject grupo = new JsonObject();
 					grupo.addProperty("id", listaGrupo.get(k).getId());
 					grupo.addProperty("nombre", listaGrupo.get(k).getNombre());				
-					JsonArray equipos = new JsonArray();				
+					JsonArray equiposGrupo = new JsonArray();				
 
 					System.out.println(listaGrupo.get(k).getId());
 						
-					listaEquipo = beanEquiposGrupo.obtenerEquiposPorGrupo(listaGrupo.get(k).getId());
-					if (listaEquipo != null) {
-						int y = listaEquipo.size();
+					listaEquiposGrupo = beanGrupo.obtenerEquiposGrupo(listaGrupo.get(k).getId());
+					if (listaEquiposGrupo != null) {
+						int y = listaEquiposGrupo.size();
 						System.out.println("y es "+y);
 						for (int l=0;l<y;l++) {
 							System.out.println("j de fases es "+j);
 							System.out.println("k de grupos es "+k);
 							System.out.println("l de equiposgrupo es "+l);
-							JsonObject equipo = new JsonObject();
-							equipo.addProperty("id", listaEquipo.get(l).getId());
-							equipo.addProperty("nombre", listaEquipo.get(l).getNombre());
-							System.out.println(listaEquipo.get(l).getNombre());
+							JsonObject equipoGrupo = new JsonObject();
+							equipoGrupo.addProperty("id", listaEquiposGrupo.get(l).getId());
+							equipoGrupo.addProperty("equipoid", listaEquiposGrupo.get(l).getEquipo().getId());
+							equipoGrupo.addProperty("golenContra", listaEquiposGrupo.get(l).getGolenContra());
+							equipoGrupo.addProperty("golesFavor", listaEquiposGrupo.get(l).getGolesFavor());
+							equipoGrupo.addProperty("partidosEmpatados", listaEquiposGrupo.get(l).getPartidosEmpatados());
+							equipoGrupo.addProperty("partidosGanados", listaEquiposGrupo.get(l).getPartidosGanados());
+							equipoGrupo.addProperty("partidosJugados", listaEquiposGrupo.get(l).getPartidosJugados());
+							equipoGrupo.addProperty("partidosPerdidos", listaEquiposGrupo.get(l).getPartidosPerdidos());
+							equipoGrupo.addProperty("posicion",listaEquiposGrupo.get(l).getPosicion());
+							equipoGrupo.addProperty("puntos", listaEquiposGrupo.get(l).getPuntos());
+							JsonObject eq = new JsonObject();
+							eq.addProperty("id",listaEquiposGrupo.get(l).getEquipo().getId());
+							eq.addProperty("nombre",listaEquiposGrupo.get(l).getEquipo().getNombre());
+							equipoGrupo.add("equipo",eq);
+							System.out.println(listaEquiposGrupo.get(l).getId());
 							
-							equipos.add(equipo);
+							equiposGrupo.add(equipoGrupo);
 						}			
-						grupo.add("equipos", equipos);
+						grupo.add("equiposGrupo", equiposGrupo);
 					}
 					grupos.add(grupo);
 								

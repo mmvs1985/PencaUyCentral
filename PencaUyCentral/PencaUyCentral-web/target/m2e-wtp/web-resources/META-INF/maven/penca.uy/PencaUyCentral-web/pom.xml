@@ -36,15 +36,9 @@
 	<dependencies>
 
 		<!-- Dependency on the EJB module so we can use it's services if needed -->
-		<!-- 
-		dependency>
-			<groupId>penca.uy</groupId>
-			<artifactId>PencaUyCentral-ejb</artifactId>
-			<type>ejb</type>
-			<scope>provided</scope>
-		</dependency>
-		-->
-		
+		<!-- dependency> <groupId>penca.uy</groupId> <artifactId>PencaUyCentral-ejb</artifactId> 
+			<type>ejb</type> <scope>provided</scope> </dependency> -->
+
 		<dependency>
 			<groupId>penca.uy</groupId>
 			<artifactId>PencaUyCentral-persistencia</artifactId>
@@ -131,6 +125,24 @@
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>async-http-servlet-3.0</artifactId>
 			<version>3.0.19.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>2.2.1.GA</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-multipart-provider</artifactId>
+			<version>2.2.0.GA</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.6.2</version>
 		</dependency>
 	</dependencies>
 
