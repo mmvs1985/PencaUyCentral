@@ -18,4 +18,5 @@ public interface PartidoPersistenceRemote {
 	public List<Equipo> obtenerEquiposVisitantesPartidosConEquipoLocal(int idel, int idg);
 	public boolean actualizarPartido(int idg, int idel, int idev, int golesel, int golesev, int idgana);
 	public Date obtenerFechaPartido(int idp);
+	public List<Partido> obtenerTodos();
 }

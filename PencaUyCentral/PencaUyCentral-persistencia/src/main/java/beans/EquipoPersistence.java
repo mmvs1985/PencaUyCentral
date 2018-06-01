@@ -51,6 +51,7 @@ public class EquipoPersistence implements EquipoPersistenceRemote, EquipoPersist
 	public Equipo obtenerEquipo(int id) {
 		return (Equipo) em.find(Equipo.class, id);
 	}	
+
 	
 	@Override
 	public int obtenerEquipoPorNombre(String nombre) {

@@ -19,11 +19,13 @@ import beans.interfaces.EquipoPersistenceRemote;
 import beans.interfaces.EquiposGrupoPersistenceRemote;
 import beans.interfaces.FasePersistenceRemote;
 import beans.interfaces.GrupoPersistenceRemote;
+import beans.interfaces.PartidoPersistenceRemote;
 import beans.interfaces.TorneoPersistenceRemote;
 import entidades.Equipo;
 import entidades.EquiposGrupo;
 import entidades.Fase;
 import entidades.Grupo;
+import entidades.Partido;
 import entidades.Torneo;
 
 
@@ -42,6 +44,8 @@ public class TorneoRest {
 	EquiposGrupoPersistenceRemote beanEquiposGrupo;
 	@EJB
 	EquipoPersistenceRemote beanEquipos;
+	@EJB
+	PartidoPersistenceRemote beanPartido;
 	
 
 	@GET
@@ -118,6 +122,44 @@ public class TorneoRest {
 					}			
 					grupo.add("equiposGrupo", equiposGrupo);
 				}
+				JsonArray partidos = new JsonArray();
+				List<Partido> listaPartido = new ArrayList<>();				
+				listaPartido = beanGrupo.obtenerPartidosGrupo(listaGrupo.get(k).getId());
+				if (!(listaPartido.isEmpty())) {
+					int r = listaPartido.size();
+					for (int s = 0;s<r;s++) {
+						Partido p =beanPartido.obtenerPartido(listaPartido.get(s).getId());
+						JsonObject partido = new JsonObject();
+						partido.addProperty("id", p.getId() );
+						partido.addProperty("fecha", p.getFecha().toString());
+						partido.addProperty("estado", p.getEstado());			
+						if (!(p.getEstado().equals("N/JUGADO"))){
+							partido.addProperty("golesEquipoLocal", p.getGolesEquipoLocal());
+							partido.addProperty("golesEquipoVisita", p.getGolesEquipoVisita());
+							JsonObject eg = new JsonObject();
+							eg.addProperty("id",listaPartido.get(s).getEquipoGanador().getId());
+							eg.addProperty("nombre",listaPartido.get(s).getEquipoGanador().getNombre());
+							partido.add("equipoGanador",eg);				
+						}
+						JsonObject el = new JsonObject();
+						el.addProperty("id",listaPartido.get(s).getEquipLocal().getId());
+						el.addProperty("nombre",listaPartido.get(s).getEquipLocal().getNombre());
+						partido.add("equipoLocal",el);
+						JsonObject ev = new JsonObject();
+						ev.addProperty("id",listaPartido.get(s).getEquipoVisitante().getId());
+						ev.addProperty("nombre",listaPartido.get(s).getEquipoVisitante().getNombre());
+						partido.add("equipoVisita",ev);
+						JsonObject gr = new JsonObject();
+						gr.addProperty("id", listaPartido.get(s).getGrupo().getId());
+						gr.addProperty("nombre", listaPartido.get(s).getGrupo().getNombre());
+						partido.add("grupo", gr);
+						partidos.add(partido);
+						
+					}
+					grupo.add("partidos", partidos);
+					
+				}			
+				
 				grupos.add(grupo);
 							
 			}	
@@ -218,7 +260,43 @@ public class TorneoRest {
 							equiposGrupo.add(equipoGrupo);
 						}			
 						grupo.add("equiposGrupo", equiposGrupo);
+						
+					}	
+					JsonArray partidos = new JsonArray();
+					List<Partido> listaPartido = new ArrayList<>();				
+					listaPartido = beanGrupo.obtenerPartidosGrupo(listaGrupo.get(k).getId());
+					if (!(listaPartido.isEmpty())) {
+						int r = listaPartido.size();
+						for (int s = 0;s<r;s++) {
+							Partido p =beanPartido.obtenerPartido(listaPartido.get(s).getId());
+							JsonObject partido = new JsonObject();
+							partido.addProperty("id", p.getId() );
+							partido.addProperty("fecha", p.getFecha().toString());
+							partido.addProperty("estado", p.getEstado());			
+							if (!(p.getEstado().equals("N/JUGADO"))){
+								partido.addProperty("golesEquipoLocal", p.getGolesEquipoLocal());
+								partido.addProperty("golesEquipoVisita", p.getGolesEquipoVisita());
+								partido.addProperty("equipoGanador", p.getEquipoGanador().getId());				
+							}
+							JsonObject el = new JsonObject();
+							el.addProperty("id",listaPartido.get(s).getEquipLocal().getId());
+							el.addProperty("nombre",listaPartido.get(s).getEquipLocal().getNombre());
+							partido.add("equipoLocal",el);
+							JsonObject ev = new JsonObject();
+							ev.addProperty("id",listaPartido.get(s).getEquipoVisitante().getId());
+							ev.addProperty("nombre",listaPartido.get(s).getEquipoVisitante().getNombre());
+							partido.add("equipoVisita",ev);
+							JsonObject gr = new JsonObject();
+							gr.addProperty("id", listaPartido.get(s).getGrupo().getId());
+							gr.addProperty("nombre", listaPartido.get(s).getGrupo().getNombre());
+							partido.add("grupo", gr);						
+							partidos.add(partido);
+							
+						}
+						grupo.add("partidos", partidos);
 					}
+					
+					
 					grupos.add(grupo);
 								
 				}	

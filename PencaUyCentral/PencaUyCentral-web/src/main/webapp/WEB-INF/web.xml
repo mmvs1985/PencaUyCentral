@@ -28,6 +28,14 @@ org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
 <servlet-name>resteasy-servlet</servlet-name>
 <url-pattern>/rest/*</url-pattern>
 </servlet-mapping>
+<!--  
+<security-constraint>
+	<web-resource-collection>
+		<web-resource-name>Torneo</web-resource-name>
+		<url-pattern>/rest/torneos/*</url-pattern>
+	</web-resource-collection>
+	<user-data-constraint>CONFIDENTIAL</user-data-constraint>
+</security-constraint>-->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

@@ -95,7 +95,7 @@ public class GrupoPersistence implements GrupoPersistenceRemote, GrupoPersistenc
 	public List<EquiposGrupo> obtenerEquiposGrupo(int id) {
 		List<EquiposGrupo> leg = em.createQuery("SELECT eg FROM " + EquiposGrupo.class.getSimpleName() + " eg WHERE eg.grupo = " + id).getResultList();
 		if (leg.isEmpty()) {
-			return null;
+			return new ArrayList<>();
 		}
 		else {
 			return leg;

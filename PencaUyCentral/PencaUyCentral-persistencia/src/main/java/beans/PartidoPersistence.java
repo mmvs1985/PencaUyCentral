@@ -109,4 +109,16 @@ public class PartidoPersistence implements PartidoPersistenceRemote, PartidoPers
 		Partido p = obtenerPartido(idp);
 		return p.getFecha();
 	}
+	
+	
+	@SuppressWarnings("unchecked")
+    public List<Partido> obtenerTodos(){
+    	List<Partido> list = new ArrayList<>();
+    	List<Partido> lista = em.createQuery( "Select p from "+ Partido.class.getSimpleName()+" p" ).getResultList();
+        if (!(lista.isEmpty())) {
+        	System.out.println("la lista de partidos no es vacia");
+        	list = lista;
+        }
+    	return list;
+    }
 }
