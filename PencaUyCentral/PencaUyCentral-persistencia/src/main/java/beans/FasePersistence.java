@@ -66,6 +66,14 @@ public class FasePersistence implements FasePersistenceRemote, FasePersistenceLo
     }
     
     @SuppressWarnings("unchecked")
+    public List<Fase> obtenerTodos(){
+    	
+    	List<Fase> list = em.createQuery( "Select f from "+ Fase.class.getSimpleName()+" f" ).getResultList();
+        System.out.println("obtuve todas las fases");
+    	return list;
+    }
+    
+    @SuppressWarnings("unchecked")
 	@Override
 	public List<Grupo> obtenerGruposFase(int id) {
 		List<Grupo> list = em.createQuery( "Select g from " + Grupo.class.getSimpleName()+" g where g.fase = " + id).getResultList();

@@ -15,4 +15,5 @@ public interface FasePersistenceLocal {
     public List<Fase> obtenerFasesPorTorneo(int id);
     public int obtenerFasePorNombreYTorneo(int id,String nombre);
     public List<Grupo> obtenerGruposFase(int id);
+    public List<Fase> obtenerTodos();
 }

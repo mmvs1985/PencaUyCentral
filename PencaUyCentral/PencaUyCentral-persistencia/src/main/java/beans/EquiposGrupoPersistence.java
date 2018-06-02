@@ -14,6 +14,7 @@ import beans.interfaces.EquiposGrupoPersistenceRemote;
 import entidades.Equipo;
 import entidades.EquiposGrupo;
 import entidades.Grupo;
+import entidades.Torneo;
 
 /**
  * Session Bean implementation class EquipoPersistence
@@ -96,6 +97,14 @@ public class EquiposGrupoPersistence implements EquiposGrupoPersistenceRemote, E
 		}
 		else return false;
 	 }
+	
+    @SuppressWarnings("unchecked")
+    public List<EquiposGrupo> obtenerTodos(){
+    	
+    	List<EquiposGrupo> list = em.createQuery( "Select eg from "+ EquiposGrupo.class.getSimpleName()+" eg" ).getResultList();
+        System.out.println("obtuve todos los EquiposGrupo");
+    	return list;
+    }
 	
 
 }

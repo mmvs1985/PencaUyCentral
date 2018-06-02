@@ -91,6 +91,14 @@ public class GrupoPersistence implements GrupoPersistenceRemote, GrupoPersistenc
     }
     
     @SuppressWarnings("unchecked")
+    public List<Grupo> obtenerTodos(){
+    	
+    	List<Grupo> list = em.createQuery( "Select g from "+ Grupo.class.getSimpleName()+" g" ).getResultList();
+        System.out.println("obtuve todos los grupos");
+    	return list;
+    }
+    
+    @SuppressWarnings("unchecked")
 	@Override
 	public List<EquiposGrupo> obtenerEquiposGrupo(int id) {
 		List<EquiposGrupo> leg = em.createQuery("SELECT eg FROM " + EquiposGrupo.class.getSimpleName() + " eg WHERE eg.grupo = " + id).getResultList();

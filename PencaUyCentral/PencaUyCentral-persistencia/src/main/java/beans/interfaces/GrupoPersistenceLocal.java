@@ -18,4 +18,5 @@ public interface GrupoPersistenceLocal {
 	public List<Grupo> obtenerGruposPorFase(int id);
 	public List<Partido> obtenerPartidosGrupo(int id);
 	public List<EquiposGrupo> obtenerEquiposGrupo(int id);
+	public List<Grupo> obtenerTodos();
 }
