@@ -14,6 +14,7 @@ import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 import beans.interfaces.EquipoPersistenceRemote;
+import beans.interfaces.EquiposGrupoPersistenceRemote;
 import beans.interfaces.FasePersistenceRemote;
 import beans.interfaces.GrupoPersistenceRemote;
 import beans.interfaces.PartidoPersistenceRemote;
@@ -58,6 +59,8 @@ public class ListaPartidosView implements Serializable {
 	PartidoPersistenceRemote partidoBean;
 	@EJB
 	EquipoPersistenceRemote equipoBean;
+	@EJB
+	EquiposGrupoPersistenceRemote equiposGrupoBean;
 	
  
     @PostConstruct
@@ -90,6 +93,7 @@ public class ListaPartidosView implements Serializable {
 	    	   partido.setGolesEquipoLocal(p.getGolesEquipoLocal());
 	    	   partido.setGolesEquipoVisita(p.getGolesEquipoVisita());
 	    	   partido.setGrupo(p.getGrupo().getNombre());
+	    	   partido.setGrupoId(p.getGrupo().getId());
 	    	   listaPartidosString.add(partido);
 	       }
 	     this.partidos = listaPartidosString;
@@ -102,13 +106,21 @@ public class ListaPartidosView implements Serializable {
         int id = ((PartidoString) event.getObject()).getId();
         int golesel = ((PartidoString) event.getObject()).getGolesEquipoLocal();
         int golesev = ((PartidoString) event.getObject()).getGolesEquipoVisita();
+        int grupo = ((PartidoString) event.getObject()).getGrupoId();
         int idgana;
+        int el = equipoBean.obtenerEquipoPorNombre(((PartidoString) event.getObject()).getEquipoLocal());
+        int ev = equipoBean.obtenerEquipoPorNombre(((PartidoString) event.getObject()).getEquipoVisita());
         if (golesel>=golesev) {
-        	idgana = equipoBean.obtenerEquipoPorNombre(((PartidoString) event.getObject()).getEquipoLocal());
+        	idgana = el;
         }else {
-        	idgana = equipoBean.obtenerEquipoPorNombre(((PartidoString) event.getObject()).getEquipoVisita());
+        	idgana = ev;
         }
         partidoBean.actualizarPartidoPorId(id, golesel, golesev, idgana);
+        int egLocal = equiposGrupoBean.obtenerEquiposGrupoPorEquipoyGrupo(grupo,el).getId();
+        int egVisita = equiposGrupoBean.obtenerEquiposGrupoPorEquipoyGrupo(grupo,ev).getId();
+        equiposGrupoBean.actualizarEquiposGrupo(egLocal, golesev,golesel);
+        equiposGrupoBean.actualizarEquiposGrupo(egVisita, golesel,golesev);
+        //equiposGrupoBean.actualizarEquiposGrupo(eg, golenc, golaf)
         
     }
      

@@ -15,5 +15,6 @@ public interface EquipoPersistenceLocal {
 	public List<Equipo> obtenerEquipos();
 	public boolean eliminarEquipo(int id);
 	public List<EquiposGrupo> obtenerGruposEquipo(int id);
+	public EquiposGrupo obtenerEquiposGrupoPorEquipoyGrupo(int grupo, int equipo);
 	
 }

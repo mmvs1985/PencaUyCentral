@@ -8,6 +8,7 @@ import entidades.Grupo;
 import entidades.Organizacion;
 import entidades.Torneo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -80,6 +81,21 @@ public class EquipoPersistence implements EquipoPersistenceRemote, EquipoPersist
 			return leg;
 		}
 	}
+	
+	
+	
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public EquiposGrupo obtenerEquiposGrupoPorEquipoyGrupo(int grupo, int equipo) {
+		List<EquiposGrupo> listEG = new ArrayList<EquiposGrupo>();
+		listEG = em.createQuery("SELECT e FROM "+ EquiposGrupo.class.getSimpleName()+" e WHERE e.equipo = " + equipo +" and e.grupo = "+grupo).getResultList();
+		EquiposGrupo eg = listEG.get(0);
+		return eg;
+	}
+	
+	
+	
 	
 	@Override
 	public boolean eliminarEquipo(int id) {

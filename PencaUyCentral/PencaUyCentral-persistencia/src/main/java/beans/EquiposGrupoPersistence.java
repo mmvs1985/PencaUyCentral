@@ -1,5 +1,7 @@
 package beans;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -22,23 +24,25 @@ import entidades.Torneo;
 @Stateless
 @LocalBean
 public class EquiposGrupoPersistence implements EquiposGrupoPersistenceRemote, EquiposGrupoPersistenceLocal {
-	
-	@PersistenceContext(unitName="PencaUyCentral-persistencia")
+
+	@PersistenceContext(unitName = "PencaUyCentral-persistencia")
 	private EntityManager em;
 
-    /**
-     * Default constructor. 
-     */
-    public EquiposGrupoPersistence() {
-        // TODO Auto-generated constructor stub
-    }
-    
-    @Override
-	public boolean agregarEquiposGrupo(int equipo,int grupo) {
-		//List<Equipo> le = em.createNamedQuery("Equipo.findByNombre", Equipo.class).setParameter("nombre", nombre).getResultList();
-    	if (em.createQuery("SELECT e FROM "+ EquiposGrupo.class.getSimpleName()+" e WHERE e.equipo = " + equipo +" and e.grupo = "+grupo).getResultList().isEmpty()) {	
+	/**
+	 * Default constructor.
+	 */
+	public EquiposGrupoPersistence() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public boolean agregarEquiposGrupo(int equipo, int grupo) {
+		// List<Equipo> le = em.createNamedQuery("Equipo.findByNombre",
+		// Equipo.class).setParameter("nombre", nombre).getResultList();
+		if (em.createQuery("SELECT e FROM " + EquiposGrupo.class.getSimpleName() + " e WHERE e.equipo = " + equipo
+				+ " and e.grupo = " + grupo).getResultList().isEmpty()) {
 			EquiposGrupo eg = new EquiposGrupo();
-			
+
 			eg.setEquipo(em.find(Equipo.class, equipo));
 			eg.setGrupo(em.find(Grupo.class, grupo));
 			eg.setGolenContra(0);
@@ -55,38 +59,82 @@ public class EquiposGrupoPersistence implements EquiposGrupoPersistenceRemote, E
 			return true;
 		} else {
 			return false;
-		}		
+		}
 	}
-    
+
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Equipo> obtenerEquiposPorGrupo(int grupo){
-		List<EquiposGrupo> list = em.createQuery( "Select eg from "+ EquiposGrupo.class.getSimpleName()+" eg where eg.grupo = "+grupo).getResultList();
+	public List<Equipo> obtenerEquiposPorGrupo(int grupo) {
+		List<EquiposGrupo> list = em
+				.createQuery("Select eg from " + EquiposGrupo.class.getSimpleName() + " eg where eg.grupo = " + grupo)
+				.getResultList();
 		if (!(list.isEmpty())) {
 			EquiposGrupo eg;
 			List<Equipo> listEquipo = new ArrayList<Equipo>();
 			Iterator<EquiposGrupo> itList = list.iterator();
-	        while(itList.hasNext()) {
-	            eg = itList.next();
-	            listEquipo.add(eg.getEquipo());
-	            System.out.println("Agregué el equipo "+eg.getEquipo().getNombre()+" a la lista");
-	        }
-	        return listEquipo;
-		}			
-		else return null ;
+			while (itList.hasNext()) {
+				eg = itList.next();
+				listEquipo.add(eg.getEquipo());
+				System.out.println("Agregué el equipo " + eg.getEquipo().getNombre() + " a la lista");
+			}
+			return listEquipo;
+		} else
+			return null;
 	}
-	
-	/*@Override
+
+	@Override
 	@SuppressWarnings("unchecked")
-	public List<EquiposGrupo> obtenerEquiposGrupo(int idg){
-		List<EquiposGrupo> list = em.createQuery( "Select eg from "+ EquiposGrupo.class.getSimpleName()+" eg where eg.grupo = "+ idg).getResultList();
-		return list;
-	}*/
-	
+	public EquiposGrupo obtenerEquiposGrupoPorEquipoyGrupo(int grupo, int equipo) {
+		List<EquiposGrupo> listEG = new ArrayList<EquiposGrupo>();
+		listEG = em.createQuery("SELECT e FROM " + EquiposGrupo.class.getSimpleName() + " e WHERE e.equipo = " + equipo
+				+ " and e.grupo = " + grupo).getResultList();
+		EquiposGrupo eg = listEG.get(0);
+		return eg;
+	}
+
+	@Override
 	@SuppressWarnings("unchecked")
-	public boolean eliminarEquiposGrupo(int equipo,int grupo) {
-		List<EquiposGrupo> listEG = em.createQuery("SELECT e FROM "+ EquiposGrupo.class.getSimpleName()+" e WHERE e.equipo = " + equipo +" and e.grupo = "+grupo).getResultList();
-		if(!(listEG.isEmpty())) {
+	public boolean actualizarEquiposGrupo(int eg, int golenc, int golaf) {
+		EquiposGrupo equipoGrupo = em.find(EquiposGrupo.class, eg);
+		int contra = equipoGrupo.getGolenContra() - golenc;
+		equipoGrupo.setGolenContra(contra);
+		int favor = equipoGrupo.getGolesFavor() + golaf;
+		equipoGrupo.setGolesFavor(favor);
+		int pts = equipoGrupo.getPuntos();
+		
+		int jugados = equipoGrupo.getPartidosJugados();
+		equipoGrupo.setPartidosJugados(jugados + 1);
+		if (golenc < golaf) {
+			int ganados = equipoGrupo.getPartidosGanados();
+			equipoGrupo.setPartidosGanados(ganados + 1);
+			equipoGrupo.setPuntos(pts + 3);
+		} else if (golenc > golaf) {
+			int perdidos = equipoGrupo.getPartidosPerdidos();
+			equipoGrupo.setPartidosPerdidos(perdidos + 1);
+		} else if (golenc == golaf) {
+			int empatados = equipoGrupo.getPartidosEmpatados();
+			equipoGrupo.setPartidosEmpatados(empatados + 1);
+			equipoGrupo.setPuntos(pts + 1);
+		}
+		em.merge(equipoGrupo);
+		return true;
+	}
+
+	/*
+	 * @Override
+	 * 
+	 * @SuppressWarnings("unchecked") public List<EquiposGrupo>
+	 * obtenerEquiposGrupo(int idg){ List<EquiposGrupo> list = em.createQuery(
+	 * "Select eg from "+
+	 * EquiposGrupo.class.getSimpleName()+" eg where eg.grupo = "+
+	 * idg).getResultList(); return list; }
+	 */
+
+	@SuppressWarnings("unchecked")
+	public boolean eliminarEquiposGrupo(int equipo, int grupo) {
+		List<EquiposGrupo> listEG = em.createQuery("SELECT e FROM " + EquiposGrupo.class.getSimpleName()
+				+ " e WHERE e.equipo = " + equipo + " and e.grupo = " + grupo).getResultList();
+		if (!(listEG.isEmpty())) {
 			Equipo e = em.find(Equipo.class, equipo);
 			e.removeEquiposGrupo(listEG.get(0));
 			Grupo g = em.find(Grupo.class, grupo);
@@ -94,17 +142,17 @@ public class EquiposGrupoPersistence implements EquiposGrupoPersistenceRemote, E
 			EquiposGrupo eg = em.find(EquiposGrupo.class, listEG.get(0).getId());
 			em.remove(eg);
 			return true;
-		}
-		else return false;
-	 }
-	
-    @SuppressWarnings("unchecked")
-    public List<EquiposGrupo> obtenerTodos(){
-    	
-    	List<EquiposGrupo> list = em.createQuery( "Select eg from "+ EquiposGrupo.class.getSimpleName()+" eg" ).getResultList();
-        System.out.println("obtuve todos los EquiposGrupo");
-    	return list;
-    }
-	
+		} else
+			return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<EquiposGrupo> obtenerTodos() {
+
+		List<EquiposGrupo> list = em.createQuery("Select eg from " + EquiposGrupo.class.getSimpleName() + " eg")
+				.getResultList();
+		System.out.println("obtuve todos los EquiposGrupo");
+		return list;
+	}
 
 }

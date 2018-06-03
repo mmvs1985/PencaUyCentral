@@ -3,6 +3,7 @@ package beans;
 import beans.interfaces.PartidoPersistenceLocal;
 import beans.interfaces.PartidoPersistenceRemote;
 import entidades.Equipo;
+import entidades.EquiposGrupo;
 import entidades.Fase;
 import entidades.Grupo;
 import entidades.Organizacion;
@@ -100,7 +101,7 @@ public class PartidoPersistence implements PartidoPersistenceRemote, PartidoPers
 		Equipo eg = em.find(Equipo.class, idgana);
 		p.setEquipoGanador(eg);
 		p.setEstado("FINALIZADO");
-		em.merge(p);
+		em.merge(p);		
 		return true;
 	}
 	

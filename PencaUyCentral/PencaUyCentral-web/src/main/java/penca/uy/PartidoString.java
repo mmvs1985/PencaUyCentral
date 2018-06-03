@@ -16,6 +16,13 @@ public class PartidoString {
 	private String equipoVisita;
 	private String equipoLocal;
 	private String grupo;
+	private int grupoId;
+	public int getGrupoId() {
+		return grupoId;
+	}
+	public void setGrupoId(int grupoId) {
+		this.grupoId = grupoId;
+	}
 	public int getId() {
 		return id;
 	}

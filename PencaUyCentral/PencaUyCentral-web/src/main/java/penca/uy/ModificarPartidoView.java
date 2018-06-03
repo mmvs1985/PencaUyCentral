@@ -13,11 +13,13 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import beans.interfaces.EquipoPersistenceRemote;
+import beans.interfaces.EquiposGrupoPersistenceRemote;
 import beans.interfaces.FasePersistenceRemote;
 import beans.interfaces.GrupoPersistenceRemote;
 import beans.interfaces.PartidoPersistenceRemote;
 import beans.interfaces.TorneoPersistenceRemote;
 import entidades.Equipo;
+import entidades.EquiposGrupo;
 import entidades.Fase;
 import entidades.Grupo;
 import entidades.Partido;
@@ -56,6 +58,8 @@ public class ModificarPartidoView implements Serializable {
 	
 	@EJB
 	EquipoPersistenceRemote equipoBean;
+	@EJB
+	EquiposGrupoPersistenceRemote equiposGrupoBean;
 	
 	
 	@PostConstruct
@@ -230,6 +234,8 @@ public class ModificarPartidoView implements Serializable {
 			int idel = equipoBean.obtenerEquipoPorNombre(equipolocal);
 			int idev = equipoBean.obtenerEquipoPorNombre(equipovisita);
 			int idp = partidoBean.obtenerPartidoPorGrupoEquipoLocalYEquipoVisitante(idg, idel, idev);
+			int eqGrupoLocal = equiposGrupoBean.obtenerEquiposGrupoPorEquipoyGrupo(idg, idel).getId();
+			int eqGrupoVisita = equiposGrupoBean.obtenerEquiposGrupoPorEquipoyGrupo(idg, idev).getId();
 			if (idp != -1) {
 				Date hoy = new Date();
 				Date fecha = partidoBean.obtenerFechaPartido(idp);
@@ -245,6 +251,8 @@ public class ModificarPartidoView implements Serializable {
 						ideg = idev;
 					}
 					partidoBean.actualizarPartido(idg, idel, idev, goleslocal, golesvisita, ideg);	
+					equiposGrupoBean.actualizarEquiposGrupo(eqGrupoLocal, golesvisita, goleslocal);
+					equiposGrupoBean.actualizarEquiposGrupo(eqGrupoVisita, goleslocal, golesvisita);
 					msg = new FacesMessage("Se actualizó el partido");
 				}
 			}

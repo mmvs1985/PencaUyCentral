@@ -13,5 +13,7 @@ public interface EquiposGrupoPersistenceRemote {
 	public List<Equipo> obtenerEquiposPorGrupo(int grupo);
 	public boolean eliminarEquiposGrupo(int equipo,int grupo);
 	public List<EquiposGrupo> obtenerTodos();
+	public EquiposGrupo obtenerEquiposGrupoPorEquipoyGrupo(int grupo, int equipo);
+	public boolean actualizarEquiposGrupo(int eg, int golenc, int golaf);
 	//public List<EquiposGrupo> obtenerEquiposGrupo(int idg);
 }
