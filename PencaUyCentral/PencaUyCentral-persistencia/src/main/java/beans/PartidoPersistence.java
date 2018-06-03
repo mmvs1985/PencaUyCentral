@@ -103,6 +103,19 @@ public class PartidoPersistence implements PartidoPersistenceRemote, PartidoPers
 		em.merge(p);
 		return true;
 	}
+	
+	@Override
+	public boolean actualizarPartidoPorId(int id, int golesel, int golesev, int idgana) {
+		
+		Partido p = em.find(Partido.class, id);
+		p.setGolesEquipoLocal(golesel);
+		p.setGolesEquipoVisita(golesev);
+		Equipo eg = em.find(Equipo.class, idgana);
+		p.setEquipoGanador(eg);
+		p.setEstado("FINALIZADO");
+		em.merge(p);
+		return true;
+	}
 
 	@Override
 	public Date obtenerFechaPartido(int idp) {

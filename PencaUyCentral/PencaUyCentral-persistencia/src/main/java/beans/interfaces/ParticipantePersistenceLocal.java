@@ -15,4 +15,5 @@ public interface ParticipantePersistenceLocal {
 	public List<Participante> obtenerParticipantesPorPenca(int id);
 	public Participante obtenerParticipante(int id);	
 	public boolean eliminarParticipante(int id);
+	
 }

@@ -1,0 +1,96 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
+</h:head>
+<h:body>
+	<p:menubar>
+		<f:facet name="options">
+			<p:commandButton value="Cerrar Sesión"
+				actionListener="#{LoginBean.cerrarSesion()}"
+				action="/login?faces-redirect=true" icon="ui-icon-power" />
+		</f:facet>
+	</p:menubar>
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+		<p:panel header="FIXTURE" style="margin-bottom:10px;">
+
+			<f:facet name="header">
+				Torneo Ejemplo
+			</f:facet>
+
+			<p:dataTable var="partido" value="#{ListaPartidosView.getPartidos()}"
+				editable="true">
+
+				<p:ajax event="rowEdit" listener="#{ListaPartidosView.onRowEdit}"
+					update=":form:msgs" />
+				<p:ajax event="rowEditCancel"
+					listener="#{ListaPartidosView.onRowCancel}" update=":form:msgs" />
+
+				<p:column headerText="id">
+					<h:outputText value="#{partido.id}" />
+				</p:column>
+				<p:column headerText="fecha">
+					<h:outputText value="#{partido.fecha}" />
+				</p:column>
+
+				<p:column headerText="Local">
+					<h:outputText value="#{partido.equipoLocal}" />
+				</p:column>
+				<p:column headerText="Goles Local">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{partido.golesEquipoLocal}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{partido.golesEquipoLocal}"
+								style="width:96%" label="Goles Local" />
+						</f:facet>
+					</p:cellEditor>
+
+				</p:column>
+				<p:column headerText="    ">
+					<h:outputText value="" />
+				</p:column>
+
+				<p:column headerText="Goles Visitante">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{partido.golesEquipoVisita}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{partido.golesEquipoVisita}"
+								style="width:96%" label="Goles Visita" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Visitante">
+					<h:outputText value="#{partido.equipoVisita}" />
+				</p:column>
+
+				<p:column headerText="Grupo">
+					<h:outputText value="#{partido.grupo}" />
+				</p:column>
+				<p:column style="width:32px">
+					<p:rowEditor />
+				</p:column>
+
+
+
+
+			</p:dataTable>
+
+
+
+
+		</p:panel>
+	</h:form>
+
+
+</h:body>
+</html>
