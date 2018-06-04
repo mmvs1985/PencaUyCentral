@@ -52,18 +52,20 @@
 						<p:commandButton value="Posiciones" id="btnPosiciones"
 							process="@form" update="grid"
 							action="/Grupos/Posiciones?faces-redirect=true" />
+						
 					</h:panelGrid>
 					<p:separator />
 					<h:panelGrid columns="2" cellpadding="5">
 						<p:commandButton value="Agregar Equipo" id="btnAgregarEquipo"
 							process="@form" update="grid"
 							action="/EquiposGrupo/Agregar?faces-redirect=true" />
-						<p:commandButton value="Agregar EquipoPick" id="btnAgregarEquipoPick"
-							process="@form" update="grid"
+						<p:commandButton value="Agregar EquipoPick"
+							id="btnAgregarEquipoPick" process="@form" update="grid"
 							action="/EquiposGrupo/AgregarPick?faces-redirect=true" />
 						<p:commandButton value="Borrar Equipo" id="btnBorrarEquipo"
 							process="@form" update="grid"
 							action="/EquiposGrupo/Borrar?faces-redirect=true" />
+							
 					</h:panelGrid>
 					<p:separator />
 					<h:panelGrid columns="3" cellpadding="5">

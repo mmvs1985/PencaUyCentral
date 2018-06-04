@@ -167,7 +167,7 @@ public class AgregarPickEquiposGrupoView implements Serializable {
 				equiposGrupoBean.agregarEquiposGrupo(ide, idg);
 				
 			}
-			
+			msg = new FacesMessage(FacesMessage.FACES_MESSAGES, "Se agregaron los Grupos Correctamente");
 			/*
 			 * List<EquiposGrupo> lista = grupoBean.obtenerEquiposGrupo(idg); int x =
 			 * lista.size(); boolean encontrado = false; int i = 0; while (i < x &&

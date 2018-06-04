@@ -18,12 +18,14 @@ import beans.interfaces.EquiposGrupoPersistenceRemote;
 import beans.interfaces.FasePersistenceRemote;
 import beans.interfaces.GrupoPersistenceRemote;
 import beans.interfaces.PartidoPersistenceRemote;
+import beans.interfaces.TiposPremioPersistenceRemote;
 import beans.interfaces.TorneoPersistenceRemote;
 import entidades.Equipo;
 import entidades.EquiposGrupo;
 import entidades.Fase;
 import entidades.Grupo;
 import entidades.Partido;
+import entidades.TiposPremio;
 import entidades.Torneo;
 
 @Path("/api")
@@ -41,6 +43,8 @@ public class TorneoApi {
 	EquipoPersistenceRemote beanEquipo;
 	@EJB
 	PartidoPersistenceRemote beanPartido;
+	@EJB
+	TiposPremioPersistenceRemote beanTiposPremio;
 	
 	
 	@GET
@@ -52,6 +56,16 @@ public class TorneoApi {
         		+ "";
     }
 	
+	
+	@GET
+	@Path("/tipospremio")
+	@Produces({MediaType.APPLICATION_JSON})
+	public String getTiposPremioAll() {
+		Gson g = new Gson();
+		List<TiposPremio> listaTiposPremio = beanTiposPremio.obtenerTiposPremio();
+		return g.toJson(listaTiposPremio);	
+		
+	}
 	
 	@GET
     @Path("/torneos")

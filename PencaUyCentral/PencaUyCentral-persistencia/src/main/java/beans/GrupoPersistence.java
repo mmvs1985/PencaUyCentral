@@ -89,12 +89,13 @@ public class GrupoPersistence implements GrupoPersistenceRemote, GrupoPersistenc
     	list =(List<Partido>) em.createQuery( "Select p from "+ Partido.class.getSimpleName()+" p where p.grupo = "+id ).getResultList();
     	return list;
     }
-    
+    @Override
     @SuppressWarnings("unchecked")
     public List<Grupo> obtenerTodos(){
     	
     	List<Grupo> list = em.createQuery( "Select g from "+ Grupo.class.getSimpleName()+" g" ).getResultList();
         System.out.println("obtuve todos los grupos");
+        System.out.println("el tamano de la lista es "+list.size());
     	return list;
     }
     
