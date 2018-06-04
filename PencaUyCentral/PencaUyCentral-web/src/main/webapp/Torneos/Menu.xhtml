@@ -7,61 +7,82 @@
 	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
 </h:head>
 <h:body>
-<p:menubar>
-	<f:facet name="options">
-		<p:commandButton value="Cerrar Sesión" actionListener="#{LoginBean.cerrarSesion()}" action="/login?faces-redirect=true" icon="ui-icon-power"/>
-	</f:facet>
-</p:menubar>
+	<p:menubar>
+		<f:facet name="options">
+			<p:commandButton value="Volver" onclick="window.history.back();"
+				icon="ui-icon-arrowreturnthick-1-w" />
+			<p:commandButton value="Cerrar Sesión"
+				actionListener="#{LoginBean.cerrarSesion()}"
+				action="/login?faces-redirect=true" icon="ui-icon-power" />
+		</f:facet>
+	</p:menubar>
 	<h:form>
-		<p:panel header="Menú de Opciones sobre Torneos" style="margin-bottom:10px;">
+		<p:panel header="Menú de Opciones sobre Torneos"
+			style="margin-bottom:10px;">
 			<h:panelGrid id="grid" cellpadding="5" columns="1">
-				<p:outputLabel value="Usted se ha identificado como: #{LoginBean.usuario}" />
+				<p:outputLabel
+					value="Usted se ha identificado como: #{LoginBean.usuario}" />
 				<p:panel header="Elija su Opción:" style="margin-bottom:10px;">
 					<h:panelGrid columns="3" cellpadding="5">
-						<p:commandButton value="Agregar Torneo" id="btnAgregarTorneo" process="@form"
-							update="grid" action="Agregar?faces-redirect=true" />
-						<p:commandButton value="Borrar Torneo" id="btnBorrarTorneo" process="@form"
-							update="grid" action="Borrar?faces-redirect=true" />
-						<p:commandButton value="Listar Torneos" id="btnListarTorneos" process="@form"
-							update="grid" action="Tabla?faces-redirect=true" />
+						<p:commandButton value="Agregar Torneo" id="btnAgregarTorneo"
+							process="@form" update="grid"
+							action="Agregar?faces-redirect=true" />
+						<p:commandButton value="Borrar Torneo" id="btnBorrarTorneo"
+							process="@form" update="grid" action="Borrar?faces-redirect=true" />
+						<p:commandButton value="Listar Torneos" id="btnListarTorneos"
+							process="@form" update="grid" action="Tabla?faces-redirect=true" />
 					</h:panelGrid>
 					<p:separator />
 					<h:panelGrid columns="2" cellpadding="5">
-						<p:commandButton value="Agregar Fase" id="btnAgregarFase" process="@form"
-							update="grid" action="/Fases/Agregar?faces-redirect=true" />
-						<p:commandButton value="Borrar Fase" id="btnBorrarFase" process="@form"
-							update="grid" action="/Fases/Borrar?faces-redirect=true" />
+						<p:commandButton value="Agregar Fase" id="btnAgregarFase"
+							process="@form" update="grid"
+							action="/Fases/Agregar?faces-redirect=true" />
+						<p:commandButton value="Borrar Fase" id="btnBorrarFase"
+							process="@form" update="grid"
+							action="/Fases/Borrar?faces-redirect=true" />
 					</h:panelGrid>
 					<p:separator />
 					<h:panelGrid columns="2" cellpadding="5">
-						<p:commandButton value="Agregar Grupo" id="btnAgregarGrupo" process="@form"
-							update="grid" action="/Grupos/Agregar?faces-redirect=true" />
-						<p:commandButton value="Borrar Grupo" id="btnBorrarGrupo" process="@form"
-							update="grid" action="/Grupos/Borrar?faces-redirect=true" />
-						<p:commandButton value="Posiciones" id="btnPosiciones" process="@form"
-							update="grid" action="/Grupos/Posiciones?faces-redirect=true" />
+						<p:commandButton value="Agregar Grupo" id="btnAgregarGrupo"
+							process="@form" update="grid"
+							action="/Grupos/Agregar?faces-redirect=true" />
+						<p:commandButton value="Borrar Grupo" id="btnBorrarGrupo"
+							process="@form" update="grid"
+							action="/Grupos/Borrar?faces-redirect=true" />
+						<p:commandButton value="Posiciones" id="btnPosiciones"
+							process="@form" update="grid"
+							action="/Grupos/Posiciones?faces-redirect=true" />
 					</h:panelGrid>
 					<p:separator />
 					<h:panelGrid columns="2" cellpadding="5">
-						<p:commandButton value="Agregar Equipo" id="btnAgregarEquipo" process="@form"
-							update="grid" action="/EquiposGrupo/Agregar?faces-redirect=true" />
-						<p:commandButton value="Borrar Equipo" id="btnBorrarEquipo" process="@form"
-							update="grid" action="/EquiposGrupo/Borrar?faces-redirect=true" />
+						<p:commandButton value="Agregar Equipo" id="btnAgregarEquipo"
+							process="@form" update="grid"
+							action="/EquiposGrupo/Agregar?faces-redirect=true" />
+						<p:commandButton value="Agregar EquipoPick" id="btnAgregarEquipoPick"
+							process="@form" update="grid"
+							action="/EquiposGrupo/AgregarPick?faces-redirect=true" />
+						<p:commandButton value="Borrar Equipo" id="btnBorrarEquipo"
+							process="@form" update="grid"
+							action="/EquiposGrupo/Borrar?faces-redirect=true" />
 					</h:panelGrid>
 					<p:separator />
 					<h:panelGrid columns="3" cellpadding="5">
-						<p:commandButton value="Agregar Partido" id="btnAgregarPartido" process="@form"
-							update="grid" action="/Partidos/Agregar?faces-redirect=true" />
-						<p:commandButton value="Borrar Partido" id="btnBorrarPartido" process="@form"
-							update="grid" action="/Partidos/Borrar?faces-redirect=true" />
-						<p:commandButton value="Actualizar Partido" id="btnActualizarPartido" process="@form"
-							update="grid" action="/Partidos/Modificar?faces-redirect=true" />
-							
-						<p:commandButton value="ListaPartidos" id="btnLista" process="@form"
-							update="grid" action="/Fases/ListaPartidos?faces-redirect=true" />
+						<p:commandButton value="Agregar Partido" id="btnAgregarPartido"
+							process="@form" update="grid"
+							action="/Partidos/Agregar?faces-redirect=true" />
+						<p:commandButton value="Borrar Partido" id="btnBorrarPartido"
+							process="@form" update="grid"
+							action="/Partidos/Borrar?faces-redirect=true" />
+						<p:commandButton value="Actualizar Partido"
+							id="btnActualizarPartido" process="@form" update="grid"
+							action="/Partidos/Modificar?faces-redirect=true" />
+
+						<p:commandButton value="ListaPartidos" id="btnLista"
+							process="@form" update="grid"
+							action="/Fases/ListaPartidos?faces-redirect=true" />
 					</h:panelGrid>
 				</p:panel>
-			</h:panelGrid>			
+			</h:panelGrid>
 		</p:panel>
 	</h:form>
 </h:body>

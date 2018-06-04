@@ -1,0 +1,73 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
+</h:head>
+<h:body>
+	<p:menubar>
+		<f:facet name="options">
+			<p:commandButton value="Volver" onclick="window.history.back();"
+				icon="ui-icon-arrowreturnthick-1-w" />
+			<p:commandButton value="Cerrar Sesión"
+				actionListener="#{LoginBean.cerrarSesion()}"
+				action="/login?faces-redirect=true" icon="ui-icon-power" />
+		</f:facet>
+	</p:menubar>
+	<h:form>
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:panel header="Agregar Equipo a Grupo" style="margin-bottom:10px;">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel for="torneo" value="Torneo: " />
+				<p:selectOneMenu id="torneo"
+					value="#{AgregarPickEquiposGrupoView.torneo}" style="width:150px">
+					<p:ajax listener="#{AgregarPickEquiposGrupoView.onTorneoChange}"
+						update="fase" />
+					<f:selectItem itemLabel="Seleccione un Torneo" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{AgregarPickEquiposGrupoView.torneos}" />
+				</p:selectOneMenu>
+
+
+				<p:outputLabel for="fase" value="Fase: " />
+				<p:selectOneMenu id="fase"
+					value="#{AgregarPickEquiposGrupoView.fase}" style="width:150px">
+					<p:ajax listener="#{AgregarPickEquiposGrupoView.onFaseChange}"
+						update="grupo" />
+					<f:selectItem itemLabel="Seleccione una Fase" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{AgregarPickEquiposGrupoView.fases}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="grupo" value="Grupo: " />
+				<p:selectOneMenu id="grupo"
+					value="#{AgregarPickEquiposGrupoView.grupo}" style="width:150px">
+					<f:selectItem itemLabel="Seleccione un Grupo" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{AgregarPickEquiposGrupoView.grupos}" />
+				</p:selectOneMenu>
+
+
+
+				<h3 style="margin-top: 0"></h3>
+				<p:pickList id="pickList"
+					value="#{AgregarPickEquiposGrupoView.equipos}" var="equipos"
+					itemLabel="#{equipos}" itemValue="#{equipos}" />
+				
+				<p:commandButton value="Agregar" update="msgs"
+				actionListener="#{AgregarPickEquiposGrupoView.save}" />
+				
+
+			</h:panelGrid>
+
+			
+		</p:panel>
+	</h:form>
+
+
+</h:body>
+</html>
