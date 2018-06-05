@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 /**
  * The persistent class for the "Participantes" database table.
- * 
+ *
  */
 @Entity
 @Table(name="\"Participantes\"")
@@ -16,7 +16,7 @@ import javax.persistence.*;
 	@NamedQuery(name = "Participante.findByPenca",query = "SELECT p FROM Participante p WHERE p.penca = :penca")
 })
 public class Participante implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -39,6 +39,9 @@ public class Participante implements Serializable {
 	private Penca penca;
 
 	public Participante() {
+		this.puntos = 0;
+		this.usuario = "";
+		this.penca = null;
 	}
 
 	public Integer getId() {

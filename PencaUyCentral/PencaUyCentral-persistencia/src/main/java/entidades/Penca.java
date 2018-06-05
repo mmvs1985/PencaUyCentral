@@ -2,12 +2,14 @@ package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
 /**
  * The persistent class for the "Pencas" database table.
- * 
+ *
  */
 @Entity
 @Table(name="\"Pencas\"")
@@ -18,14 +20,14 @@ import java.util.List;
 	@NamedQuery(name = "Penca.findByOrganizacion", query = "SELECT p FROM Penca p WHERE p.organizacion = :organizacion")
 })
 public class Penca implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@Column(name="\"Id\"")
 	private Integer id;
-	
+
 	@Column(name="\"Nombre\"")
 	private String nombre;
 
@@ -39,6 +41,9 @@ public class Penca implements Serializable {
 	private Organizacion organizacion;
 
 	public Penca() {
+		this.nombre = "";
+		this.organizacion = null;
+		this.participantes = new ArrayList<>();
 	}
 
 	public Integer getId() {
@@ -48,7 +53,7 @@ public class Penca implements Serializable {
 	/*public void setId(Integer id) {
 		this.id = id;
 	}*/
-	
+
 	public String getNombre() {
 		return nombre;
 	}

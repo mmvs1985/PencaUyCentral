@@ -32,27 +32,42 @@ public class Usuario  implements Serializable {
 
 	@Column(name="\"Nombre\"")
 	private String nombre;
-	
+
 	@Column(name="\"Apellido\"")
 	private String apellido;
-	
+
 	@Column(name="\"Email\"")
 	private String email;
-	
+
 	@Column(name="\"Nickname\"")
 	private String nickname;
-	
+
 	@Column(name="\"Password\"")
 	private String password;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="\"Nacimiento\"")
 	private Date nacimiento;
-	
-	
-	public Usuario(){		
+
+
+	public Usuario(){
+		this.nombre = "";
+		this.apellido = "";
+		this.email = "";
+		this.nickname = "";
+		this.password = "";
+		this.nacimiento = null;
 	}
-	
+
+	public Usuario(String nombre, String apellido, String email, String nickname, String password, Date nacimiento) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.nickname = nickname;
+		this.password = password;
+		this.nacimiento = nacimiento;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -108,5 +123,5 @@ public class Usuario  implements Serializable {
 	public void setNacimiento(Date nacimiento) {
 		this.nacimiento = nacimiento;
 	}
-	
+
 }

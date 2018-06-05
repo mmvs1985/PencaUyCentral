@@ -9,13 +9,13 @@ import java.util.Objects;
 
 /**
  * The persistent class for the "Torneos" database table.
- * 
+ *
  */
 @Entity
 @Table(name="\"Torneos\"")
 @NamedQuery(name="Torneo.findAll", query="SELECT t FROM Torneo t")
 public class Torneo implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -38,10 +38,12 @@ public class Torneo implements Serializable {
 	private List<Fase> fases;
 
 	public Torneo() {
+		this.nombre = "";
+		this.tipo = "";
+		this.comienzo = null;
 	}
-	
+
 	public Torneo(String nombre, String tipo, Date comienzo) {
-		super();
 		this.nombre = nombre;
 		this.tipo = tipo;
 		this.comienzo = comienzo;
@@ -100,14 +102,14 @@ public class Torneo implements Serializable {
 
 		return fase;
 	}
-	
+
 	@Override
     public int hashCode() {
         int hash = 7;
         hash = 29 * hash + Objects.hashCode(this.id);
         return hash;
     }
-	
+
 	 @Override
 	    public boolean equals(Object obj) {
 	        if (this == obj) {

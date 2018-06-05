@@ -2,18 +2,20 @@ package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
 /**
  * The persistent class for the "Fases" database table.
- * 
+ *
  */
 @Entity
 @Table(name="\"Fases\"")
 @NamedQuery(name="Fase.findAll", query="SELECT f FROM Fase f")
 public class Fase implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -34,8 +36,11 @@ public class Fase implements Serializable {
 	private List<Grupo> grupos;
 
 	public Fase() {
+		this.nombre = "";
+		this.torneo = null;
+		this.grupos = new ArrayList<>();
 	}
-	
+
 	public Fase(String nombre) {
 		this.nombre = nombre;
 	}
@@ -75,7 +80,7 @@ public class Fase implements Serializable {
 	public Grupo addGrupo(Grupo grupo) {
 		getGrupos().add(grupo);
 		grupo.setFase(this);
-		return grupo;		
+		return grupo;
 	}
 
 	public Grupo removeGrupo(Grupo grupo) {

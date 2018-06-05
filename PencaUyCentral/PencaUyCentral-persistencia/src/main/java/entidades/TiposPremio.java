@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * The persistent class for the "TiposPremio" database table.
- * 
+ *
  */
 @Entity
 @Table(name="\"TiposPremio\"")
@@ -16,7 +16,7 @@ import java.util.List;
 	@NamedQuery(name = "TiposPremio.findByNombre",query = "SELECT t FROM TiposPremio t WHERE t.nombre = :nombre")
 })
 public class TiposPremio implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -29,6 +29,11 @@ public class TiposPremio implements Serializable {
 
 
 	public TiposPremio() {
+		this.nombre = null;
+	}
+
+	public TiposPremio(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public Integer getId() {

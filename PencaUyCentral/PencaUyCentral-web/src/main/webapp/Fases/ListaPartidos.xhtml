@@ -45,7 +45,7 @@
 				<p:column headerText="Goles Local">
 					<p:cellEditor>
 						<f:facet name="output">
-							<h:outputText value="#{partido.golesEquipoLocal}" />
+							<h:outputText value="#{partido.golesEquipoLocal}" rendered="#{partido.golesEquipoLocal ge 0}"  />
 						</f:facet>
 						<f:facet name="input">
 							<p:inputText value="#{partido.golesEquipoLocal}"
@@ -61,7 +61,7 @@
 				<p:column headerText="Goles Visitante">
 					<p:cellEditor>
 						<f:facet name="output">
-							<h:outputText value="#{partido.golesEquipoVisita}" />
+							<h:outputText value="#{partido.golesEquipoVisita}" rendered="#{partido.golesEquipoVisita ge 0}"/>
 						</f:facet>
 						<f:facet name="input">
 							<p:inputText value="#{partido.golesEquipoVisita}"

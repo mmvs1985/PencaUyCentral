@@ -7,13 +7,13 @@ import java.util.Date;
 
 /**
  * The persistent class for the "Partidos" database table.
- * 
+ *
  */
 @Entity
 @Table(name="\"Partidos\"")
 @NamedQuery(name="Partido.findAll", query="SELECT p FROM Partido p")
 public class Partido implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -55,6 +55,14 @@ public class Partido implements Serializable {
 	private Grupo grupo;
 
 	public Partido() {
+		this.estado = "";
+		this.fecha = null;
+		this.golesEquipoLocal = -1;
+		this.golesEquipoVisita = -1;
+		this.equipoGanador = null;
+		this.equipoVisita = null;
+		this.equipoLocal = null;
+		this.grupo = null;
 	}
 
 	public Integer getId() {

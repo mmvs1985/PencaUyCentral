@@ -1,30 +1,32 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
 import javax.persistence.*;
 
 
 /**
  * The persistent class for the "EquiposGrupo" database table.
- * 
+ *
  */
 @Entity
-@Table(name="\"EquiposGrupo\"") 
+@Table(name="\"EquiposGrupo\"")
 @NamedQuery(name="EquiposGrupo.findAll", query="SELECT e FROM EquiposGrupo e")
 public class EquiposGrupo implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@Column(name="\"Id\"")
 	private Integer id;
-	
+
 	//bi-directional many-to-one association to Equipo
 	@ManyToOne
 	@JoinColumn(name="\"EquipoId\"")
 	private Equipo equipo;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -36,8 +38,8 @@ public class EquiposGrupo implements Serializable {
 	//bi-directional many-to-one association to Grupo
 	@ManyToOne
 	@JoinColumn(name="\"GrupoId\"")
-	private Grupo grupo;	
-	
+	private Grupo grupo;
+
 	@Column(name="\"GolenContra\"")
 	private Integer golenContra;
 
@@ -62,9 +64,17 @@ public class EquiposGrupo implements Serializable {
 	@Column(name="\"Puntos\"")
 	private Integer puntos;
 
-
-
 	public EquiposGrupo() {
+		this.equipo = null;
+		this.grupo = null;
+		this.golenContra = 0;
+		this.golesFavor = 0;
+		this.partidosEmpatados = 0;
+		this.partidosGanados = 0;
+		this.partidosJugados = 0;
+		this.partidosPerdidos = 0;
+		this.posicion = 0;
+		this.puntos = 0;
 	}
 
 	public Integer getGolenContra() {

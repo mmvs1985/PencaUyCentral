@@ -2,21 +2,23 @@ package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
 /**
  * The persistent class for the "Equipos" database table.
- * 
+ *
  */
 @Entity
-@Table(name="\"Equipos\"")  
+@Table(name="\"Equipos\"")
 @NamedQueries({
 	@NamedQuery(name = "Equipo.findAll", query="SELECT e FROM Equipo e"),
 	@NamedQuery(name = "Equipo.findByNombre", query = "SELECT e FROM Equipo e WHERE e.nombre = :nombre")
 })
 public class Equipo implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -44,6 +46,19 @@ public class Equipo implements Serializable {
 	private List<Partido> partidosEquipoLocal;
 
 	public Equipo() {
+		this.nombre = "";
+		this.equiposGrupo = new ArrayList<>();
+		this.partidosEquipoGanador = new ArrayList<>();
+		this.partidosEquipoVisita = new ArrayList<>();
+		this.partidosEquipoLocal = new ArrayList<>();
+	}
+
+	public Equipo(String nombre) {
+		this.nombre = nombre;
+		this.equiposGrupo = new ArrayList<>();
+		this.partidosEquipoGanador = new ArrayList<>();
+		this.partidosEquipoVisita = new ArrayList<>();
+		this.partidosEquipoLocal = new ArrayList<>();
 	}
 
 	public Integer getId() {

@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * The persistent class for the "Organizaciones" database table.
- * 
+ *
  */
 @Entity
 @Table(name="\"Organizaciones\"")
@@ -18,7 +18,7 @@ import java.util.List;
 	@NamedQuery(name = "Organizacion.findByNombre",query = "SELECT o FROM Organizacion o WHERE o.nombre = :nombre")
 })
 public class Organizacion implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -28,7 +28,7 @@ public class Organizacion implements Serializable {
 
 	@Column(name="\"Nombre\"")
 	private String nombre;
-	
+
 	@Column(name="\"Estado\"")
 	private String estado;
 
@@ -37,12 +37,14 @@ public class Organizacion implements Serializable {
 	private List<Penca> pencas;
 
 	public Organizacion() {
-		this.pencas = new ArrayList<Penca>(); 
+		this.nombre = "";
+		this.estado = "";
+		this.pencas = new ArrayList<Penca>();
 	}
-	
+
 	public Organizacion(String nombre) {
 		this.nombre = nombre;
-		this.pencas = new ArrayList<Penca>(); 
+		this.pencas = new ArrayList<Penca>();
 	}
 
 	public Integer getId() {
@@ -55,8 +57,8 @@ public class Organizacion implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}	
-	
+	}
+
 	public String getEstado() {
 		return estado;
 	}

@@ -2,19 +2,21 @@ package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
 /**
  * The persistent class for the "Grupos" database table.
- * 
+ *
  */
 @Entity
 @Table(name="\"Grupos\"")
 @NamedQuery(name="Grupo.findAll", query="SELECT g FROM Grupo g")
 public class Grupo implements Serializable {
-	
-	private static final long serialVersionUID = 1L;	
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
@@ -38,6 +40,10 @@ public class Grupo implements Serializable {
 	private List<Partido> partidos;
 
 	public Grupo() {
+		this.nombre = "";
+		this.fase = null;
+		this.equiposGrupo = new ArrayList<>();
+		this.partidos = new ArrayList<>();
 	}
 
 	public Integer getId() {
