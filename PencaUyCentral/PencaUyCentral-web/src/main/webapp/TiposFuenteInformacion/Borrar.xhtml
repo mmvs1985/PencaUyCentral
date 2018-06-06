@@ -1,0 +1,33 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
+</h:head>
+<h:body>
+<p:menubar>
+	<f:facet name="options">
+	<p:commandButton value="Volver" onclick="window.history.back();" icon="ui-icon-arrowreturnthick-1-w"/>
+		<p:commandButton value="Cerrar Sesión" actionListener="#{LoginBean.cerrarSesion}" action="/login?faces-redirect=true" icon="ui-icon-power"/>
+	</f:facet>
+</p:menubar>
+<h:form>
+    <p:growl id="msgs" showDetail="true" />
+	<p:panel header="Borrar Tipo de Fuente de Información" style="margin-bottom:10px;">
+        <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel for="tipofuenteinfo" value="Tipo de Fuente de Información: " />
+            <p:selectOneMenu id="tipofuenteinfo" value="#{BorrarTipoFuenteInformacionView.tipofuenteinfo}" style="width:150px">
+                <f:selectItem itemLabel="Tipos de Fuente de Información" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{BorrarTipoFuenteInformacionView.tiposfuenteinfo}" />
+            </p:selectOneMenu>
+        </h:panelGrid> 
+        <p:commandButton value="Borrar" update="msgs" actionListener="#{BorrarTipoFuenteInformacionView.borrar}" icon="ui-icon-trash" />
+    </p:panel>	
+</h:form>
+
+
+</h:body>
+</html>

@@ -1,0 +1,28 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
+</h:head>
+
+<h:body><p:menubar>
+	<f:facet name="options">
+	<p:commandButton value="Volver" onclick="window.history.back();" icon="ui-icon-arrowreturnthick-1-w"/>
+		<p:commandButton value="Cerrar Sesión" actionListener="#{LoginBean.cerrarSesion()}" action="/login?faces-redirect=true" icon="ui-icon-power"/>
+	</f:facet>
+</p:menubar>
+<p:panel header="Tabla de Tipos de Fuente de Información" style="margin-bottom:10px;">
+	<p:dataTable var="tiposfuenteinformacion" value="#{TablaTiposFuenteInformacionView.getTiposFuenteInformacion()}">
+		<p:column headerText="Id">
+			<h:outputText value="#{tiposfuenteinformacion.id}" />
+		</p:column>
+		<p:column headerText="Nombre">
+			<h:outputText value="#{tiposfuenteinformacion.nombre}" />
+		</p:column>
+	</p:dataTable>
+</p:panel>
+</h:body>
+</html>
