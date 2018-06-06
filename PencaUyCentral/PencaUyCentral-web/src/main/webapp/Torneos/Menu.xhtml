@@ -52,7 +52,7 @@
 						<p:commandButton value="Posiciones" id="btnPosiciones"
 							process="@form" update="grid"
 							action="/Grupos/Posiciones?faces-redirect=true" />
-						
+
 					</h:panelGrid>
 					<p:separator />
 					<h:panelGrid columns="2" cellpadding="5">
@@ -65,7 +65,10 @@
 						<p:commandButton value="Borrar Equipo" id="btnBorrarEquipo"
 							process="@form" update="grid"
 							action="/EquiposGrupo/Borrar?faces-redirect=true" />
-							
+						<p:commandButton value="Dashboard" id="btnDashboard"
+							process="@form" update="grid"
+							action="/EquiposGrupo/Dashboard?faces-redirect=true" />
+
 					</h:panelGrid>
 					<p:separator />
 					<h:panelGrid columns="3" cellpadding="5">

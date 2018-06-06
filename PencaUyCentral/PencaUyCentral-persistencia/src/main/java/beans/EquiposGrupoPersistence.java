@@ -65,6 +65,7 @@ public class EquiposGrupoPersistence implements EquiposGrupoPersistenceRemote, E
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Equipo> obtenerEquiposPorGrupo(int grupo) {
+		List<Equipo> lista = new ArrayList<Equipo>();
 		List<EquiposGrupo> list = em
 				.createQuery("Select eg from " + EquiposGrupo.class.getSimpleName() + " eg where eg.grupo = " + grupo)
 				.getResultList();
@@ -79,7 +80,7 @@ public class EquiposGrupoPersistence implements EquiposGrupoPersistenceRemote, E
 			}
 			return listEquipo;
 		} else
-			return null;
+			return lista;
 	}
 
 	@Override
