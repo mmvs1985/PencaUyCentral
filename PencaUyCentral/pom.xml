@@ -33,6 +33,7 @@
     </licenses>
     <modules>
         <module>PencaUyCentral-ejb</module>
+        <module>PencaUyCentral-ejbNegocio</module>
         <module>PencaUyCentral-web</module>
         <module>PencaUyCentral-ear</module>
         <module>PencaUyCentral-persistencia</module>
@@ -75,6 +76,12 @@
             <dependency>
                 <groupId>penca.uy</groupId>
                 <artifactId>PencaUyCentral-ejb</artifactId>
+                <version>${project.version}</version>
+                <type>ejb</type>
+            </dependency>
+             <dependency>
+                <groupId>penca.uy</groupId>
+                <artifactId>PencaUyCentral-ejbNegocio</artifactId>
                 <version>${project.version}</version>
                 <type>ejb</type>
             </dependency>

@@ -1,4 +1,4 @@
-package rest;
+package serviciosEnviados;
 
 import java.util.List;
 
@@ -13,6 +13,14 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import util.EquiposGruposUtilities;
+import util.EquiposUtilities;
+import util.FasesUtilities;
+import util.GruposUtilities;
+import util.PartidosUtilities;
+import util.TiposFuentesInformacionUtilities;
+import util.TiposPremiosUtilities;
+import util.TorneosUtilities;
 import beans.interfaces.EquipoPersistenceRemote;
 import beans.interfaces.EquiposGrupoPersistenceRemote;
 import beans.interfaces.FasePersistenceRemote;
@@ -34,21 +42,24 @@ import entidades.Torneo;
 public class TorneoApi {
 	
 	@EJB
-	TorneoPersistenceRemote beanTorneo;
+	TorneoPersistenceRemote beanTorneo = TorneosUtilities.doLookup();
+	
 	@EJB
-	FasePersistenceRemote beanFase;
+	FasePersistenceRemote beanFase = FasesUtilities.doLookup();
 	@EJB
-	GrupoPersistenceRemote beanGrupo;
+	GrupoPersistenceRemote beanGrupo = GruposUtilities.doLookup();
+	
 	@EJB
-	EquiposGrupoPersistenceRemote beanEquiposGrupo;
+	EquiposGrupoPersistenceRemote beanEquiposGrupo = EquiposGruposUtilities.doLookup();
+	
 	@EJB
-	EquipoPersistenceRemote beanEquipo;
+	EquipoPersistenceRemote beanEquipo = EquiposUtilities.doLookup();
 	@EJB
-	PartidoPersistenceRemote beanPartido;
+	PartidoPersistenceRemote beanPartido = PartidosUtilities.doLookup();
 	@EJB
-	TiposPremioPersistenceRemote beanTiposPremio;
+	TiposPremioPersistenceRemote beanTiposPremio = TiposPremiosUtilities.doLookup();
 	@EJB
-	TiposFuenteInformacionPersistenceRemote beanTiposFuenteInformacion;
+	TiposFuenteInformacionPersistenceRemote beanTiposFuenteInformacion = TiposFuentesInformacionUtilities.doLookup();
 	
 	
 	@GET
@@ -82,6 +93,8 @@ public class TorneoApi {
 		
 	}
 	
+	
+	
 	@GET
     @Path("/torneos")
 	@Produces({MediaType.APPLICATION_JSON})
@@ -99,6 +112,8 @@ public class TorneoApi {
 		}
 		return gson.toJson(torneosArray);		
 	}
+	
+	
 	
 	@GET
     @Path("/fases")

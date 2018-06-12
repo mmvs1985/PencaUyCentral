@@ -7,15 +7,19 @@
 	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
 </h:head>
 <h:body>
-<p:menubar>
-	<f:facet name="options">
-	<p:commandButton value="Volver" onclick="window.history.back();" icon="ui-icon-arrowreturnthick-1-w"/>
-		<p:commandButton value="Cerrar Sesión" actionListener="#{LoginBean.cerrarSesion()}" action="/login?faces-redirect=true" icon="ui-icon-power"/>
-	</f:facet>
-</p:menubar>
+	<p:menubar>
+		<f:facet name="options">
+			<p:commandButton value="Volver" onclick="window.history.back();"
+				icon="ui-icon-arrowreturnthick-1-w" />
+			<p:commandButton value="Cerrar Sesión"
+				actionListener="#{LoginBean.cerrarSesion()}"
+				action="/login?faces-redirect=true" icon="ui-icon-power" />
+		</f:facet>
+	</p:menubar>
 	<h:form>
-		<p:panel header="Menú de Operaciones sobre Participantes" style="margin-bottom:10px;">
-			<h:panelGrid id="grid" cellpadding="5" columns="1">				
+		<p:panel header="Menú de Operaciones sobre Participantes"
+			style="margin-bottom:10px;">
+			<h:panelGrid id="grid" cellpadding="5" columns="1">
 				<p:panel header="Elija su Opción:" style="margin-bottom:10px;">
 					<h:panelGrid columns="3" cellpadding="5">
 						<p:commandButton value="Agregar" id="btnAgregar" process="@form"
@@ -24,9 +28,11 @@
 							update="grid" action="Borrar?faces-redirect=true" />
 						<p:commandButton value="Listar" id="btnListar" process="@form"
 							update="grid" action="Tabla?faces-redirect=true" />
+						<p:commandButton value="Sincronizar"
+							actionListener="#{SincronizacionView.sync}" />
 					</h:panelGrid>
 				</p:panel>
-			</h:panelGrid>			
+			</h:panelGrid>
 		</p:panel>
 	</h:form>
 </h:body>

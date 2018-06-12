@@ -33,6 +33,7 @@ public class PencaPersistence implements PencaPersistenceRemote, PencaPersistenc
     @Override
 	public boolean agregarPenca(String nombre, int ido) {
 		Organizacion o = em.find(Organizacion.class, ido);
+		System.out.println("entre al penca persistence con la penca "+nombre+" y la organizacion "+ido);
 		if (o != null) {	
 			int idpe = obtenerPencaPorNombre(nombre);
 			if (idpe == -1) {

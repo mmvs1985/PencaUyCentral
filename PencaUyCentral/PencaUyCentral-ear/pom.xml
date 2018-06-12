@@ -63,6 +63,11 @@
             <artifactId>PencaUyCentral-persistencia</artifactId>
             <type>ejb</type>
         </dependency>
+        <dependency>
+            <groupId>penca.uy</groupId>
+            <artifactId>PencaUyCentral-ejbNegocio</artifactId>
+            <type>ejb</type>
+        </dependency>
     </dependencies>
 
     <build>
