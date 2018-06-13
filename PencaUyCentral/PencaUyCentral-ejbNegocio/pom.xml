@@ -21,9 +21,8 @@
 	</parent>
 
 	<artifactId>PencaUyCentral-ejbNegocio</artifactId>
-	<packaging>ejb</packaging>
 
-	<name>PencaUyCentral:  Bussines EJB Module</name>
+	<name>PencaUyCentral: EJB Module</name>
 
 	<url>http://wildfly.org</url>
 	<licenses>
@@ -184,4 +183,5 @@
 
 	</profiles>
 
+	<packaging>ejb</packaging>
 </project>
