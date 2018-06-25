@@ -25,7 +25,7 @@ public class ResultadosRandomView implements Serializable {
 		
 		List<Partido> listaPartidos = partidoBean.obtenerTodos();
 		for(Partido p : listaPartidos) {
-			if (!(p.getEstado().equals("FINALIZADO"))){
+			if (!(p.getEstado().equals("JUGADO"))){
 				List<Integer> listaRandom = randomBean.random();
 				partidoBean.actualizarPartido(p.getGrupo().getId(), p.getEquipLocal().getId(),p.getEquipoVisitante().getId() , listaRandom.get(0), listaRandom.get(1), p.getEquipLocal().getId());
 				
