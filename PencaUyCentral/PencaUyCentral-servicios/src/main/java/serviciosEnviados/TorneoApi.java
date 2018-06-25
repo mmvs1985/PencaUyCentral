@@ -219,8 +219,10 @@ public class TorneoApi {
 			partidoObject.addProperty("id", p.getId());
 			
 			partidoObject.addProperty("fecha", p.getFecha().toString());
-			partidoObject.addProperty("estado", p.getEstado());			
-			if (!(p.getEstado().equals("N/JUGADO"))){
+			partidoObject.addProperty("hora", p.getHora());
+			partidoObject.addProperty("estado", p.getEstado());	
+			System.out.println(p.getEstado()+" "+p.getId());
+			if (!(p.getEstado().equals("NOJUGADO"))){
 				partidoObject.addProperty("golesEquipoLocal", p.getGolesEquipoLocal());
 				partidoObject.addProperty("golesEquipoVisita", p.getGolesEquipoVisita());
 				JsonObject egObj = new JsonObject();

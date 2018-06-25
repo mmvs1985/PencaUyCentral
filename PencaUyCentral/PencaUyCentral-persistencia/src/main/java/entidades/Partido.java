@@ -1,6 +1,8 @@
 package entidades;
 
 import java.io.Serializable;
+import java.time.LocalTime;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -15,6 +17,7 @@ import java.util.Date;
 public class Partido implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	public enum estados {NOJUGADO,JUGANDO,JUGADO};
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
@@ -27,6 +30,17 @@ public class Partido implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name="\"Fecha\"")
 	private Date fecha;
+	
+	public String getHora() {
+		return hora;
+	}
+
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
+
+	@Column(name="\"Hora\"")
+	private String hora;
 
 	@Column(name="\"GolesEquipoLocal\"")
 	private Integer golesEquipoLocal;

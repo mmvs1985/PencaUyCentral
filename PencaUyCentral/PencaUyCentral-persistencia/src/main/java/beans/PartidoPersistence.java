@@ -10,6 +10,9 @@ import entidades.Organizacion;
 import entidades.Partido;
 import entidades.Torneo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,18 +40,20 @@ public class PartidoPersistence implements PartidoPersistenceRemote, PartidoPers
     }
     
     @Override
-	public boolean agregarPartido(int elocal, int evisita, int grupo, Date fecha) {
+	public boolean agregarPartido(int elocal, int evisita, int grupo, Date fecha, String hora) {
 		//List<Equipo> le = em.createNamedQuery("Equipo.findByNombre", Equipo.class).setParameter("nombre", nombre).getResultList();
     	if (em.createQuery("SELECT p FROM "+ Partido.class.getSimpleName()+" p WHERE p.equipoLocal = " + elocal +" and p.equipoVisita = " + evisita+ " and p.grupo = "+ grupo).getResultList().isEmpty()) {	
 			Partido p = new Partido();
-			p.setEstado("N/JUGADO");
+			p.setEstado(Partido.estados.NOJUGADO.toString());
 			Equipo el = em.find(Equipo.class, elocal);
 			Equipo ev = em.find(Equipo.class, evisita);
 			p.setEquipLocal(el);
 			p.setEquipoVisitante(ev);
 			Grupo g = em.find(Grupo.class, grupo);
-			p.setGrupo(g);
+			p.setGrupo(g);	
 			p.setFecha(fecha);
+			p.setHora(hora);
+
 			em.persist(p);
 			return true;
 		} else {
@@ -100,7 +105,7 @@ public class PartidoPersistence implements PartidoPersistenceRemote, PartidoPers
 		p.setGolesEquipoVisita(golesev);
 		Equipo eg = em.find(Equipo.class, idgana);
 		p.setEquipoGanador(eg);
-		p.setEstado("FINALIZADO");
+		p.setEstado(Partido.estados.JUGADO.toString());
 		em.merge(p);		
 		return true;
 	}
@@ -113,7 +118,7 @@ public class PartidoPersistence implements PartidoPersistenceRemote, PartidoPers
 		p.setGolesEquipoVisita(golesev);
 		Equipo eg = em.find(Equipo.class, idgana);
 		p.setEquipoGanador(eg);
-		p.setEstado("FINALIZADO");
+		p.setEstado(Partido.estados.JUGADO.toString());
 		em.merge(p);
 		return true;
 	}

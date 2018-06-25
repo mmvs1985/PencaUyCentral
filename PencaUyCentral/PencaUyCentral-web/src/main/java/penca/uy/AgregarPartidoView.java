@@ -1,6 +1,7 @@
 package penca.uy;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,8 @@ public class AgregarPartidoView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Date fecha;
-	
+
+
 
 	private String torneo;
 	private List<String> torneos;
@@ -40,8 +42,17 @@ public class AgregarPartidoView implements Serializable {
 	private List<String> grupos;
 	private String equipoLocal;
 	private String equipoVisita;
+	private String hora;
 	
 	
+	public String getHora() {
+		return hora;
+	}
+
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
+
 	public String getEquipoVisita() {
 		return equipoVisita;
 	}
@@ -227,7 +238,7 @@ public class AgregarPartidoView implements Serializable {
 					  int idp1 = partidoBean.obtenerPartidoPorGrupoEquipoLocalYEquipoVisitante(idg, idel, idev);
 					  int idp2 = partidoBean.obtenerPartidoPorGrupoEquipoLocalYEquipoVisitante(idg, idev, idel);
 					  if (idp1 == -1 && idp2 == -1) {
-						  partidoBean.agregarPartido(idel, idev, idg, fecha);
+						  partidoBean.agregarPartido(idel, idev, idg, fecha, hora);
 						  msg = new FacesMessage("Se añadió el partido  " + equipoLocal + " vs "+ equipoVisita + " en el  grupo "+grupo);
 					  } else {
 						  msg = new FacesMessage("Ya existe el partido " + equipoLocal + " vs "+ equipoVisita + " en el  grupo "+grupo);

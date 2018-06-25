@@ -45,7 +45,7 @@ public class Sincronizacion implements SincronizacionRemote, SincronizacionLocal
 		try {
 			//Obtengo los Participantes
 			ResteasyClient client = new ResteasyClientBuilder().build();
-			ResteasyWebTarget target = client.target("http://localhost:9080/PencaUyLocal-Backoffice-servicios/rest/api/listado/pencausuario");
+			ResteasyWebTarget target = client.target("http://localhost:8180/PencaUyLocal-Backoffice-servicios/rest/api/listado/pencausuario");
 			Response response = target.request().get();
 			Gson gson = new Gson();
 			Type participanteStringListType = new TypeToken<ArrayList<ParticipanteString>>() {}.getType();
