@@ -1,6 +1,8 @@
 package penca.uy;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -221,36 +223,48 @@ public class AgregarPartidoView implements Serializable {
 
 	public void save() {
 		FacesMessage msg;
-		if ((grupo != null) && (equipoLocal != null) && (equipoVisita != null)) {
-			Date hoy = new Date();
-			if (fecha.before(hoy)) {
-				msg = new FacesMessage("La fecha del partido no puede ser anterior a hoy");
-			} else {
-				if (equipoLocal.equals(equipoVisita)) {	
-					msg = new FacesMessage("El Equipo Visitante debe ser distinto del Equipo Local");
+		if ((grupo != null) && (equipoLocal != null) && (equipoVisita != null)) {			
+			try {
+				Date hoy = new Date();
+				SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");  
+				String fechahoystring = new SimpleDateFormat("yyyy-MM-dd").format(hoy);
+				Date fechahoy = formateador.parse(fechahoystring);
+				String fechapartidostring = new SimpleDateFormat("yyyy-MM-dd").format(fecha);
+				Date fechapartido = formateador.parse(fechapartidostring);
+				if (fechapartido.before(fechahoy)) {
+					msg = new FacesMessage("La fecha del partido no puede ser anterior a hoy");
+					FacesContext.getCurrentInstance().addMessage(null, msg);
 				} else {
-					  System.out.println("el grupo "+grupo+" no es null, la fase "+fase+ "no es null");
-					  int idt = torneoBean.obtenerTorneoPorNombre(torneo);
-					  int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
-					  int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo, idf);
-					  int idel = equipoBean.obtenerEquipoPorNombre(equipoLocal);
-					  int idev = equipoBean.obtenerEquipoPorNombre(equipoVisita);	
-					  int idp1 = partidoBean.obtenerPartidoPorGrupoEquipoLocalYEquipoVisitante(idg, idel, idev);
-					  int idp2 = partidoBean.obtenerPartidoPorGrupoEquipoLocalYEquipoVisitante(idg, idev, idel);
-					  if (idp1 == -1 && idp2 == -1) {
-						  partidoBean.agregarPartido(idel, idev, idg, fecha, hora);
-						  msg = new FacesMessage("Se añadió el partido  " + equipoLocal + " vs "+ equipoVisita + " en el  grupo "+grupo);
-					  } else {
-						  msg = new FacesMessage("Ya existe el partido " + equipoLocal + " vs "+ equipoVisita + " en el  grupo "+grupo);
-					  }
+					if (equipoLocal.equals(equipoVisita)) {	
+						msg = new FacesMessage("El Equipo Visitante debe ser distinto del Equipo Local");
+						FacesContext.getCurrentInstance().addMessage(null, msg);
+					} else {
+						  int idt = torneoBean.obtenerTorneoPorNombre(torneo);
+						  int idf = faseBean.obtenerFasePorNombreYTorneo(idt, fase);
+						  int idg = grupoBean.obtenerGrupoPorNombreYFase(grupo, idf);
+						  int idel = equipoBean.obtenerEquipoPorNombre(equipoLocal);
+						  int idev = equipoBean.obtenerEquipoPorNombre(equipoVisita);	
+						  int idp1 = partidoBean.obtenerPartidoPorGrupoEquipoLocalYEquipoVisitante(idg, idel, idev);
+						  int idp2 = partidoBean.obtenerPartidoPorGrupoEquipoLocalYEquipoVisitante(idg, idev, idel);
+						  if (idp1 == -1 && idp2 == -1) {
+							  partidoBean.agregarPartido(idel, idev, idg, fecha, hora);
+							  msg = new FacesMessage("Se añadió el partido  " + equipoLocal + " vs "+ equipoVisita + " en el  grupo "+grupo);
+							  FacesContext.getCurrentInstance().addMessage(null, msg);
+						  } else {
+							  msg = new FacesMessage("Ya existe el partido " + equipoLocal + " vs "+ equipoVisita + " en el  grupo "+grupo);
+							  FacesContext.getCurrentInstance().addMessage(null, msg);
+						  }
+					}
 				}
-			}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}			
 		}
 		else {
 			System.out.println("el torneo es null");
 			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "El Torneo no es válido.");
-		}
-		FacesContext.getCurrentInstance().addMessage(null, msg);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+		}		
 	}
 
 }

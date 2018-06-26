@@ -1,7 +1,10 @@
 package penca.uy;
  
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -82,14 +85,15 @@ public class ListaPartidosView implements Serializable {
     		}
     	}
     	List<PartidoString> listaPartidosString = new ArrayList<PartidoString>();
-    	System.out.println(listaPartidos.get(0).getId());
+    	//System.out.println(listaPartidos.get(0).getId());
 	       for(Partido p : listaPartidos) {
-	    	   System.out.println("entre al for de partidos con partido "+p.getId());
+	    	   //System.out.println("entre al for de partidos con partido "+p.getId());
 	    	   PartidoString partido = new PartidoString();
 	    	   partido.setId(p.getId());
 	    	   partido.setEquipoLocal(p.getEquipLocal().getNombre());
 	    	   partido.setEquipoVisita(p.getEquipoVisitante().getNombre());
 	    	   partido.setFecha(p.getFecha());
+	    	   partido.setHora(p.getHora());
 	    	   partido.setGolesEquipoLocal(p.getGolesEquipoLocal());
 	    	   partido.setGolesEquipoVisita(p.getGolesEquipoVisita());
 	    	   partido.setGrupo(p.getGrupo().getNombre());
@@ -100,28 +104,87 @@ public class ListaPartidosView implements Serializable {
        
     }
 
-    public void onRowEdit(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Partido Actualizado");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        int id = ((PartidoString) event.getObject()).getId();
-        int golesel = ((PartidoString) event.getObject()).getGolesEquipoLocal();
-        int golesev = ((PartidoString) event.getObject()).getGolesEquipoVisita();
-        int grupo = ((PartidoString) event.getObject()).getGrupoId();
-        int idgana;
-        int el = equipoBean.obtenerEquipoPorNombre(((PartidoString) event.getObject()).getEquipoLocal());
-        int ev = equipoBean.obtenerEquipoPorNombre(((PartidoString) event.getObject()).getEquipoVisita());
-        if (golesel>=golesev) {
-        	idgana = el;
-        }else {
-        	idgana = ev;
-        }
-        partidoBean.actualizarPartidoPorId(id, golesel, golesev, idgana);
-        int egLocal = equiposGrupoBean.obtenerEquiposGrupoPorEquipoyGrupo(grupo,el).getId();
-        int egVisita = equiposGrupoBean.obtenerEquiposGrupoPorEquipoyGrupo(grupo,ev).getId();
-        equiposGrupoBean.actualizarEquiposGrupo(egLocal, golesev,golesel);
-        equiposGrupoBean.actualizarEquiposGrupo(egVisita, golesel,golesev);
-        //equiposGrupoBean.actualizarEquiposGrupo(eg, golenc, golaf)
-        
+    public void onRowEdit(RowEditEvent event) {    	
+    	FacesMessage msg;    	
+		/*try {
+			SimpleDateFormat formateadorfecha = new SimpleDateFormat("yyyy-MM-dd");  
+			Date fechaactualdate = new Date();	    	
+			String fechahoystring = new SimpleDateFormat("yyyy-MM-dd").format(fechaactualdate);
+			Date fechaactual = formateadorfecha.parse(fechahoystring);
+			Date fechapartidodate = ((PartidoString) event.getObject()).getFecha();
+			String fechapartidostring = new SimpleDateFormat("yyyy-MM-dd").format(fechapartidodate);
+			Date fechapartido = formateadorfecha.parse(fechapartidostring);
+			
+	    	SimpleDateFormat formateadorhora = new SimpleDateFormat("HH:mm");
+	    	String horaactualstring = new SimpleDateFormat("HH:mm").format(fechaactualdate);
+	    	System.out.println("Hora actual string: " + horaactualstring);
+			Date horaactualdate = formateadorhora.parse(horaactualstring);
+			System.out.println("Hora actual date: " + horaactualdate);
+	    	long horaactual = horaactualdate.getTime();
+	    	System.out.println("Hora actual ms: " + horaactual);	    	
+	    	
+	    	String horapartidostring = ((PartidoString) event.getObject()).getHora();
+	    	System.out.println("Hora partido string: " + horapartidostring);
+			Date horapartidodate = formateadorhora.parse(horapartidostring);
+			System.out.println("Hora partido date: " + horapartidodate);
+			long horapartido = horapartidodate.getTime();
+			System.out.println("Hora partido ms: " + horapartido);    	
+	    	if (fechaactual.before(fechapartido)) { 
+				msg = new FacesMessage("No se puede actualizar el resultado antes de la fecha que se juega el partido.");
+				FacesContext.getCurrentInstance().addMessage(null, msg);
+			} else {
+				if (fechaactual.equals(fechapartido)) {
+					if (horaactual < horapartido + 6000000) {
+						msg = new FacesMessage("No se puede actualizar el resultado antes de finalizado el partido.");
+						FacesContext.getCurrentInstance().addMessage(null, msg);
+					}
+					else {*/
+						int id = ((PartidoString) event.getObject()).getId();
+						int golesel = ((PartidoString) event.getObject()).getGolesEquipoLocal();
+						int golesev = ((PartidoString) event.getObject()).getGolesEquipoVisita();
+						int grupo = ((PartidoString) event.getObject()).getGrupoId();
+						int idgana;
+						int el = equipoBean.obtenerEquipoPorNombre(((PartidoString) event.getObject()).getEquipoLocal());
+						int ev = equipoBean.obtenerEquipoPorNombre(((PartidoString) event.getObject()).getEquipoVisita());
+						if (golesel >= golesev) {
+							idgana = el;
+						} else {
+							idgana = ev;
+						}
+						partidoBean.actualizarPartidoPorId(id, golesel, golesev, idgana);
+						int egLocal = equiposGrupoBean.obtenerEquiposGrupoPorEquipoyGrupo(grupo,el).getId();
+						int egVisita = equiposGrupoBean.obtenerEquiposGrupoPorEquipoyGrupo(grupo,ev).getId();
+						equiposGrupoBean.actualizarEquiposGrupo(egLocal, golesev,golesel);
+						equiposGrupoBean.actualizarEquiposGrupo(egVisita, golesel,golesev);
+						msg = new FacesMessage("Partido Actualizado");
+						FacesContext.getCurrentInstance().addMessage(null, msg);
+					/*}
+				} else {
+					int id = ((PartidoString) event.getObject()).getId();
+					int golesel = ((PartidoString) event.getObject()).getGolesEquipoLocal();
+					int golesev = ((PartidoString) event.getObject()).getGolesEquipoVisita();
+					int grupo = ((PartidoString) event.getObject()).getGrupoId();
+					int idgana;
+					int el = equipoBean.obtenerEquipoPorNombre(((PartidoString) event.getObject()).getEquipoLocal());
+					int ev = equipoBean.obtenerEquipoPorNombre(((PartidoString) event.getObject()).getEquipoVisita());
+					if (golesel >= golesev) {
+						idgana = el;
+					} else {
+						idgana = ev;
+					}
+					partidoBean.actualizarPartidoPorId(id, golesel, golesev, idgana);
+					int egLocal = equiposGrupoBean.obtenerEquiposGrupoPorEquipoyGrupo(grupo,el).getId();
+					int egVisita = equiposGrupoBean.obtenerEquiposGrupoPorEquipoyGrupo(grupo,ev).getId();
+					equiposGrupoBean.actualizarEquiposGrupo(egLocal, golesev,golesel);
+					equiposGrupoBean.actualizarEquiposGrupo(egVisita, golesel,golesev);
+					//equiposGrupoBean.actualizarEquiposGrupo(eg, golenc, golaf)
+					msg = new FacesMessage("Partido Actualizado");
+					FacesContext.getCurrentInstance().addMessage(null, msg);
+				}
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} */   	        
     }
      
     public void onRowCancel(RowEditEvent event) {

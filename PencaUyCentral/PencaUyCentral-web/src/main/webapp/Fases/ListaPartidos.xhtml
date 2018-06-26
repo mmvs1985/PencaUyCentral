@@ -32,11 +32,14 @@
 				<p:ajax event="rowEditCancel"
 					listener="#{ListaPartidosView.onRowCancel}" update=":form:msgs" />
 
-				<p:column headerText="id">
+				<p:column headerText="Id">
 					<h:outputText value="#{partido.id}" />
 				</p:column>
-				<p:column headerText="fecha">
+				<p:column headerText="Fecha">
 					<h:outputText value="#{partido.fecha}" />
+				</p:column>
+				<p:column headerText="Hora">
+					<h:outputText value="#{partido.hora}" />
 				</p:column>
 
 				<p:column headerText="Local">

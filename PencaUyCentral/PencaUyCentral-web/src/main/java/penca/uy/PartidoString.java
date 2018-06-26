@@ -10,6 +10,7 @@ public class PartidoString {
 	private int id;
 	private String estado;
 	private Date fecha;
+	private String hora;
 	private Integer golesEquipoLocal;
 	private Integer golesEquipoVisita;
 	private String equipoGanador;
@@ -40,6 +41,12 @@ public class PartidoString {
 	}
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}	
+	public String getHora() {
+		return hora;
+	}
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
 	public Integer getGolesEquipoLocal() {
 		return golesEquipoLocal;
