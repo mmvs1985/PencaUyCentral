@@ -1,0 +1,112 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:event type="preRenderView" listener="#{LoginBean.verificarSesion}"></f:event>
+</h:head>
+<h:body>
+	<p:menubar>
+		<f:facet name="options">
+			<p:commandButton value="Volver" onclick="window.history.back();" icon="ui-icon-arrowreturnthick-1-w"/>
+			<p:commandButton value="Cerrar Sesión"
+				actionListener="#{LoginBean.cerrarSesion()}"
+				action="/login?faces-redirect=true" icon="ui-icon-power" />
+		</f:facet>
+	</p:menubar>
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+		<p:panel header="FIXTURE" style="margin-bottom:10px;">
+			<f:facet name="header">
+				Actualizar Resultados de Partidos
+			</f:facet>
+			<p:panel header="Seleccione Torneo, Fase y Grupo" style="margin-bottom:10px;">
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel for="torneo" value="Torneo: " />
+						<p:selectOneMenu id="torneo" value="#{ActualizarPartidosView.torneo}"
+							style="width:150px" required="true"
+							requiredMessage="Debe tener un Torneo.">
+							<p:ajax listener="#{ActualizarPartidosView.onTorneoChange}" update="fase" />
+							<f:selectItem itemLabel="Seleccione un Torneo" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{ActualizarPartidosView.torneos}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel for="fase" value="Fase: " />
+						<p:selectOneMenu id="fase" value="#{ActualizarPartidosView.fase}"
+							style="width:150px" required="true"
+							requiredMessage="Debe tener una Fase.">
+							<p:ajax listener="#{ActualizarPartidosView.onFaseChange}" update="grupo" />
+							<f:selectItem itemLabel="Seleccione una Fase" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{ActualizarPartidosView.fases}" />
+						</p:selectOneMenu>
+						
+						
+						<p:outputLabel for="grupo" value="Grupo: " />
+						<p:selectOneMenu id="grupo" value="#{ActualizarPartidosView.grupo}"
+							style="width:150px" required="true"
+							requiredMessage="Debe tener un Grupo.">
+							<p:ajax listener="#{ActualizarPartidosView.onGrupoChange}" update="tabla"/>
+							<f:selectItem itemLabel="Seleccione un Grupo" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{ActualizarPartidosView.grupos}" />
+						</p:selectOneMenu>	
+					</h:panelGrid>					
+				</p:panel>
+				
+				<p:dataTable id="tabla" var="partido" value="#{ActualizarPartidosView.partidos}" editable="true">
+					<p:ajax event="rowEdit" listener="#{ActualizarPartidosView.onRowEdit}" update=":form:msgs" />
+					<p:ajax event="rowEditCancel" listener="#{ActualizarPartidosView.onRowCancel}" update=":form:msgs" />
+					<!--  <p:column headerText="Id">
+						<h:outputText value="#{partido.id}" />
+					</p:column> -->
+					<p:column headerText="Fecha">
+						<h:outputText value="#{partido.fecha}" />
+					</p:column>
+					<p:column headerText="Hora">
+						<h:outputText value="#{partido.hora}" />
+					</p:column>
+					<p:column headerText="Local">
+						<h:outputText value="#{partido.equipoLocal}" />
+					</p:column>
+					<p:column headerText="Goles Local">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{partido.golesEquipoLocal}" rendered="#{partido.golesEquipoLocal ge 0}"  />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{partido.golesEquipoLocal}"
+									style="width:96%" label="Goles Local" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="    ">
+						<h:outputText value="" />
+					</p:column>
+					<p:column headerText="Goles Visitante">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{partido.golesEquipoVisita}" rendered="#{partido.golesEquipoVisita ge 0}"/>
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{partido.golesEquipoVisita}"
+									style="width:96%" label="Goles Visita" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Visitante">
+						<h:outputText value="#{partido.equipoVisita}" />
+					</p:column>
+					<p:column style="width:32px">
+						<p:rowEditor />
+					</p:column>
+				</p:dataTable>
+		</p:panel>
+	</h:form>
+
+
+</h:body>
+</html>

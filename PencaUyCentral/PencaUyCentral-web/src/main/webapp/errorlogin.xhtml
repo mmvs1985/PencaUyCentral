@@ -2,9 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
 <h:head></h:head> 
 <body> 
-	<h2>Debe estar logueado para acceder a esta página</h2>	
+	<p:panel header="Acceso denegado" style="margin-bottom:10px;">
+		<h:panelGrid id="grid" cellpadding="10" columns="1" style="vertical-align: top;">
+			<div>
+				Debe estar logueado para acceder a esta página.
+			</div>
+			<p:button value="Ir al Inicio" outcome="/login.xhtml" />
+		</h:panelGrid>
+	</p:panel>
 </body> 
 </html>
