@@ -1,5 +1,5 @@
 package penca.uy;
- 
+
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,7 +13,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.ws.rs.core.Response;
 
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
@@ -24,18 +28,19 @@ import beans.interfaces.GrupoPersistenceRemote;
 import beans.interfaces.PartidoPersistenceRemote;
 import beans.interfaces.TorneoPersistenceRemote;
 import beans.interfaces.UsuarioPersistenceRemote;
+import configuracion.ConfiguracionBackoffice;
 import entidades.Fase;
 import entidades.Grupo;
 import entidades.Partido;
 import entidades.Torneo;
 import entidades.Usuario;
- 
+
 @ManagedBean(name="ActualizarPartidosView")
 @ViewScoped
 public class ActualizarPartidosView implements Serializable {
-     
- 	private static final long serialVersionUID = 1L;	
- 	
+
+ 	private static final long serialVersionUID = 1L;
+
  	@EJB
 	TorneoPersistenceRemote torneoBean;
 	@EJB
@@ -120,9 +125,9 @@ public class ActualizarPartidosView implements Serializable {
 		torneos = new ArrayList<String>();
 		for (int j = 0; j < i; j++) {
 			torneos.add(listaTorneos.get(j).getNombre());
-		}       
+		}
     }
-	
+
 	public void onTorneoChange() {
         if (torneo !=null && !torneo.equals("")) {
         	System.out.println("Este es el torneo "+ torneo);
@@ -135,7 +140,7 @@ public class ActualizarPartidosView implements Serializable {
     		}
         }
     }
-	
+
 	public void onFaseChange() {
         if (fase !=null && !fase.equals("")) {
         	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
@@ -148,7 +153,7 @@ public class ActualizarPartidosView implements Serializable {
     		}
         }
     }
- 
+
     public void onGrupoChange() {
         if (grupo !=null && !grupo.equals("")) {
         	int idt = torneoBean.obtenerTorneoPorNombre(torneo);
@@ -169,36 +174,36 @@ public class ActualizarPartidosView implements Serializable {
     	    	partido.setGrupoId(p.getGrupo().getId());
     	    	listaPartidosString.add(partido);
     	     }
-    	     partidos = listaPartidosString;    	     
+    	     partidos = listaPartidosString;
         }
     }
 
-    public void onRowEdit(RowEditEvent event) {    	
-    	FacesMessage msg;    	
+    public void onRowEdit(RowEditEvent event) {
+    	FacesMessage msg;
 		/*try {
-			SimpleDateFormat formateadorfecha = new SimpleDateFormat("yyyy-MM-dd");  
-			Date fechaactualdate = new Date();	    	
+			SimpleDateFormat formateadorfecha = new SimpleDateFormat("yyyy-MM-dd");
+			Date fechaactualdate = new Date();
 			String fechahoystring = new SimpleDateFormat("yyyy-MM-dd").format(fechaactualdate);
 			Date fechaactual = formateadorfecha.parse(fechahoystring);
 			Date fechapartidodate = ((PartidoString) event.getObject()).getFecha();
 			String fechapartidostring = new SimpleDateFormat("yyyy-MM-dd").format(fechapartidodate);
 			Date fechapartido = formateadorfecha.parse(fechapartidostring);
-			
+
 	    	SimpleDateFormat formateadorhora = new SimpleDateFormat("HH:mm");
 	    	String horaactualstring = new SimpleDateFormat("HH:mm").format(fechaactualdate);
 	    	System.out.println("Hora actual string: " + horaactualstring);
 			Date horaactualdate = formateadorhora.parse(horaactualstring);
 			System.out.println("Hora actual date: " + horaactualdate);
 	    	long horaactual = horaactualdate.getTime();
-	    	System.out.println("Hora actual ms: " + horaactual);	    	
-	    	
+	    	System.out.println("Hora actual ms: " + horaactual);
+
 	    	String horapartidostring = ((PartidoString) event.getObject()).getHora();
 	    	System.out.println("Hora partido string: " + horapartidostring);
 			Date horapartidodate = formateadorhora.parse(horapartidostring);
 			System.out.println("Hora partido date: " + horapartidodate);
 			long horapartido = horapartidodate.getTime();
-			System.out.println("Hora partido ms: " + horapartido);    	
-	    	if (fechaactual.before(fechapartido)) { 
+			System.out.println("Hora partido ms: " + horapartido);
+	    	if (fechaactual.before(fechapartido)) {
 				msg = new FacesMessage("No se puede actualizar el resultado antes de la fecha que se juega el partido.");
 				FacesContext.getCurrentInstance().addMessage(null, msg);
 			} else {
@@ -220,6 +225,30 @@ public class ActualizarPartidosView implements Serializable {
 						} else {
 							idgana = ev;
 						}
+
+						try {
+							if(partidoBean.actualizarPartidoPorId(id, golesel, golesev, idgana)) {
+								int egLocal = equiposGrupoBean.obtenerEquiposGrupoPorEquipoyGrupo(grupo,el).getId();
+								int egVisita = equiposGrupoBean.obtenerEquiposGrupoPorEquipoyGrupo(grupo,ev).getId();
+								equiposGrupoBean.actualizarEquiposGrupo(egLocal, golesev,golesel);
+								equiposGrupoBean.actualizarEquiposGrupo(egVisita, golesel,golesev);
+								String url = ConfiguracionBackoffice.getInstancia().getURL() +"partidos/actualizar/"+ id +"/"+ golesel +"/"+ golesev +"/"+ idgana;
+								ResteasyClient client = new ResteasyClientBuilder().build();
+								ResteasyWebTarget target = client.target(url);
+								Response response = target.request().get();
+								if (response.equals("ERROR")) {
+									throw new RuntimeException("Failed : HTTP error code : "+ response.getStatus());
+								}
+								FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Servidor Central", "Partidos actualizados correctamente"));
+							}else {
+								FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Servidor Central", "No se pudieron actualizar los partidos"));
+							}
+
+						}catch (Exception e) {
+							e.printStackTrace();
+						}
+
+						/*
 						partidoBean.actualizarPartidoPorId(id, golesel, golesev, idgana);
 						int egLocal = equiposGrupoBean.obtenerEquiposGrupoPorEquipoyGrupo(grupo,el).getId();
 						int egVisita = equiposGrupoBean.obtenerEquiposGrupoPorEquipoyGrupo(grupo,ev).getId();
@@ -227,6 +256,7 @@ public class ActualizarPartidosView implements Serializable {
 						equiposGrupoBean.actualizarEquiposGrupo(egVisita, golesel,golesev);
 						msg = new FacesMessage("Partido Actualizado");
 						FacesContext.getCurrentInstance().addMessage(null, msg);
+						*/
 					/*}
 				} else {
 					int id = ((PartidoString) event.getObject()).getId();
@@ -253,13 +283,13 @@ public class ActualizarPartidosView implements Serializable {
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
-		} */   	        
+		} */
     }
-     
+
     public void onRowCancel(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("No se Actualizó");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
- 
+
 }
